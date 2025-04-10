@@ -1,0 +1,8 @@
+{
+  "${ModID}:Valor": {
+    "NAME": "Valor",
+    "DESCRIPTION": [
+      "While in this y#${ModID}:Drive_Form every other attack played adds a *Shiv to your hand"
+    ]
+  }
+}
