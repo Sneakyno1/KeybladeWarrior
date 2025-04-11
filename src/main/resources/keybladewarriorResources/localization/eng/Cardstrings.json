@@ -67,11 +67,11 @@
 
   "${ModID}:ExitDrive": {
     "NAME": "Exit",
-    "DESCRIPTION": "Retain. NL Exits current ${ModID}:Drive_Form."
+    "DESCRIPTION": "Retain. NL Exits current y#${ModID}:Drive_Form."
   },
   "${ModID}:Courage": {
     "NAME": "Courage",
-    "DESCRIPTION": "Enter Valor ${ModID}:Form."
+    "DESCRIPTION": "Enter Valor y#${ModID}:Form."
   }
 
 }

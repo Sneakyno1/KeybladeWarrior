@@ -3,7 +3,9 @@
     "PROPER_NAME": "TODO",
     "NAMES": [
       "todo",
-      "todos"
+      "todos",
+      "Form",
+      "Forms"
     ],
     "DESCRIPTION": "TODO: Make your own epic keywords"
   },
@@ -11,8 +13,7 @@
   {
     "PROPER_NAME": "Drive Form",
     "NAMES": [
-      "Form",
-      "Forms",
+
       "Drive Form",
       "Drive_Form",
       "Drive_Forms"

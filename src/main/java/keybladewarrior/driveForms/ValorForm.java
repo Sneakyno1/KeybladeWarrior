@@ -1,6 +1,8 @@
 package keybladewarrior.driveForms;
 
+import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -8,9 +10,11 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
+import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.cards.Courage;
 import keybladewarrior.cards.ExitDrive;
 import keybladewarrior.powers.ValorPower;
@@ -22,12 +26,21 @@ public class ValorForm extends AbstractDriveForm{
     private static final StanceStrings stanceString = CardCrawlGame.languagePack.getStanceString(STANCE_ID);
     private static final String NAME = stanceString.NAME;
     public static final String[] DESCRIPTIONS = stanceString.DESCRIPTION;
-    private static long sfxId;
+    private static long sfxId = -1L;
+
+    public static final Color COLOR_MIN = CardHelper.getColor(92, 92, 92);
+    public static final Color COLOR_MAX = CardHelper.getColor(128, 128, 128);
+
+    private static Color cachedColor = null;
+
+    private static final String ENTER_SOUND = "STANCE_ENTER_CALM";
+    private static final String LOOP_SOUND = "STANCE_LOOP_DIVINITY";
+    private static float TIMER = 0.1F;
 
     public ValorForm() {
         this.ID = STANCE_ID;
         this.name = NAME;
-        updateDescription();
+        this.updateDescription();
     }
 
     @Override
@@ -50,8 +63,10 @@ public class ValorForm extends AbstractDriveForm{
 
     @Override
     public void onExitStance() {
+
         AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player, ValorPower.ID));
         stopIdleSfx();
+        super.onExitStance();
     }
 
     @Override
@@ -61,4 +76,25 @@ public class ValorForm extends AbstractDriveForm{
             sfxId = -1L;
         }
     }
+
+    public static Color getColor() { return getColor(1.0f); }
+
+    public static Color getColor(float a) {
+        if (cachedColor == null) {
+            cachedColor = COLOR_MIN.cpy().lerp(COLOR_MAX, MathUtils.random(1.0f));
+
+            //CustomPlayer.logger.info("Caching new color: " + cachedColor.toString());
+        }
+
+        Color color = cachedColor.cpy();
+
+        if (a > 1.0f) {
+            a = a / 255.0f;
+        }
+        color.a = a;
+
+        return color;
+    }
 }
+
+

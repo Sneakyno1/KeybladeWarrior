@@ -11,7 +11,11 @@ import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
@@ -24,13 +28,16 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.cards.cardvars.AbstractEasyDynamicVariable;
 import keybladewarrior.potions.AbstractEasyPotion;
+import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.relics.AbstractEasyRelic;
 import keybladewarrior.util.ProAudio;
 import java.nio.charset.StandardCharsets;
+import basemod.interfaces.OnCardUseSubscriber;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @SpireInitializer
 public class ModFile implements
+        OnCardUseSubscriber,
         EditCardsSubscriber,
         EditRelicsSubscriber,
         EditStringsSubscriber,
@@ -185,5 +192,16 @@ public class ModFile implements
                 BaseMod.addKeyword(modID, keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
             }
         }
+    }
+
+    @Override
+    public void receiveCardUsed(AbstractCard card) {
+        AbstractPlayer p = AbstractDungeon.player;
+
+        if (AbstractDungeon.player instanceof KeybladeWarrior)
+
+            if (card.type == AbstractCard.CardType.ATTACK){
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p), 1));
+            }
     }
 }
