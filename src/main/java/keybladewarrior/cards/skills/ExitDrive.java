@@ -1,4 +1,4 @@
-package keybladewarrior.cards;
+package keybladewarrior.cards.skills;
 
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
@@ -6,11 +6,11 @@ import com.megacrit.cardcrawl.actions.watcher.NotStanceCheckAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.EmptyStanceEffect;
-import keybladewarrior.powers.DrivePoints;
+import keybladewarrior.cards.AbstractEasyCard;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class ExitDrive extends AbstractEasyCard{
+public class ExitDrive extends AbstractEasyCard {
     public static final String ID =makeID(ExitDrive.class.getSimpleName());
 
     public ExitDrive(){

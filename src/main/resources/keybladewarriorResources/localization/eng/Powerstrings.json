@@ -6,5 +6,12 @@
       " #yStrength and #b",
       " #yDexterity."
     ]
+  },
+  "${ModID}:WisdomPower": {
+    "NAME": "Wisdom Form",
+    "DESCRIPTIONS": [
+      "Whenever you play a card, gain #b",
+      " #yBlock."
+    ]
   }
 }

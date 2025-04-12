@@ -7,6 +7,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 import keybladewarrior.driveForms.ValorForm;
+import keybladewarrior.driveForms.WisdomForm;
 
 @SuppressWarnings("unused")
 public class StancePatchForDrives {
@@ -17,6 +18,10 @@ public class StancePatchForDrives {
         public static SpireReturn<AbstractStance> Prefix(String stanceID) {
             if (stanceID.equals(ValorForm.STANCE_ID)) {
                 return SpireReturn.Return(new ValorForm());
+            }
+
+            if (stanceID.equals(WisdomForm.STANCE_ID)) {
+                return SpireReturn.Return(new WisdomForm());
             }
 
             return SpireReturn.Continue();

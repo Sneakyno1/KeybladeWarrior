@@ -71,7 +71,35 @@
   },
   "${ModID}:Courage": {
     "NAME": "Courage",
-    "DESCRIPTION": "Enter Valor y#${ModID}:Form."
+    "DESCRIPTION": "Enter y#${ModID}:Valor_Form."
+  },
+  "${ModID}:Wisdom": {
+    "NAME": "Wisdom",
+    "DESCRIPTION": "Enter y#${ModID}:Wisdom_Form."
+  },
+  "${ModID}:InnerStrength": {
+    "NAME": "Inner Strength",
+    "DESCRIPTION": "Deal !D! damage. NL Adds damage equal to your y#${ModID}:Drive_Points/!M!"
+  },
+  "${ModID}:AddedBenefits": {
+    "NAME": "Added Benefits",
+    "DESCRIPTION": "Deal !D! damage. NL #${ModID}:Strong: Apply !M! #yVulnerable. NL #${ModID}:Wise: Apply !M! #yWeak."
+  },
+  "${ModID}:CounterGuard": {
+    "NAME": "Counter Guard",
+    "DESCRIPTION": "Deal !D! damage. NL #${ModID}:Wise: Gain !B! #yBlock."
+  },
+  "${ModID}:Invigorate": {
+    "NAME": "Invigorate",
+    "DESCRIPTION": "Deal !D! damage. NL Gain !M! y#${ModID}:Drive_Points."
+  },
+  "${ModID}:ComboMaster": {
+    "NAME": "Combo Master",
+    "DESCRIPTION": "Apply !M! #yWeak. NL Apply !M! #yVulnerable."
+  },
+  "${ModID}:PowerBoost": {
+    "NAME": "Power Boost",
+    "DESCRIPTION": "Gain 1 #yStrength for every !M! y#${ModID}:Drive_Points. NL #yExhaust"
   }
 
 }

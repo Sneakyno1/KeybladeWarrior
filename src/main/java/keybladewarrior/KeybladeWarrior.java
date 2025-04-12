@@ -18,9 +18,10 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
-import keybladewarrior.cards.Courage;
-import keybladewarrior.cards.Defend;
-import keybladewarrior.cards.Strike;
+import keybladewarrior.cards.skills.Courage;
+import keybladewarrior.cards.skills.Defend;
+import keybladewarrior.cards.attacks.Strike;
+import keybladewarrior.cards.skills.Wisdom;
 import keybladewarrior.relics.TodoItem;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ import static keybladewarrior.ModFile.*;
 
 public class KeybladeWarrior extends CustomPlayer {
 
-    static final String ID = makeID("ModdedCharacter");
+    static final String ID = makeID(KeybladeWarrior.class.getSimpleName());
     static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     static final String[] NAMES = characterStrings.NAMES;
     static final String[] TEXT = characterStrings.TEXT;
@@ -67,6 +68,7 @@ public class KeybladeWarrior extends CustomPlayer {
             retVal.add(Defend.ID);
         }
         retVal.add(Courage.ID);
+        retVal.add(Wisdom.ID);
         return retVal;
     }
 

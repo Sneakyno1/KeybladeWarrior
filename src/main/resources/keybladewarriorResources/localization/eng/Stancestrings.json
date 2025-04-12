@@ -4,5 +4,11 @@
     "DESCRIPTION": [
       "While in this y#${ModID}:Drive_Form every other attack played adds a *Shiv to your hand"
     ]
+  },
+  "${ModID}:WisdomForm": {
+    "NAME": "Wisdom",
+    "DESCRIPTION": [
+      "While in this y#${ModID}:Drive_Form every card played adds gains 2 y#Block"
+    ]
   }
 }

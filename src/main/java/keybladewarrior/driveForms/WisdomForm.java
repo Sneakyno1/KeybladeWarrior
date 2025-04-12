@@ -9,11 +9,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import keybladewarrior.powers.ValorPower;
+import keybladewarrior.powers.WisdomPower;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class ValorForm extends AbstractDriveForm{
-    public static final String STANCE_ID = makeID(ValorForm.class.getSimpleName());
+public class WisdomForm extends AbstractDriveForm{
+    public static final String STANCE_ID = makeID(WisdomForm.class.getSimpleName());
     private static final StanceStrings stanceString = CardCrawlGame.languagePack.getStanceString(STANCE_ID);
     private static final String NAME = stanceString.NAME;
     public static final String[] DESCRIPTIONS = stanceString.DESCRIPTION;
@@ -28,7 +29,7 @@ public class ValorForm extends AbstractDriveForm{
     private static final String LOOP_SOUND = "STANCE_LOOP_DIVINITY";
     private static float TIMER = 0.1F;
 
-    public ValorForm() {
+    public WisdomForm() {
         this.ID = STANCE_ID;
         this.name = NAME;
 
@@ -50,7 +51,7 @@ public class ValorForm extends AbstractDriveForm{
     @Override
     public void onEnterStance() {
         super.onEnterStance();
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player, new ValorPower(AbstractDungeon.player),1));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player, new WisdomPower(AbstractDungeon.player),2));
 
 //        if (sfxId != -1L)
 //            stopIdleSfx();

@@ -11,13 +11,64 @@
   },
 
   {
+    "PROPER_NAME": "Drive Points",
+    "NAMES": [
+      "Drive Points",
+      "Drive_Points"
+    ],
+    "DESCRIPTION": "y#${ModID}:Drive_Points are used to fuel Sora's y#${ModID}:Drive_Form and other abilities"
+  },
+
+  {
     "PROPER_NAME": "Drive Form",
     "NAMES": [
-
       "Drive Form",
       "Drive_Form",
       "Drive_Forms"
     ],
-    "DESCRIPTION": "You can only be in one Drive Form at a time. "
+    "DESCRIPTION": "You can only be in one y#${ModID}:Drive_Form at a time."
+  },
+
+  {
+    "PROPER_NAME": "Valor Form",
+    "NAMES": [
+      "Valor Form",
+      "Valor_Form",
+      "Valor_Forms"
+    ],
+    "DESCRIPTION": "You can only be in one y#${ModID}:Drive_Form at a time. "
+  },
+
+  {
+    "PROPER_NAME": "Wisdom Form",
+    "NAMES": [
+      "Wisdom Form",
+      "Wisdom_Form",
+      "Wisdom_Forms"
+    ],
+    "DESCRIPTION": "You can only be in one y#${ModID}:Drive_Form at a time. "
+  },
+
+  {
+    "PROPER_NAME": "Combo",
+    "NAMES": [
+      "Combo"
+    ],
+    "DESCRIPTION": "If the last card played also had y#${ModID}:Combo, trigger this cards y#${ModID}:Combo effect. "
+  },
+  {
+    "PROPER_NAME": "Strong",
+    "NAMES": [
+      "Strong"
+    ],
+    "DESCRIPTION": "If you are in y#${ModID}:Valor_Form trigger this cards y#${ModID}:Strong effect."
+  }
+,
+  {
+    "PROPER_NAME": "Wise",
+    "NAMES": [
+      "Wise"
+    ],
+    "DESCRIPTION": "If you are in y#${ModID}:Wisdom_Form trigger this cards y#${ModID}:Wise effect."
   }
 ]

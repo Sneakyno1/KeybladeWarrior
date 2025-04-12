@@ -1,17 +1,15 @@
-package keybladewarrior.cards;
+package keybladewarrior.cards.skills;
 
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
 import keybladewarrior.KeybladeWarrior;
+import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.driveForms.ValorForm;
-import keybladewarrior.powers.AbstractEasyPower;
-import keybladewarrior.powers.DrivePoints;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class Courage extends AbstractEasyCard{
+public class Courage extends AbstractEasyCard {
     public static final String ID =makeID(Courage.class.getSimpleName());
 
 
@@ -22,17 +20,11 @@ public class Courage extends AbstractEasyCard{
     @Override
     public void upp() {
         upgradeBaseCost(0);
+        super.upgrade();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
-        DrivePoints Drive = (DrivePoints) p.getPower(DrivePoints.ID);
-
-        int CurrentDrivePoints = (Drive == null) ? 0 : Drive.amount;
-        if (CurrentDrivePoints >= 3){
-            Drive.CurrentFormCost = 3;
-
         addToBot(new ChangeStanceAction(ValorForm.STANCE_ID));
-        }
     }
 }
