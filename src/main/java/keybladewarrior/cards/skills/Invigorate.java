@@ -35,6 +35,6 @@ public class Invigorate extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
         blck();
-        addToBot(new ApplyPowerAction(p, p, new DrivePoints(p), this.magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new DrivePoints(p,this.magicNumber), this.magicNumber));
     }
 }

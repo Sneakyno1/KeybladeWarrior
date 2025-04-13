@@ -8,6 +8,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
+import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
+import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
 import keybladewarrior.powers.ValorPower;
 
 import static keybladewarrior.ModFile.makeID;
@@ -42,6 +44,22 @@ public class ValorForm extends AbstractDriveForm{
         this.updateDescription();
     }
 
+    public ValorForm(boolean IgnoreCostToEnterForm) {
+        super(IgnoreCostToEnterForm);
+
+        this.ID = STANCE_ID;
+        this.name = NAME;
+
+        this.BaseCostToEnterForm = 4;
+        this.CurrentFormCost = this.BaseCostToEnterForm;
+        this.BaseFormCostPerTurn = 2;
+        this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
+        this.FormCostModifier = 0;
+        this.FormCostMultiplier = 1;
+
+        this.updateDescription();
+    }
+
     @Override
     public void updateDescription(){
         this.description = DESCRIPTIONS[0];
@@ -52,12 +70,12 @@ public class ValorForm extends AbstractDriveForm{
         super.onEnterStance();
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player, new ValorPower(AbstractDungeon.player),1));
 
-//        if (sfxId != -1L)
-//            stopIdleSfx();
-//        CardCrawlGame.sound.play("STANCE_ENTER_WRATH");
-//        sfxId = CardCrawlGame.sound.playAndLoop("STANCE_LOOP_WRATH");
-//        AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.SCARLET, true));
-//        AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, "Wrath"));
+        if (sfxId != -1L)
+            stopIdleSfx();
+        CardCrawlGame.sound.play("STANCE_ENTER_WRATH");
+        sfxId = CardCrawlGame.sound.playAndLoop("STANCE_LOOP_WRATH");
+        AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.SCARLET, true));
+        AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, "Wrath"));
 
     }
 

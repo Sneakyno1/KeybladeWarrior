@@ -1,9 +1,9 @@
 {
   "${ModID}:TodoItem": {
-    "NAME": "Todo Item",
-    "FLAVOR": "TODO: make this a sweet relic.",
+    "NAME": "test Starting Relic",
+    "FLAVOR": "It'll do for now i guess",
     "DESCRIPTIONS": [
-      "Has no effect."
+      "Gain 2 #yDrive #yPoints when you shuffle your deck."
     ]
   }
 }

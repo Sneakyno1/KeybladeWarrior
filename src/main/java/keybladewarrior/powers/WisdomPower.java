@@ -19,7 +19,7 @@ public class WisdomPower extends AbstractEasyPower{
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID);
 
     public WisdomPower(AbstractCreature owner){
-        super(ID, getPowerStrings(ID).NAME, PowerType.BUFF,true,owner,1);
+        super(ID, getPowerStrings(ID).NAME, PowerType.BUFF,true,owner,2);
     }
 
     @Override

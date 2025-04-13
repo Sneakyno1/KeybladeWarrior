@@ -19,7 +19,7 @@ public class PowerBoost extends AbstractEasyCard {
 
 
     public PowerBoost(){
-        super(ID, 2, CardType.SKILL, CardRarity.RARE, CardTarget.ALL_ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
+        super(ID, 2, CardType.SKILL, CardRarity.RARE, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
         this.exhaust = true;
         this.baseMagicNumber = 4;
         this.magicNumber = this.baseMagicNumber;
@@ -27,7 +27,7 @@ public class PowerBoost extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeMagicNumber(1);
+        upgradeMagicNumber(-1);
         super.upgrade();
     }
 
@@ -41,7 +41,7 @@ public class PowerBoost extends AbstractEasyCard {
         }
 
         if (StrengthToAdd > 0){
-            addToBot(new ApplyPowerAction(p, p, new StrengthPower(p, 1), StrengthToAdd));
+            addToBot(new ApplyPowerAction(p, p, new StrengthPower(p, StrengthToAdd), StrengthToAdd));
         }
     }
 

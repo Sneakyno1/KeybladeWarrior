@@ -7,99 +7,58 @@
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
   },
-  "${ModID}:ExampleTwoAmountPowerCard": {
-    "NAME": "Two Amount Power",
-    "DESCRIPTION": "At the start of your turn, gain !M! Strength and !${ModID}:m2! Dexterity."
-  },
-  "${ModID}:InlinePowerDemo": {
-    "NAME": "Inline Power",
-    "DESCRIPTION": "Strikes deal !M! more damage. NL At the end of your turn, gain !M! Block.",
-    "EXTENDED_DESCRIPTION": [
-      "Strike+, Block+",
-      "#yStrikes deal #b",
-      " additional damage. At the end of your turn, gain #b",
-      " #yBlock."
-    ]
-  },
-  "${ModID}:SelectCardsPlusCardMods": {
-    "NAME": "Cool Card Stuff",
-    "DESCRIPTION": "Choose from 1 of 3 cost 0 cards from any class. NL Add it into your hand. NL It gains Ethereal and Exhaust.",
-    "EXTENDED_DESCRIPTION": [
-      "Choose a card to add into your hand with Ethereal and Exhaust."
-    ]
-  },
-  "${ModID}:EasyXCostDemo": {
-    "NAME": "Easy X Cost",
-    "DESCRIPTION": "{@@}Deal !D! damage X{!M!|>0=+!M!} times. NL Gain X{!M!|>0=+!M!} Strength. NL Exhaust."
-  },
-  "${ModID}:EasyModalChoiceDemo": {
-    "NAME": "Easy Modal Choice",
-    "DESCRIPTION": "Choose one: Draw !M! cards or gain !${ModID}:m2! Strength.",
-    "EXTENDED_DESCRIPTION": [
-      "Draw",
-      "Draw ",
-      " cards.",
-      "Strength",
-      "Gain ",
-      " Strength."
-    ]
-  },
-  "${ModID}:DrawAndShiv": {
-    "NAME": "Draw and Shiv",
-    "DESCRIPTION": "Draw 1 card. NL Add 1 *Shiv into your hand."
-  },
-  "${ModID}:TwoTypesOfDamage": {
-    "NAME": "Two Damage Values",
-    "DESCRIPTION": "Deal !D! damage. NL If you're Vulnerable, deal !${ModID}:sd! damage instead."
-  },
-  "${ModID}:StartupBlockCard": {
-    "NAME": "Startup And AOE",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Startup: Gain !M! Block."
-  },
-  "${ModID}:MultiCardPreviewAndDrawCallback": {
-    "NAME": "Previews and Callbacks",
-    "DESCRIPTION": "{@@}Shuffle *Smite{!Upgrades!|>0=+} and *Safety{!Upgrades!|>0=+} into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies."
-  },
-
-
-
-
-
   "${ModID}:ExitDrive": {
     "NAME": "Exit",
-    "DESCRIPTION": "Retain. NL Exits current y#${ModID}:Drive_Form."
+    "DESCRIPTION": "Retain. NL Exits current ${ModID}:Drive_Form. NL Exhaust."
   },
   "${ModID}:Courage": {
     "NAME": "Courage",
-    "DESCRIPTION": "Enter y#${ModID}:Valor_Form."
+    "DESCRIPTION": "Enter ${ModID}:Valor_Form."
   },
   "${ModID}:Wisdom": {
     "NAME": "Wisdom",
-    "DESCRIPTION": "Enter y#${ModID}:Wisdom_Form."
+    "DESCRIPTION": "Enter ${ModID}:Wisdom_Form."
   },
   "${ModID}:InnerStrength": {
     "NAME": "Inner Strength",
-    "DESCRIPTION": "Deal !D! damage. NL Adds damage equal to your y#${ModID}:Drive_Points/!M!"
+    "DESCRIPTION": "Deal !D! damage. NL Adds damage equal to your Drive_Points NL divided by !M!.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Adds damage equal to your ${ModID}:Drive_Points."
   },
   "${ModID}:AddedBenefits": {
     "NAME": "Added Benefits",
-    "DESCRIPTION": "Deal !D! damage. NL #${ModID}:Strong: Apply !M! #yVulnerable. NL #${ModID}:Wise: Apply !M! #yWeak."
+    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Strong: Apply !M! Vulnerable. NL ${ModID}:Wise: Apply !M! Weak."
   },
   "${ModID}:CounterGuard": {
     "NAME": "Counter Guard",
-    "DESCRIPTION": "Deal !D! damage. NL #${ModID}:Wise: Gain !B! #yBlock."
+    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Wise: Gain !B! Block."
   },
   "${ModID}:Invigorate": {
     "NAME": "Invigorate",
-    "DESCRIPTION": "Deal !D! damage. NL Gain !M! y#${ModID}:Drive_Points."
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! ${ModID}:Drive_Points."
   },
   "${ModID}:ComboMaster": {
     "NAME": "Combo Master",
-    "DESCRIPTION": "Apply !M! #yWeak. NL Apply !M! #yVulnerable."
+    "DESCRIPTION": "Apply !M! Weak. NL Apply !M! Vulnerable. NL ${ModID}:Combo: Apply to ALL enemies NL Exhaust. "
   },
   "${ModID}:PowerBoost": {
     "NAME": "Power Boost",
-    "DESCRIPTION": "Gain 1 #yStrength for every !M! y#${ModID}:Drive_Points. NL #yExhaust"
+    "DESCRIPTION": "Gain 1 Strength for every !M! ${ModID}:Drive_Points. NL Exhaust."
+  },
+  "${ModID}:FauxMastery": {
+    "NAME": "Faux Mastery",
+    "DESCRIPTION": "${ModID}:Valor_Form and ${ModID}:Wisdom_Form no longer consume ${ModID}:Drive_Points at the end of turn."
+  },
+  "${ModID}:DriveBank": {
+    "NAME": "Drive Bank",
+    "DESCRIPTION": "Hold up to !M! ${ModID}:Drive_Points each turn while in a ${ModID}:Drive_Form. NL Gives banked ${ModID}:Drive_Points when exiting a ${ModID}:Drive_Form."
+  },
+  "${ModID}:WellRounded": {
+    "NAME": "Well Rounded",
+    "DESCRIPTION": "{@@}Gain !M! ${ModID}:Drive_Point{!M!|>1=s} when playing a Skill."
+  },
+  "${ModID}:FlashStep": {
+    "NAME": "Flash Step",
+    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Strong: Draw !M! cards."
   }
 
 }

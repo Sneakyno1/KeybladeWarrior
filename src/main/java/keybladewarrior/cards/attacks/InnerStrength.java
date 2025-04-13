@@ -1,17 +1,19 @@
 package keybladewarrior.cards.attacks;
 
-import basemod.interfaces.PostPlayerUpdateSubscriber;
+import basemod.interfaces.PostPowerApplySubscriber;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.powers.DrivePoints;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class InnerStrength extends AbstractEasyCard implements PostPlayerUpdateSubscriber {
+public class InnerStrength extends AbstractEasyCard {
     public static final String ID =makeID(InnerStrength.class.getSimpleName());
     public int ExtraDriveDamage = 0;
 
@@ -27,18 +29,12 @@ public class InnerStrength extends AbstractEasyCard implements PostPlayerUpdateS
     @Override
     public void upp() {
         this.upgradeDamage(6);
-        this.upgradeMagicNumber(1);
+        this.upgradeMagicNumber(-1);
         super.upgrade();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
-    }
-
-    @Override
-    public void receivePostPlayerUpdate() {
-        AbstractPlayer p = AbstractDungeon.player;
         DrivePoints Drive = (DrivePoints) p.getPower(DrivePoints.ID);
 
         if (Drive != null && Drive.amount > 0){
@@ -47,5 +43,6 @@ public class InnerStrength extends AbstractEasyCard implements PostPlayerUpdateS
             this.ExtraDriveDamage = 0;
         }
         this.damage = this.baseDamage + this.ExtraDriveDamage;
+        dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
     }
 }

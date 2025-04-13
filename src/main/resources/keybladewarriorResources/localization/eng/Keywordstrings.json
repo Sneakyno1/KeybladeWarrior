@@ -13,62 +13,72 @@
   {
     "PROPER_NAME": "Drive Points",
     "NAMES": [
-      "Drive Points",
-      "Drive_Points"
+      "drive points",
+      "drive_points",
+      "Drive_Points",
+      "Drive_Point",
+      "drive_point",
+      "dp",
+      "DP"
     ],
-    "DESCRIPTION": "y#${ModID}:Drive_Points are used to fuel Sora's y#${ModID}:Drive_Form and other abilities"
+    "DESCRIPTION": "#yDrive #yPoints are used to fuel Sora's #yDrive #yForms and other abilities."
   },
 
   {
     "PROPER_NAME": "Drive Form",
     "NAMES": [
-      "Drive Form",
+      "drive form",
       "Drive_Form",
-      "Drive_Forms"
+      "drive_form",
+      "Drive_Forms",
+      "drive_forms"
     ],
-    "DESCRIPTION": "You can only be in one y#${ModID}:Drive_Form at a time."
+    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time and cannot gain #yDrive #yPoints."
   },
 
   {
     "PROPER_NAME": "Valor Form",
     "NAMES": [
-      "Valor Form",
+      "valor form",
       "Valor_Form",
-      "Valor_Forms"
+      "valor_form"
     ],
-    "DESCRIPTION": "You can only be in one y#${ModID}:Drive_Form at a time. "
+    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. Every other attack played adds a *Shiv to your hand."
   },
 
   {
     "PROPER_NAME": "Wisdom Form",
     "NAMES": [
-      "Wisdom Form",
+      "wisdom form",
       "Wisdom_Form",
-      "Wisdom_Forms"
+      "wisdom_form"
     ],
-    "DESCRIPTION": "You can only be in one y#${ModID}:Drive_Form at a time. "
+    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. Whenever you play a card, gain #b2 Block."
   },
 
   {
     "PROPER_NAME": "Combo",
     "NAMES": [
+      "combo",
       "Combo"
     ],
-    "DESCRIPTION": "If the last card played also had y#${ModID}:Combo, trigger this cards y#${ModID}:Combo effect. "
+    "DESCRIPTION": "If the last card played also had #yCombo, trigger this cards #yCombo effect."
   },
   {
     "PROPER_NAME": "Strong",
     "NAMES": [
+      "strong",
       "Strong"
     ],
-    "DESCRIPTION": "If you are in y#${ModID}:Valor_Form trigger this cards y#${ModID}:Strong effect."
+    "DESCRIPTION": "If you are in #yValor #yForm trigger this cards #yStrong effect."
   }
 ,
   {
     "PROPER_NAME": "Wise",
     "NAMES": [
+      "wise",
       "Wise"
     ],
-    "DESCRIPTION": "If you are in y#${ModID}:Wisdom_Form trigger this cards y#${ModID}:Wise effect."
+    "DESCRIPTION": "If you are in #yWisdom #yForm trigger this cards #yWise effect."
   }
 ]

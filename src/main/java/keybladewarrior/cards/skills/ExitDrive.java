@@ -17,6 +17,7 @@ public class ExitDrive extends AbstractEasyCard {
         super(ID, 0, CardType.SKILL, CardRarity.SPECIAL, CardTarget.SELF);
         color = CardColor.COLORLESS;
         selfRetain = true;
+        this.exhaust= true;
     }
 
     @Override

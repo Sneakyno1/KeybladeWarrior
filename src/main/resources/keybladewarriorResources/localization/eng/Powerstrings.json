@@ -13,5 +13,36 @@
       "Whenever you play a card, gain #b",
       " #yBlock."
     ]
+  },
+  "${ModID}:ValorPower": {
+    "NAME": "Valor Form",
+    "DESCRIPTIONS": [
+      "While in this #yDrive #yForm every other attack played adds a *Shiv to your hand."
+    ]
+  },
+  "${ModID}:FauxMasteryPower": {
+    "NAME": "Faux Mastery",
+    "DESCRIPTIONS": [
+      "#yValor #yForm and #yWisdom #yForm no longer consume ##yDrive #yPoints at the end of turn."
+    ]
+  },
+  "${ModID}:DriveBankPower": {
+    "NAME": "Drive Bank",
+    "DESCRIPTIONS": [
+      "Can hold up to #b"," #yDrive #yPoints per turn. NL",
+      "Currently holding #b"," #yDrive #yPoints."
+    ]
+  },
+  "${ModID}:WellRoundedPower": {
+    "NAME": "Well Rounded",
+    "DESCRIPTIONS": [
+      "Gain #b"," #yDrive #yPoints whenever you play a Skill."
+    ]
+  },
+  "${ModID}:DrivePoints": {
+    "NAME": "Drive Points",
+    "DESCRIPTIONS": [
+      "You have #b"," #yDrive #yPoints."
+    ]
   }
 }

@@ -43,6 +43,20 @@ public class WisdomForm extends AbstractDriveForm{
         this.updateDescription();
     }
 
+    public WisdomForm(boolean IgnoreCostToEnterForm) {
+        super(IgnoreCostToEnterForm);
+
+        this.ID = STANCE_ID;
+        this.name = NAME;
+        this.BaseCostToEnterForm = 4;
+        this.CurrentFormCost = this.BaseCostToEnterForm;
+        this.BaseFormCostPerTurn = 2;
+        this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
+        this.FormCostModifier = 0;
+        this.FormCostMultiplier = 1;
+        this.updateDescription();
+    }
+
     @Override
     public void updateDescription(){
         this.description = DESCRIPTIONS[0];
@@ -65,7 +79,7 @@ public class WisdomForm extends AbstractDriveForm{
     @Override
     public void onExitStance() {
 
-        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player, ValorPower.ID));
+        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player, WisdomPower.ID));
         stopIdleSfx();
     }
 
