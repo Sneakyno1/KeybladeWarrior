@@ -13,7 +13,8 @@
   },
   "${ModID}:Courage": {
     "NAME": "Courage",
-    "DESCRIPTION": "Enter ${ModID}:Valor_Form."
+    "DESCRIPTION": "Enter ${ModID}:Valor_Form.",
+    "UPGRADE_DESCRIPTION": "{@@}Enter ${ModID}:Valor_Form. NL Draw !M! card{!M!|>1=s}."
   },
   "${ModID}:Wisdom": {
     "NAME": "Wisdom",
@@ -21,15 +22,15 @@
   },
   "${ModID}:InnerStrength": {
     "NAME": "Inner Strength",
-    "DESCRIPTION": "Deal !D! damage. NL Adds damage equal to your ${ModID}:Drive_Points NL divided by !M!.",
+    "DESCRIPTION": "Deal !D! damage. NL Adds damage equal to half of your ${ModID}:Drive_Points.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Adds damage equal to your ${ModID}:Drive_Points."
   },
   "${ModID}:AddedBenefits": {
     "NAME": "Added Benefits",
     "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Strong: Apply !M! Vulnerable. NL ${ModID}:Wise: Apply !M! Weak."
   },
-  "${ModID}:CounterGuard": {
-    "NAME": "Counter Guard",
+  "${ModID}:Dash": {
+    "NAME": "Dash",
     "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Wise: Gain !B! Block."
   },
   "${ModID}:Invigorate": {
@@ -75,5 +76,21 @@
   "${ModID}:AutoValor": {
     "NAME": "Auto Valor",
     "DESCRIPTION": "Gain !B! Block. NL If the enemy does not intend to attack, enter ${ModID}:Valor_Form."
+  },
+  "${ModID}:CounterGuard": {
+    "NAME": "Counter Guard",
+    "DESCRIPTION": "Deal !D! damage. NL Gain Block equal to half of unblocked damage dealt. NL ${ModID}:Strong: Gain Block equal to unblocked damage dealt."
+  },
+  "${ModID}:Contemplation": {
+    "NAME": "Contemplation",
+    "DESCRIPTION": "Draw !M! cards. NL Gain !${ModID}:m2! ${ModID}:Drive_Points."
+  },
+  "${ModID}:ComboPlus": {
+    "NAME": "Combo Plus",
+    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Combo: Place this card on top of the draw pile."
+  },
+  "${ModID}:DefenseBoost": {
+    "NAME": "Defense Boost",
+    "DESCRIPTION": "Gain !B! Block. NL Consume !M! ${ModID}:Drive_Points and gain 1 Dexterity."
   }
 }

@@ -1,18 +1,22 @@
 package keybladewarrior.cards.attacks;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.common.DamageCallbackAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.driveForms.ValorForm;
-import keybladewarrior.driveForms.WisdomForm;
+import keybladewarrior.powers.DrivePoints;
+import keybladewarrior.util.CustomTags;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import static keybladewarrior.ModFile.makeID;
 
@@ -21,26 +25,33 @@ public class CounterGuard extends AbstractEasyCard {
 
 
     public CounterGuard(){
-        super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = 8;
-        this.baseBlock = 8;
-
-
+        super(ID, 2, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
+        this.baseDamage = 12;
+        tags.add(CustomTags.STRONG);
     }
+
+
+
     @Override
     public void upp() {
-        upgradeDamage(4);
-        upgradeBlock(4);
+        upgradeDamage(6);
         super.upgrade();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        dmg(m, AbstractGameAction.AttackEffect.BLUNT_LIGHT);
+        Consumer<Integer> consumer = (Integer x) -> {
+            if (x>0) {
+                if (Objects.equals(p.stance.ID, ValorForm.STANCE_ID)){
+                    addToTop(new GainBlockAction(p, m.lastDamageTaken));
+                }else{
+                    addToTop(new GainBlockAction(p, m.lastDamageTaken/2));
+                }
+            }
+        };
+        addToBot(new DamageCallbackAction(m,new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY,consumer));
 
-        if (Objects.equals(p.stance.ID, WisdomForm.STANCE_ID)){
-            blck();
-        }
+
     }
 
 

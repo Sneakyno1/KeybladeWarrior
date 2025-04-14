@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.stances.AbstractStance;
+import com.megacrit.cardcrawl.stances.NeutralStance;
 import com.megacrit.cardcrawl.vfx.combat.EmptyStanceEffect;
 import keybladewarrior.cards.skills.ExitDrive;
 import keybladewarrior.powers.DrivePoints;
@@ -102,12 +103,9 @@ public class AbstractDriveForm extends AbstractStance {
         }
         //if player doesn't have enough drive points to change we'll force them back into their current form
         else {
-            AbstractDriveForm currForm = (AbstractDriveForm) p.stance;
 
-            currForm.IgnoreCostToEnterForm = true;
-            AbstractDungeon.actionManager.addToBottom(new NotStanceCheckAction(currForm.ID, new VFXAction(new EmptyStanceEffect(p.hb.cX, p.hb.cY), 0.1F)));
-            AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction(currForm));
-            currForm.IgnoreCostToEnterForm = false;
+            AbstractDungeon.actionManager.addToBottom(new NotStanceCheckAction(NeutralStance.STANCE_ID, new VFXAction(new EmptyStanceEffect(p.hb.cX, p.hb.cY), 0.1F)));
+            AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction(NeutralStance.STANCE_ID));
         }
 
     }
