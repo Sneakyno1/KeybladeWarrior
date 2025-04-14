@@ -26,7 +26,7 @@ public class ComboMaster extends AbstractEasyCard {
 
     public ComboMaster(){
         super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseMagicNumber = 2;
+        this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
         tags.add(CustomTags.COMBO);
     }
@@ -55,7 +55,7 @@ public class ComboMaster extends AbstractEasyCard {
 
     @Override
     public void triggerOnGlowCheck() {
-        if (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && ((AbstractEasyCard) AbstractDungeon.actionManager.cardsPlayedThisCombat
+        if (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && (AbstractDungeon.actionManager.cardsPlayedThisCombat
                 .get(AbstractDungeon.actionManager.cardsPlayedThisCombat
                         .size() - 1)).hasTag(CustomTags.COMBO)){
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();

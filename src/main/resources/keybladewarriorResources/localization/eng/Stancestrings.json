@@ -2,13 +2,13 @@
   "${ModID}:ValorForm": {
     "NAME": "Valor",
     "DESCRIPTION": [
-      "While in this #yDrive #yForm, every other attack played adds a *Shiv to your hand."
+      "While in this #yDrive #yForm, every other attack played adds a #yShiv to your hand. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
     ]
   },
   "${ModID}:WisdomForm": {
     "NAME": "Wisdom",
     "DESCRIPTION": [
-      "While in this #yDrive #yForm, every card played adds gains 2 #yBlock."
+      "While in this #yDrive #yForm, every card played adds gains 2 #yBlock. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
     ]
   }
 }

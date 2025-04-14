@@ -100,10 +100,14 @@ public class AbstractDriveForm extends AbstractStance {
                 AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new ExitDrive(), 1, false));
             }
         }
-        //if player doesn't have enough drive points to change we'll force them back into neutral
+        //if player doesn't have enough drive points to change we'll force them back into their current form
         else {
-            AbstractDungeon.actionManager.addToBottom(new NotStanceCheckAction("Neutral", new VFXAction(new EmptyStanceEffect(p.hb.cX, p.hb.cY), 0.1F)));
-            AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction("Neutral"));
+            AbstractDriveForm currForm = (AbstractDriveForm) p.stance;
+
+            currForm.IgnoreCostToEnterForm = true;
+            AbstractDungeon.actionManager.addToBottom(new NotStanceCheckAction(currForm.ID, new VFXAction(new EmptyStanceEffect(p.hb.cX, p.hb.cY), 0.1F)));
+            AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction(currForm));
+            currForm.IgnoreCostToEnterForm = false;
         }
 
     }

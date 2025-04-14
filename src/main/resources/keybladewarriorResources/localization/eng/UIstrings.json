@@ -1,3 +1,7 @@
 {
-    
+  "${ModID}:AutoValor": {
+    "TEXT": [
+      "That enemy intends to attack me!"
+    ]
+  }
 }

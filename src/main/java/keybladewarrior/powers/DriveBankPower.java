@@ -32,12 +32,28 @@ public class DriveBankPower extends AbstractEasyPower{
 
     @Override
     public void onChangeStance(AbstractStance oldStance, AbstractStance newStance) {
-        AbstractPlayer p = AbstractDungeon.player;
-        if (Objects.equals(newStance.ID, NeutralStance.STANCE_ID)){
-            addToBot(new ApplyPowerAction(p, p, new DrivePoints(p), this.BankedDrive));
+
+        if (!Objects.equals(oldStance.ID, newStance.ID) && this.BankedDrive > 0){
+            AbstractPlayer p = AbstractDungeon.player;
+            DrivePoints points = (DrivePoints) p.getPower(DrivePoints.ID);
+
+            if (points == null){
+                points = new DrivePoints(p,this.BankedDrive);
+
+                points.GainFromBank = true;
+                addToBot(new ApplyPowerAction(p, p, points, this.BankedDrive));
+
+
+            }else {
+                points.GainFromBank = true;
+                addToBot(new ApplyPowerAction(p, p, new DrivePoints(p,this.BankedDrive), this.BankedDrive));
+            }
+
             this.BankedDrive = 0;
             this.DriveBankedThisTurn = 0;
+            updateDescription();
         }
+
 
         updateDescription();
     }
@@ -45,6 +61,7 @@ public class DriveBankPower extends AbstractEasyPower{
     @Override
     public void atEndOfTurn(boolean isPlayer) {
         this.DriveBankedThisTurn = 0;
+        updateDescription();
     }
 
     @Override
@@ -65,7 +82,7 @@ public class DriveBankPower extends AbstractEasyPower{
                 //check if we need to bank the drive points
                 if (!Objects.equals(p.stance.ID, NeutralStance.STANCE_ID)){
 
-                    AmountToBank = Math.min(points.amount, this.amount-DriveBankedThisTurn);
+                    AmountToBank = Math.min(power.amount, this.amount-DriveBankedThisTurn);
                     this.DriveBankedThisTurn += AmountToBank;
                     this.BankedDrive += AmountToBank;
                 }

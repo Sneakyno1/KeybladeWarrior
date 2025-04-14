@@ -21,7 +21,7 @@
   },
   "${ModID}:InnerStrength": {
     "NAME": "Inner Strength",
-    "DESCRIPTION": "Deal !D! damage. NL Adds damage equal to your Drive_Points NL divided by !M!.",
+    "DESCRIPTION": "Deal !D! damage. NL Adds damage equal to your ${ModID}:Drive_Points NL divided by !M!.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Adds damage equal to your ${ModID}:Drive_Points."
   },
   "${ModID}:AddedBenefits": {
@@ -50,7 +50,7 @@
   },
   "${ModID}:DriveBank": {
     "NAME": "Drive Bank",
-    "DESCRIPTION": "Hold up to !M! ${ModID}:Drive_Points each turn while in a ${ModID}:Drive_Form. NL Gives banked ${ModID}:Drive_Points when exiting a ${ModID}:Drive_Form."
+    "DESCRIPTION": "${ModID}:Bank up to !M! ${ModID}:Drive_Points each turn while in a ${ModID}:Drive_Form."
   },
   "${ModID}:WellRounded": {
     "NAME": "Well Rounded",
@@ -59,6 +59,21 @@
   "${ModID}:FlashStep": {
     "NAME": "Flash Step",
     "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Strong: Draw !M! cards."
+  },
+  "${ModID}:BerserkCharge": {
+    "NAME": "Berserk Charge",
+    "DESCRIPTION": "Deal !D! damage X times. NL ${ModID}:Combo: Gain !M! ${ModID}:Drive_Points X times."
+  },
+  "${ModID}:SynchBlade": {
+    "NAME": "Synch Blade",
+    "DESCRIPTION": "{@@}Deal !D! damage twice. NL ${ModID}:Strong: Deal !D! damage !M! additional time{!M!|>1=s}."
+  },
+  "${ModID}:MagnetBurst": {
+    "NAME": "Magnet Burst",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL ${ModID}:Combo: Gain !M! ${ModID}:Drive_Points per unblocked damage dealt."
+  },
+  "${ModID}:AutoValor": {
+    "NAME": "Auto Valor",
+    "DESCRIPTION": "Gain !B! Block. NL If the enemy does not intend to attack, enter ${ModID}:Valor_Form."
   }
-
 }

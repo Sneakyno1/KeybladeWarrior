@@ -37,7 +37,7 @@ public class PowerBoost extends AbstractEasyCard {
         int StrengthToAdd = 0;
 
         if (Drive != null && Drive.amount > 0){
-            StrengthToAdd = Drive.amount % this.magicNumber;
+            StrengthToAdd = Drive.amount / this.magicNumber;
         }
 
         if (StrengthToAdd > 0){
