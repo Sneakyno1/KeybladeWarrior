@@ -27,6 +27,7 @@ public class ComboPlus extends AbstractEasyCard {
         super(ID, 0, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
         this.baseDamage = 6;
         tags.add(CustomTags.COMBO);
+        this.shuffleBackIntoDrawPile = false;
     }
 
 
@@ -38,13 +39,15 @@ public class ComboPlus extends AbstractEasyCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+
+        this.shuffleBackIntoDrawPile = false;
         dmg(m, AbstractGameAction.AttackEffect.BLUNT_LIGHT);
         if (PreviousCardWasComboCard) {
-            addToBot(new MoveCardsAction(p.drawPile,p.discardPile,c -> c.uuid == this.uuid));
+            this.shuffleBackIntoDrawPile = true;
+            //addToBot(new MoveCardsAction(p.drawPile,p.discardPile,c -> c.uuid == this.uuid));
         }
 
     }
-
 
     @Override
     public void triggerOnGlowCheck() {
