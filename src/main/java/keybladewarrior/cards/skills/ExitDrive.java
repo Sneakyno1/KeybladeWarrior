@@ -22,7 +22,6 @@ public class ExitDrive extends AbstractEasyCard {
 
     @Override
     public void upp() {
-
     }
 
     @Override

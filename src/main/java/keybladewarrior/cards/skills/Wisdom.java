@@ -1,5 +1,8 @@
 package keybladewarrior.cards.skills;
 
+import com.megacrit.cardcrawl.actions.common.DiscardAction;
+import com.megacrit.cardcrawl.actions.common.DiscardSpecificCardAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -14,16 +17,20 @@ public class Wisdom extends AbstractEasyCard {
 
 
     public Wisdom(){
-        super(ID, 1, CardType.SKILL, CardRarity.BASIC, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
+        super(ID, 0, CardType.SKILL, CardRarity.BASIC, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
+        this.baseMagicNumber = this.magicNumber = 1;
     }
 
     @Override
     public void upp() {
-        upgradeBaseCost(0);
+        upgradeMagicNumber(1);
+        super.upgrade();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
         addToBot(new ChangeStanceAction(WisdomForm.STANCE_ID));
+        addToBot(new DrawCardAction(p, this.magicNumber));
+        addToBot(new DiscardAction(p,p,1,false));
     }
 }

@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.actions.EasyXCostAction;
+import keybladewarrior.actions.comboActions.BerserkChargeAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
@@ -40,19 +41,15 @@ public class BerserkCharge extends AbstractEasyCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-
         atb(new EasyXCostAction(this,
                 (effect, params)->{
-            for (int i = 0; i < effect;i++) {
-                if (params[1] == 1) {
-                    applyToSelfTop(new DrivePoints(p, params[0]));
+                for (int i = 0; i < effect;i++) {
+                    dmgTop(m, AbstractGameAction.AttackEffect.BLUNT_HEAVY);
+                    addToTop(new BerserkChargeAction(p,this.magicNumber));
                 }
-                dmgTop(m, AbstractGameAction.AttackEffect.BLUNT_HEAVY);
-            }
-
-            return true;
-        },
-                this.magicNumber, (this.PreviousCardWasComboCard) ? 1:0));
+                return true;
+            })
+        );
     }
 
     @Override
@@ -61,10 +58,8 @@ public class BerserkCharge extends AbstractEasyCard {
                 .get(AbstractDungeon.actionManager.cardsPlayedThisCombat
                         .size() - 1).hasTag(CustomTags.COMBO)){
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-            this.PreviousCardWasComboCard = true;
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-            this.PreviousCardWasComboCard = false;
         }
     }
 

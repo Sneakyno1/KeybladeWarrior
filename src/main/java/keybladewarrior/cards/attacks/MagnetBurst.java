@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
+import keybladewarrior.actions.comboActions.MagnetBurstAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
@@ -42,27 +43,7 @@ public class MagnetBurst extends AbstractEasyCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        //int numHit = 0;
-
-        Consumer<Integer> consumer = (Integer x) -> {if (x>0) addToBot(new ApplyPowerAction(p,p,new DrivePoints(p,2),2)); };
-        if (PreviousCardWasComboCard){
-            //allDmg(AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-            for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters){
-
-                addToBot(new DamageCallbackAction(mo,new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL,consumer));
-                //numHit += (mo.lastDamageTaken > 0) ? 1 : 0;
-            }
-
-            //addToBot(new ApplyPowerAction(p,p,new DrivePoints(p,this.magicNumber*numHit),this.magicNumber*numHit));
-        }
-        else{
-            for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters){
-
-                dmg(mo,AbstractGameAction.AttackEffect.SLASH_HORIZONTAL);
-            }
-        }
-
-
+        addToBot(new MagnetBurstAction(p,this.magicNumber,this.damage,this.damageTypeForTurn));
     }
 
     @Override
@@ -71,10 +52,8 @@ public class MagnetBurst extends AbstractEasyCard {
                 .get(AbstractDungeon.actionManager.cardsPlayedThisCombat
                         .size() - 1)).hasTag(CustomTags.COMBO)){
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-            this.PreviousCardWasComboCard = true;
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-            this.PreviousCardWasComboCard = false;
         }
     }
 

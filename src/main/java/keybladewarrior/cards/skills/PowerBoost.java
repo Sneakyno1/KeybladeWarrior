@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import keybladewarrior.KeybladeWarrior;
+import keybladewarrior.actions.miscellaneousActions.PowerBoostAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.powers.DrivePoints;
 
@@ -33,16 +34,7 @@ public class PowerBoost extends AbstractEasyCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        DrivePoints Drive = (DrivePoints) p.getPower(DrivePoints.ID);
-        int StrengthToAdd = 0;
-
-        if (Drive != null && Drive.amount > 0){
-            StrengthToAdd = Drive.amount / this.magicNumber;
-        }
-
-        if (StrengthToAdd > 0){
-            addToBot(new ApplyPowerAction(p, p, new StrengthPower(p, StrengthToAdd), StrengthToAdd));
-        }
+        addToBot(new PowerBoostAction(p,this.magicNumber));
     }
 
 }

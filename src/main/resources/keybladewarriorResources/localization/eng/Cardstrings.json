@@ -13,12 +13,11 @@
   },
   "${ModID}:Courage": {
     "NAME": "Courage",
-    "DESCRIPTION": "Enter ${ModID}:Valor_Form.",
-    "UPGRADE_DESCRIPTION": "{@@}Enter ${ModID}:Valor_Form. NL Draw !M! card{!M!|>1=s}."
+    "DESCRIPTION": "Enter ${ModID}:Valor_Form. NL Gain !M! Strength. NL At the end of this turn, lose !M! Strength."
   },
   "${ModID}:Wisdom": {
     "NAME": "Wisdom",
-    "DESCRIPTION": "Enter ${ModID}:Wisdom_Form."
+    "DESCRIPTION": "Enter ${ModID}:Wisdom_Form. NL Draw !M! card{!M!|>1=s} NL Discard 1 card."
   },
   "${ModID}:InnerStrength": {
     "NAME": "Inner Strength",
@@ -87,7 +86,7 @@
   },
   "${ModID}:ComboPlus": {
     "NAME": "Combo Plus",
-    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Combo: Place this card on top of the draw pile."
+    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Combo: Shuffle this card into your draw pile."
   },
   "${ModID}:DefenseBoost": {
     "NAME": "Defense Boost",

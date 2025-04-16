@@ -1,9 +1,12 @@
 package keybladewarrior.cards.skills;
 
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.LoseStrengthPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.driveForms.ValorForm;
@@ -15,21 +18,20 @@ public class Courage extends AbstractEasyCard {
 
 
     public Courage(){
-        super(ID, 1, CardType.SKILL, CardRarity.BASIC, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseMagicNumber=this.magicNumber = 1;
+        super(ID, 0, CardType.SKILL, CardRarity.BASIC, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
+        this.baseMagicNumber=this.magicNumber = 2;
     }
 
     @Override
     public void upp() {
-        upgradeBaseCost(0);
+        upgradeMagicNumber(2);
         super.upgrade();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
         addToBot(new ChangeStanceAction(ValorForm.STANCE_ID));
-        if (this.upgraded){
-            addToBot(new DrawCardAction(p,this.magicNumber));
-        }
+        addToBot(new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new LoseStrengthPower(p, this.magicNumber), this.magicNumber));
     }
 }

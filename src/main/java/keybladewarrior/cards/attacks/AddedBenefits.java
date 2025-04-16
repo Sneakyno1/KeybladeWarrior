@@ -8,9 +8,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import keybladewarrior.KeybladeWarrior;
+import keybladewarrior.actions.miscellaneousActions.AddedBenefitsAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.driveForms.ValorForm;
 import keybladewarrior.driveForms.WisdomForm;
+import keybladewarrior.util.CustomTags;
 
 import java.util.Objects;
 
@@ -25,6 +27,8 @@ public class AddedBenefits extends AbstractEasyCard {
         this.baseDamage = 6;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
+        this.tags.add(CustomTags.STRONG);
+        this.tags.add(CustomTags.WISE);
 
 
     }
@@ -37,14 +41,7 @@ public class AddedBenefits extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
-
-        if (Objects.equals(p.stance.ID, ValorForm.STANCE_ID)){
-            addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false), this.magicNumber));
-        }
-
-        if (Objects.equals(p.stance.ID, WisdomForm.STANCE_ID)){
-            addToBot(new ApplyPowerAction(m, AbstractDungeon.player, new WeakPower(m, this.magicNumber, false), this.magicNumber));
-        }
+        addToBot(new AddedBenefitsAction(p,m,this.magicNumber));
     }
 
 

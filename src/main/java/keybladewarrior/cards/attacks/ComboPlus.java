@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
+import keybladewarrior.actions.comboActions.ComboPlusAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
@@ -27,7 +28,6 @@ public class ComboPlus extends AbstractEasyCard {
         super(ID, 0, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
         this.baseDamage = 6;
         tags.add(CustomTags.COMBO);
-        this.shuffleBackIntoDrawPile = false;
     }
 
 
@@ -39,14 +39,8 @@ public class ComboPlus extends AbstractEasyCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-
-        this.shuffleBackIntoDrawPile = false;
         dmg(m, AbstractGameAction.AttackEffect.BLUNT_LIGHT);
-        if (PreviousCardWasComboCard) {
-            this.shuffleBackIntoDrawPile = true;
-            //addToBot(new MoveCardsAction(p.drawPile,p.discardPile,c -> c.uuid == this.uuid));
-        }
-
+        addToBot(new ComboPlusAction(this));
     }
 
     @Override
@@ -55,10 +49,8 @@ public class ComboPlus extends AbstractEasyCard {
                 .get(AbstractDungeon.actionManager.cardsPlayedThisCombat
                         .size() - 1)).hasTag(CustomTags.COMBO)){
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-            this.PreviousCardWasComboCard = true;
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-            this.PreviousCardWasComboCard = false;
         }
     }
 

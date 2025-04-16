@@ -4,8 +4,10 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
+import keybladewarrior.actions.wiseActions.DashAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.driveForms.WisdomForm;
+import keybladewarrior.util.CustomTags;
 
 import java.util.Objects;
 
@@ -17,8 +19,9 @@ public class Dash extends AbstractEasyCard {
 
     public Dash(){
         super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = 8;
-        this.baseBlock = 8;
+        this.baseDamage = this.damage = 8;
+        this.baseBlock = this.block = 8;
+        this.tags.add(CustomTags.WISE);
 
 
     }
@@ -32,10 +35,7 @@ public class Dash extends AbstractEasyCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
-
-        if (Objects.equals(p.stance.ID, WisdomForm.STANCE_ID)){
-            blck();
-        }
+        addToBot(new DashAction(p,this.block));
     }
 
 

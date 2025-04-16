@@ -4,12 +4,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import keybladewarrior.powers.ValorPower;
 import keybladewarrior.powers.WisdomPower;
+import keybladewarrior.util.CustomTags;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import static keybladewarrior.ModFile.makeID;
 
@@ -19,6 +25,7 @@ public class WisdomForm extends AbstractDriveForm{
     private static final String NAME = stanceString.NAME;
     public static final String[] DESCRIPTIONS = stanceString.DESCRIPTION;
     private static long sfxId = -1L;
+    public static final ArrayList<AbstractCard.CardTags> DriveTags = new ArrayList<AbstractCard.CardTags>(Collections.singletonList(CustomTags.WISE));
 
     public static final Color COLOR_MIN = CardHelper.getColor(92, 92, 92);
     public static final Color COLOR_MAX = CardHelper.getColor(128, 128, 128);
@@ -40,20 +47,13 @@ public class WisdomForm extends AbstractDriveForm{
         this.FormCostModifier = 0;
         this.FormCostMultiplier = 1;
 
+
         this.updateDescription();
     }
 
     public WisdomForm(boolean IgnoreCostToEnterForm) {
-        super(IgnoreCostToEnterForm);
-
-        this.ID = STANCE_ID;
-        this.name = NAME;
-        this.BaseCostToEnterForm = 4;
-        this.CurrentFormCost = this.BaseCostToEnterForm;
-        this.BaseFormCostPerTurn = 2;
-        this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
-        this.FormCostModifier = 0;
-        this.FormCostMultiplier = 1;
+        this();
+        this. IgnoreCostToEnterForm = IgnoreCostToEnterForm;
         this.updateDescription();
     }
 

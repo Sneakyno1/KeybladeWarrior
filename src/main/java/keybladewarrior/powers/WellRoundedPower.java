@@ -16,8 +16,8 @@ public class WellRoundedPower extends AbstractEasyPower{
     public static final String ID =makeID(WellRoundedPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID);
 
-    public WellRoundedPower(AbstractCreature owner){
-        super(ID, getPowerStrings(ID).NAME, PowerType.BUFF,false,owner,1);
+    public WellRoundedPower(AbstractCreature owner, int amount){
+        super(ID, getPowerStrings(ID).NAME, PowerType.BUFF,false,owner,amount);
     }
 
     @Override

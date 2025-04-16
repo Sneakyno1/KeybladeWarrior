@@ -1,8 +1,6 @@
 package keybladewarrior.driveForms;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
@@ -18,7 +16,6 @@ import keybladewarrior.powers.DrivePoints;
 
 import java.util.ArrayList;
 
-import static keybladewarrior.util.Wiz.getCardsMatchingPredicate;
 
 public class AbstractDriveForm extends AbstractStance {
     public int BaseCostToEnterForm = 0;
@@ -29,6 +26,7 @@ public class AbstractDriveForm extends AbstractStance {
     public float FormCostMultiplier = 1;
     public boolean IgnoreFormCostPerTurn = false;
     public boolean IgnoreCostToEnterForm = false;
+    public ArrayList<AbstractCard.CardTags> DriveTags = new ArrayList<>();
 
 
     public AbstractDriveForm(){}
@@ -95,7 +93,6 @@ public class AbstractDriveForm extends AbstractStance {
             AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new ExitDrive(), 1, false));
         } else if (Drive != null && Drive.amount >= CurrentFormCost){
             Drive.reducePower(CurrentFormCost);
-            //AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p),-CurrentFormCost));
 
             if (!ExitDriveInWorkingDeck(p)){
                 AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new ExitDrive(), 1, false));
@@ -126,7 +123,6 @@ public class AbstractDriveForm extends AbstractStance {
         }
         else if (Drive != null && Drive.amount > 0) {
             Drive.reducePower(CurrentFormCostPerTurn);
-            //AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p), -CurrentFormCostPerTurn));
         }
         else {
             //right now player is just force back into neutral

@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import keybladewarrior.KeybladeWarrior;
+import keybladewarrior.actions.miscellaneousActions.DefenseBoostAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.powers.DrivePoints;
 
@@ -31,13 +32,8 @@ public class DefenseBoost extends AbstractEasyCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        DrivePoints Drive = (DrivePoints) p.getPower(DrivePoints.ID);
         blck();
-
-        if (Drive != null && Drive.amount >= this.magicNumber){
-            Drive.reducePower(this.magicNumber);
-            addToBot(new ApplyPowerAction(p, p, new DexterityPower(p, 1), 1));
-        }
+        addToBot(new DefenseBoostAction(p,this.magicNumber));
     }
 
 }

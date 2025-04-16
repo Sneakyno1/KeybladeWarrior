@@ -27,6 +27,6 @@ public class WellRounded extends AbstractEasyCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
-        addToBot(new ApplyPowerAction(p, p, new WellRoundedPower(p), this.magicNumber));
+        addToBot(new ApplyPowerAction(p, p, new WellRoundedPower(p,this.magicNumber), this.magicNumber));
     }
 }

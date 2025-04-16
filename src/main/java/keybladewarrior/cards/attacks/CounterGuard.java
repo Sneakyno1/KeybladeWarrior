@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.cards.AbstractEasyCard;
+import keybladewarrior.driveForms.AbstractDriveForm;
 import keybladewarrior.driveForms.ValorForm;
 import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
@@ -42,7 +43,7 @@ public class CounterGuard extends AbstractEasyCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         Consumer<Integer> consumer = (Integer x) -> {
             if (x>0) {
-                if (Objects.equals(p.stance.ID, ValorForm.STANCE_ID)){
+                if (((AbstractDriveForm)p.stance).DriveTags.contains(CustomTags.STRONG)){
                     addToTop(new GainBlockAction(p, m.lastDamageTaken));
                 }else{
                     addToTop(new GainBlockAction(p, m.lastDamageTaken/2));
