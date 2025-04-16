@@ -30,8 +30,10 @@ public class SynchBladeAction extends AbstractGameAction {
     public void update(){
         int NumOfAttacks = 2;
 
-        if (((AbstractDriveForm)p.stance).DriveTags.contains(CustomTags.STRONG)){
-            NumOfAttacks += this.ExtraAttacks;
+        if (p.stance instanceof AbstractDriveForm){
+            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.STRONG)) {
+                NumOfAttacks += this.ExtraAttacks;
+            }
         }
 
         for (int i = 0; i< NumOfAttacks; i++){

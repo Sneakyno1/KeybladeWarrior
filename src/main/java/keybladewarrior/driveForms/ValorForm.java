@@ -1,5 +1,6 @@
 package keybladewarrior.driveForms;
 
+import basemod.helpers.CardTags;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -54,6 +55,11 @@ public class ValorForm extends AbstractDriveForm{
         this();
         this. IgnoreCostToEnterForm = IgnoreCostToEnterForm;
         this.updateDescription();
+    }
+
+    @Override
+    public boolean hasTag(AbstractCard.CardTags tagToCheck) {
+        return DriveTags.contains(tagToCheck);
     }
 
     @Override

@@ -21,7 +21,6 @@ import static keybladewarrior.ModFile.makeID;
 
 public class ComboPlus extends AbstractEasyCard {
     public static final String ID =makeID(ComboPlus.class.getSimpleName());
-    public boolean PreviousCardWasComboCard = false;
 
 
     public ComboPlus(){

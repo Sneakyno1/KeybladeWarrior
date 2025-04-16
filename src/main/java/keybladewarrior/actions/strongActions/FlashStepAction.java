@@ -19,8 +19,10 @@ public class FlashStepAction extends AbstractGameAction {
 
     @Override
     public void update(){
-        if (((AbstractDriveForm)p.stance).DriveTags.contains(CustomTags.STRONG)){
-            addToBot(new DrawCardAction(p,AmountToApply));
+        if (p.stance instanceof AbstractDriveForm){
+            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.STRONG)) {
+                addToBot(new DrawCardAction(p, AmountToApply));
+            }
         }
         this.isDone = true;
     }

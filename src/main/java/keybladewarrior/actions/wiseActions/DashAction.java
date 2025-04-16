@@ -23,8 +23,10 @@ public class DashAction extends AbstractGameAction {
 
     @Override
     public void update(){
-        if (((AbstractDriveForm)p.stance).DriveTags.contains(CustomTags.WISE)){
-            addToBot(new GainBlockAction(p,p,AmountToApply));
+        if (p.stance instanceof AbstractDriveForm){
+            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.WISE)) {
+                addToBot(new GainBlockAction(p, p, AmountToApply));
+            }
         }
         this.isDone = true;
     }

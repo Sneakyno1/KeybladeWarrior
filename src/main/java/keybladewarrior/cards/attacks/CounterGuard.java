@@ -43,10 +43,12 @@ public class CounterGuard extends AbstractEasyCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         Consumer<Integer> consumer = (Integer x) -> {
             if (x>0) {
-                if (((AbstractDriveForm)p.stance).DriveTags.contains(CustomTags.STRONG)){
-                    addToTop(new GainBlockAction(p, m.lastDamageTaken));
+                if (p.stance instanceof AbstractDriveForm){
+                    if (((AbstractDriveForm) p.stance).hasTag(CustomTags.STRONG)) {
+                        addToTop(new GainBlockAction(p, m.lastDamageTaken));
+                    }
                 }else{
-                    addToTop(new GainBlockAction(p, m.lastDamageTaken/2));
+                    addToTop(new GainBlockAction(p, (m.lastDamageTaken/2)));
                 }
             }
         };

@@ -21,8 +21,8 @@ public class AbstractComboAction extends AbstractGameAction {
             return true;
         }
 
-        return (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() &&
+        return (AbstractDungeon.actionManager.cardsPlayedThisCombat.size() >= 2 &&
                 (AbstractDungeon.actionManager.cardsPlayedThisCombat.get(
-                        AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1)).hasTag(CustomTags.COMBO));
+                        AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 2)).hasTag(CustomTags.COMBO));
     }
 }

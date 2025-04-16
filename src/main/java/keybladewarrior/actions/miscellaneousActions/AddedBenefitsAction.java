@@ -28,13 +28,16 @@ public class AddedBenefitsAction extends AbstractGameAction {
 
     @Override
     public void update(){
-        if (((AbstractDriveForm)p.stance).DriveTags.contains(CustomTags.STRONG)){
-            addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, this.AmountToApply, false), this.AmountToApply));
+        if (p.stance instanceof AbstractDriveForm) {
+            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.STRONG)) {
+                addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, this.AmountToApply, false), this.AmountToApply));
+            }
+
+            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.WISE)) {
+                addToBot(new ApplyPowerAction(m, AbstractDungeon.player, new WeakPower(m, this.AmountToApply, false), this.AmountToApply));
+            }
         }
 
-        if (((AbstractDriveForm)p.stance).DriveTags.contains(CustomTags.WISE)){
-            addToBot(new ApplyPowerAction(m, AbstractDungeon.player, new WeakPower(m, this.AmountToApply, false), this.AmountToApply));
-        }
 
         this.isDone = true;
     }

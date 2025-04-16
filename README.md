@@ -1,20 +1,16 @@
-This is an example character template for the more experienced Slay the Spire modder.
-It contains the basics of an empty character, as well as:
-- Improved X cost action framework (Alchyr)
-- General action use wizard for any effects (GK + my own stuff)
-- Lambda power support (mine)
-- AbstractRelic, Power and Card with improved image loading and other shortcuts (alchyr + mine)
-- AbstractCard comes with secondary variable and secondary damage (me + Kio)
-- Automatic card recoloring (me + Mayhem)
-- Hopefully more! Let me know if there's something you'd want added!!
+Sora has entered the spire! It seems like he got a little confused and started going after the wrong heart in the 
+wrong kingdom! Use Sora's Drive Forms to boost you through the spire! Current forms include Valor and Wisdom, 
+but Master, Final,and even Anti-Form will all be making their spire debut! Sora also takes advantage of his Combos, 
+cards with this keyword will only use their Combo effect when the previous card was a Combo card. What kind of Combo 
+chains will you come up with? 
 
-Setup guide:
-1. Clone the project with Github, preferably downloading with Github Desktop to make it so IntelliJ integration is easy!
-2. Go into your `pom.xml`, and change the path to your steam installation, the artifactId, version number, name, description, and modID fields inside of that.
-3. Rename the mod's Resources folder. (the folder under the `resources` folder, initially named todomodResources. The change needs to match your mod ID, plus "Resources". IE: if your modid is "blah", `blahResources`.)
-4. In the modded character file, go to the Enums section at the bottom and change the PlayerClass and CardColor enums. They're also annotated with TODOs.
-5. In the main mod file, change the modID to match the modID field in your `pom.xml`.
-6. Delete LICENSE (and add [your own](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) if needed).
-7. Change the author field in `resources/ModTheSpire.json` to your own name.
-8. Rename the mod's code folder. (the folder named 'keybladewarrior' to start). Right click and refactor its name to the name of your mod, all lowercase.
-9+. You'll probably want to rename your character in the `Charstrings.json` file to start off. From there, it's just making the mod of your dreams!
+There are currently 21 custom cards along with one custom starter relic for Sora.
+More cards and relics are in the works, along with new custom potions and potentially even new special events!
+
+To use this mod you'll need the most recent versions of BaseMod, ModTheSpire, and STSLib. All are available on the
+Steam workshop for download.
+
+This mod will also be available on the Steam workshop once more content is added.
+
+This mod is based on the template provided by DarkVexon at: https://github.com/DarkVexon/ProTemplate.
+I also referenced conversations in the modding sections of the Slay The Spire discord: https://discord.gg/ATzTPmyRSS.

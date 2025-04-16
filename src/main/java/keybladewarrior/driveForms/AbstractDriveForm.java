@@ -1,5 +1,6 @@
 package keybladewarrior.driveForms;
 
+import basemod.helpers.CardTags;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -17,7 +18,7 @@ import keybladewarrior.powers.DrivePoints;
 import java.util.ArrayList;
 
 
-public class AbstractDriveForm extends AbstractStance {
+public abstract class AbstractDriveForm extends AbstractStance {
     public int BaseCostToEnterForm = 0;
     public int CurrentFormCost = 0;
     public int BaseFormCostPerTurn = 0;
@@ -82,6 +83,8 @@ public class AbstractDriveForm extends AbstractStance {
 
         }
     }
+
+     public abstract boolean hasTag(AbstractCard.CardTags tagToCheck);
 
     @Override
     public void onEnterStance() {
