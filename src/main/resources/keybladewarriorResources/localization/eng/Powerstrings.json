@@ -29,8 +29,9 @@
   "${ModID}:DriveBankPower": {
     "NAME": "Drive Bank",
     "DESCRIPTIONS": [
-      "Can #yBank up to #b"," #yDrive #yPoints per turn. NL ",
-      "Currently holding #b"," #yDrive #yPoints."
+      "Currently holding #b"," #yDrive #yPoints. NL ",
+      "Can #yBank up to #b"," #yDrive #yPoints per turn."
+
     ]
   },
   "${ModID}:WellRoundedPower": {

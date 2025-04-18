@@ -46,9 +46,11 @@ public class CounterGuard extends AbstractEasyCard {
                 if (p.stance instanceof AbstractDriveForm){
                     if (((AbstractDriveForm) p.stance).hasTag(CustomTags.STRONG)) {
                         addToTop(new GainBlockAction(p, m.lastDamageTaken));
+                    }else{
+                        addToTop(new GainBlockAction(p, (m.lastDamageTaken/2)));
                     }
                 }else{
-                    addToTop(new GainBlockAction(p, (m.lastDamageTaken/2)));
+                        addToTop(new GainBlockAction(p, (m.lastDamageTaken/2)));
                 }
             }
         };

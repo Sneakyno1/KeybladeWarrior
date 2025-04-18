@@ -1,11 +1,15 @@
 package keybladewarrior.powers;
 
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.stances.AbstractStance;
@@ -18,12 +22,17 @@ import static keybladewarrior.ModFile.makeID;
 public class DriveBankPower extends AbstractEasyPower{
     public static final String ID =makeID(DriveBankPower.class.getSimpleName());
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID);
+    public static Color blueColor2 = Color.SKY.cpy();
 
-    public int BankedDrive = 0;
     public int DriveBankedThisTurn = 0;
 
+    //amount is how many drive points can be banked per turn
+    //amount2 is how many drive points you've banked so far, resets to 0 when drive points are given to the player
     public DriveBankPower(AbstractCreature owner, int amount){
         super(ID, getPowerStrings(ID).NAME, PowerType.BUFF,true,owner,amount);
+        this.isTwoAmount = true;
+        this.canGoNegative = this.canGoNegative2 = false;
+        this.amount2 = 0;
         updateDescription();
 
     }
@@ -33,23 +42,23 @@ public class DriveBankPower extends AbstractEasyPower{
     @Override
     public void onChangeStance(AbstractStance oldStance, AbstractStance newStance) {
 
-        if (!Objects.equals(oldStance.ID, newStance.ID) && this.BankedDrive > 0){
+        if (!Objects.equals(oldStance.ID, newStance.ID) && this.amount2 > 0){
             AbstractPlayer p = AbstractDungeon.player;
             DrivePoints points = (DrivePoints) p.getPower(DrivePoints.ID);
 
             if (points == null){
-                points = new DrivePoints(p,this.BankedDrive);
+                points = new DrivePoints(p,this.amount2);
 
                 points.GainFromBank = true;
-                addToBot(new ApplyPowerAction(p, p, points, this.BankedDrive));
+                addToBot(new ApplyPowerAction(p, p, points, this.amount2));
 
 
             }else {
                 points.GainFromBank = true;
-                addToBot(new ApplyPowerAction(p, p, new DrivePoints(p,this.BankedDrive), this.BankedDrive));
+                addToBot(new ApplyPowerAction(p, p, new DrivePoints(p,this.amount2), this.amount2));
             }
 
-            this.BankedDrive = 0;
+            this.amount2 = 0;
             this.DriveBankedThisTurn = 0;
             updateDescription();
         }
@@ -84,7 +93,7 @@ public class DriveBankPower extends AbstractEasyPower{
 
                     AmountToBank = Math.min(power.amount, this.amount-DriveBankedThisTurn);
                     this.DriveBankedThisTurn += AmountToBank;
-                    this.BankedDrive += AmountToBank;
+                    this.amount2 += AmountToBank;
                 }
             }
         }
@@ -94,8 +103,19 @@ public class DriveBankPower extends AbstractEasyPower{
 
     @Override
     public void updateDescription(){
-        this.description = powerStrings.DESCRIPTIONS[0] + amount + powerStrings.DESCRIPTIONS[1] +
-                           powerStrings.DESCRIPTIONS[2] + DriveBankedThisTurn + powerStrings.DESCRIPTIONS[3];
+        this.description = powerStrings.DESCRIPTIONS[0] + amount2 + powerStrings.DESCRIPTIONS[1] +
+                           powerStrings.DESCRIPTIONS[2] + amount  + powerStrings.DESCRIPTIONS[3];
     }
+
+    @Override
+    public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
+        super.renderAmount(sb, x, y, c);
+        if (amount == DriveBankedThisTurn) {
+            blueColor2.a = c.a;
+            c = blueColor2;
+            FontHelper.renderFontRightTopAligned(sb, FontHelper.powerAmountFont, Integer.toString(amount2), x, y + 15.0F * Settings.scale, fontScale, c);
+        }
+    }
+
 }
 

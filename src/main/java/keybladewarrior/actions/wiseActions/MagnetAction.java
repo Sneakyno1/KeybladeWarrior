@@ -21,7 +21,7 @@ public class MagnetAction extends AbstractGameAction {
     public void update(){
         if (p.stance instanceof AbstractDriveForm){
             if (((AbstractDriveForm) p.stance).hasTag(CustomTags.WISE)) {
-                addToBot(new BetterDiscardPileToHandAction(amount));
+                addToTop(new BetterDiscardPileToHandAction(amount));
             }
         }
         this.isDone = true;
