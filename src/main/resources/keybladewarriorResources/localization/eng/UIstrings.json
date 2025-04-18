@@ -3,5 +3,10 @@
     "TEXT": [
       "That enemy intends to attack me!"
     ]
+  },
+  "${ModID}:AutoWisdom": {
+    "TEXT": [
+      "That enemy doesn't intend to attack me!"
+    ]
   }
 }

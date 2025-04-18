@@ -17,7 +17,7 @@
   },
   "${ModID}:Wisdom": {
     "NAME": "Wisdom",
-    "DESCRIPTION": "Enter ${ModID}:Wisdom_Form. NL Draw !M! card{!M!|>1=s} NL Discard 1 card."
+    "DESCRIPTION": "{@@}Enter ${ModID}:Wisdom_Form. NL Draw !M! card{!M!|>1=s} NL Discard 1 card."
   },
   "${ModID}:InnerStrength": {
     "NAME": "Inner Strength",
@@ -91,5 +91,17 @@
   "${ModID}:DefenseBoost": {
     "NAME": "Defense Boost",
     "DESCRIPTION": "Gain !B! Block. NL Consume !M! ${ModID}:Drive_Points and gain 1 Dexterity."
+  },
+  "${ModID}:AutoWisdom": {
+    "NAME": "Auto Wisdom",
+    "DESCRIPTION": "Deal !D! damage. NL If the enemy intends to attack, enter ${ModID}:Wisdom_Form."
+  },
+  "${ModID}:QuickThinking": {
+    "NAME": "Quick Thinking",
+    "DESCRIPTION": "Deal !D! damage. NL Scry !M!. NL ${ModID}:Combo: Draw 1 card."
+  },
+  "${ModID}:Magnet": {
+    "NAME": "Magnet",
+    "DESCRIPTION": "Gain !B! Block. NL ${ModID}:Wise: Put a card from your discard pile into your hand."
   }
 }

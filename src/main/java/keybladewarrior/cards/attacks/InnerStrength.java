@@ -46,16 +46,18 @@ public class InnerStrength extends AbstractEasyCard {
     public void applyPowers() {
         DrivePoints Drive = (DrivePoints) AbstractDungeon.player.getPower(DrivePoints.ID);
 
-        if (Drive != null && Drive.amount > 0){
+        if (Drive != null){
             this.ExtraDriveDamage = (int) Math.floor(Drive.amount/this.magicNumber);
         }else {
             this.ExtraDriveDamage = 0;
         }
         this.baseDamage += this.ExtraDriveDamage;
         super.applyPowers();
-        this.baseDamage += this.ExtraDriveDamage;
+        this.baseDamage -= this.ExtraDriveDamage;
+        this.isDamageModified = (this.damage != this.baseDamage);
     }
 
+    @Override
     public void calculateCardDamage(AbstractMonster mo) {
         DrivePoints Drive = (DrivePoints) AbstractDungeon.player.getPower(DrivePoints.ID);
 
@@ -66,6 +68,7 @@ public class InnerStrength extends AbstractEasyCard {
         }
         this.baseDamage += this.ExtraDriveDamage;
         super.calculateCardDamage(mo);
-        this.baseDamage += this.ExtraDriveDamage;
+        this.baseDamage -= this.ExtraDriveDamage;
+        this.isDamageModified = (this.damage != this.baseDamage);
     }
 }
