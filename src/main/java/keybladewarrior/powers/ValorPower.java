@@ -18,7 +18,7 @@ public class ValorPower extends AbstractEasyPower{
     public int counter = 0;
 
     public ValorPower(AbstractCreature owner){
-        super(ID, getPowerStrings(ID).NAME,AbstractPower.PowerType.BUFF,true,owner,1);
+        super(ID, getPowerStrings(ID).NAME,AbstractPower.PowerType.BUFF,true,owner,-1);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ValorPower extends AbstractEasyPower{
             }
             else {
                 flash();
-                addToBot(new MakeTempCardInHandAction(new Shiv(), this.amount, false));
+                addToBot(new MakeTempCardInHandAction(new Shiv(), 1, false));
             }
         }
     }

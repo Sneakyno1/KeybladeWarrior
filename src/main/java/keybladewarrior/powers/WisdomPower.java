@@ -19,20 +19,20 @@ public class WisdomPower extends AbstractEasyPower{
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID);
 
     public WisdomPower(AbstractCreature owner){
-        super(ID, getPowerStrings(ID).NAME, PowerType.BUFF,true,owner,2);
+        super(ID, getPowerStrings(ID).NAME, PowerType.BUFF,true,owner,-1);
     }
 
     @Override
     public void updateDescription() {
-        this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
+        this.description = powerStrings.DESCRIPTIONS[0];
     }
 
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
         if (Settings.FAST_MODE) {
-            addToBot(new GainBlockAction(owner, owner, this.amount, true));
+            addToBot(new GainBlockAction(owner, owner, 2, true));
         } else {
-            addToBot(new GainBlockAction(owner, owner, this.amount));
+            addToBot(new GainBlockAction(owner, owner, 2));
         }
         flash();
     }

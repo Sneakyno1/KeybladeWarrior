@@ -10,8 +10,7 @@
   "${ModID}:WisdomPower": {
     "NAME": "Wisdom Form",
     "DESCRIPTIONS": [
-      "Whenever you play a card, gain #b",
-      " #yBlock."
+      "Whenever you play a card, gain #b2 #yBlock."
     ]
   },
   "${ModID}:ValorPower": {

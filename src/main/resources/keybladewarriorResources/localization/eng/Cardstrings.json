@@ -103,5 +103,13 @@
   "${ModID}:Magnet": {
     "NAME": "Magnet",
     "DESCRIPTION": "Gain !B! Block. NL ${ModID}:Wise: Put a card from your discard pile into your hand."
+  },
+  "${ModID}:Defender": {
+    "NAME": "Defender",
+    "DESCRIPTION": "Gain !B! Block. NL ${ModID}:Combo: Block is not removed at the start of your next turn."
+  },
+  "${ModID}:AffinityForValor": {
+    "NAME": "Affinity For Valor",
+    "DESCRIPTION": "If you are in ${ModID}:Valor_Form gain !M! Strength, otherwise enter ${ModID}:Valor_Form."
   }
 }
