@@ -16,7 +16,7 @@
   "${ModID}:ValorPower": {
     "NAME": "Valor Form",
     "DESCRIPTIONS": [
-      "While in this #yDrive #yForm every other attack played adds a #yShiv to your hand."
+      "While in this #yDrive #yForm every attack played draws 1 card."
     ]
   },
   "${ModID}:FauxMasteryPower": {
@@ -44,6 +44,13 @@
     "DESCRIPTIONS": [
       "You have #b"," #yDrive #yPoints.",
                     " #yDrive #yPoint."
+    ]
+  },
+  "${ModID}:MagicLockOnPower": {
+    "NAME": "Magic Lock-On",
+    "DESCRIPTIONS": [
+      "At the start of your turn, #yScry ",
+      " ."
     ]
   }
 }

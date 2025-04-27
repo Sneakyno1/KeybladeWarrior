@@ -2,6 +2,7 @@ package keybladewarrior.cards.attacks;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -10,6 +11,7 @@ import com.megacrit.cardcrawl.powers.WeakPower;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.actions.miscellaneousActions.AddedBenefitsAction;
 import keybladewarrior.cards.AbstractEasyCard;
+import keybladewarrior.driveForms.AbstractDriveForm;
 import keybladewarrior.driveForms.ValorForm;
 import keybladewarrior.driveForms.WisdomForm;
 import keybladewarrior.util.CustomTags;
@@ -36,6 +38,7 @@ public class AddedBenefits extends AbstractEasyCard {
     public void upp() {
         this.upgradeDamage(3);
         this.upgradeMagicNumber(1);
+        super.upgrade();
     }
 
     @Override
@@ -44,5 +47,16 @@ public class AddedBenefits extends AbstractEasyCard {
         addToBot(new AddedBenefitsAction(p,m,this.magicNumber));
     }
 
+    @Override
+    public void triggerOnGlowCheck() {
+        AbstractPlayer p = AbstractDungeon.player;
+        if (p.stance instanceof AbstractDriveForm){
+            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.WISE) || ((AbstractDriveForm) p.stance).hasTag(CustomTags.STRONG)) {
+                this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+            }
+        } else {
+            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        }
+    }
 
 }

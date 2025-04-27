@@ -58,7 +58,7 @@
   },
   "${ModID}:FlashStep": {
     "NAME": "Flash Step",
-    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Strong: Draw !M! cards."
+    "DESCRIPTION": "{@@}Deal !D! damage. NL ${ModID}:Strong: Draw !M! card{!M!|>1=s}."
   },
   "${ModID}:BerserkCharge": {
     "NAME": "Berserk Charge",
@@ -111,5 +111,30 @@
   "${ModID}:AffinityForValor": {
     "NAME": "Affinity For Valor",
     "DESCRIPTION": "If you are in ${ModID}:Valor_Form gain !M! Strength, otherwise enter ${ModID}:Valor_Form."
+  },
+  "${ModID}:APBoost": {
+    "NAME": "AP Boost",
+    "DESCRIPTION": "Unplayable. NL ${ModID}:Spell: Gain [E] .",
+    "UPGRADE_DESCRIPTION": "Unplayable. NL ${ModID}:Spell: Gain [E] [E] ."
+  },
+  "${ModID}:RoundBreak": {
+    "NAME": "Round Break",
+    "DESCRIPTION": "{@@}Deal !D! damage to ALL enemies. NL Gain !M! ${ModID}:Drive_Point{!M!|>1=s}."
+  },
+  "${ModID}:WisdomShot": {
+    "NAME": "Wisdom Shot",
+    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Wise: Discard 1 card."
+  },
+  "${ModID}:QuickRun": {
+    "NAME": "Quick Run",
+    "DESCRIPTION": "{@@}Draw !M! cards. NL Discard !${ModID}:m2! card{!${ModID}:m2!|>1=s}. NL ${ModID}:Wise: Discard 1 fewer cards."
+  },
+  "${ModID}:MagicLockOn": {
+    "NAME": "Magic Lock-On",
+    "DESCRIPTION": "At the start of your turn, Scry !M!."
+  },
+  "${ModID}:MPHaste": {
+    "NAME": "MP Haste",
+    "DESCRIPTION": "{@@}Unplayable. NL ${ModID}:Spell: Draw !M! card{!M!|>1=s}."
   }
 }

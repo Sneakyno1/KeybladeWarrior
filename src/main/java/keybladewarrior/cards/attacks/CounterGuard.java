@@ -55,9 +55,18 @@ public class CounterGuard extends AbstractEasyCard {
             }
         };
         addToBot(new DamageCallbackAction(m,new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY,consumer));
-
-
     }
 
+    @Override
+    public void triggerOnGlowCheck() {
+        AbstractPlayer p = AbstractDungeon.player;
+        if (p.stance instanceof AbstractDriveForm){
+            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.STRONG)) {
+                this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+            }
+        } else {
+            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        }
+    }
 
 }

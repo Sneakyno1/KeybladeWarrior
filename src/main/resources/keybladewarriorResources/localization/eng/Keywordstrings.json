@@ -33,7 +33,7 @@
       "Drive_Forms",
       "drive_forms"
     ],
-    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time and cannot gain #yDrive #yPoints."
+    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. NL You cannot gain #yDrive #yPoints while in a #yDrive #yForm."
   },
 
   {
@@ -43,7 +43,7 @@
       "Valor_Form",
       "valor_form"
     ],
-    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. NL Every other attack played adds a #yShiv to your hand. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
+    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. NL You cannot gain #yDrive #yPoints while in a #yDrive #yForm. NL Every attack played draws 1 card. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
   },
 
   {
@@ -53,7 +53,7 @@
       "Wisdom_Form",
       "wisdom_form"
     ],
-    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. NL Whenever you play a card, gain #b2 Block. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
+    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. NL You cannot gain #yDrive #yPoints while in a #yDrive #yForm. NL Whenever you play a card, gain #b2 Block. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
   },
 
   {
@@ -91,5 +91,13 @@
       "Banked"
     ],
     "DESCRIPTION": "Whenever you would normally gain #yDrive #yPoints while in a #yDrive #yForm, they will instead be saved and then gained on exiting your current #yDrive #yForm."
+  },
+  {
+    "PROPER_NAME": "Spell",
+    "NAMES": [
+      "spell",
+      "Spell"
+    ],
+    "DESCRIPTION": "Trigger this card's #ySpell effect once if discarding from your hand, trigger it twice if discarded from #yScrying."
   }
 ]

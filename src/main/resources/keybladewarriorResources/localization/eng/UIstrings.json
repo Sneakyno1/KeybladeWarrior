@@ -8,5 +8,15 @@
     "TEXT": [
       "That enemy doesn't intend to attack me!"
     ]
+  },
+  "${ModID}:APBoost": {
+    "TEXT": [
+      "I can't play this card."
+    ]
+  },
+  "${ModID}:MPHaste": {
+    "TEXT": [
+      "I can't play this card."
+    ]
   }
 }

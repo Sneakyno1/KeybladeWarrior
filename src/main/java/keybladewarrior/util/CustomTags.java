@@ -10,4 +10,7 @@ public class CustomTags {
     public static AbstractCard.CardTags STRONG;
     @SpireEnum
     public static AbstractCard.CardTags WISE;
+    @SpireEnum
+    public static AbstractCard.CardTags SPELL;
+
 }

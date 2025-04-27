@@ -1,6 +1,7 @@
 package keybladewarrior.powers;
 
 
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -24,14 +25,7 @@ public class ValorPower extends AbstractEasyPower{
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
         if (card.type == AbstractCard.CardType.ATTACK) {
-            this.counter++;
-            if (this.counter % 2 == 0) {
-                this.counter = 0;
-            }
-            else {
-                flash();
-                addToBot(new MakeTempCardInHandAction(new Shiv(), 1, false));
-            }
+            addToBot(new DrawCardAction(1));
         }
     }
     public void updateDescription(){

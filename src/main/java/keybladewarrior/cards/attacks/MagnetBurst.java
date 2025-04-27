@@ -21,13 +21,12 @@ import static keybladewarrior.ModFile.makeID;
 
 public class MagnetBurst extends AbstractEasyCard {
     public static final String ID =makeID(MagnetBurst.class.getSimpleName());
-    public boolean PreviousCardWasComboCard = false;
 
 
     public MagnetBurst(){
         super(ID, 2, CardType.ATTACK, CardRarity.RARE, CardTarget.ALL_ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
         this.baseDamage = 16;
-        this.baseMagicNumber = 2;
+        this.baseMagicNumber = 3;
         this.magicNumber = this.baseMagicNumber;
         tags.add(CustomTags.COMBO);
     }

@@ -1,45 +1,43 @@
-package keybladewarrior.cards.attacks;
+package keybladewarrior.cards.skills;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
-import keybladewarrior.actions.wiseActions.DashAction;
+import keybladewarrior.actions.wiseActions.QuickRunAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.driveForms.AbstractDriveForm;
-import keybladewarrior.driveForms.WisdomForm;
+import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
 
-import java.util.Objects;
+import java.util.Currency;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class Dash extends AbstractEasyCard {
-    public static final String ID =makeID(Dash.class.getSimpleName());
+public class QuickRun extends AbstractEasyCard {
+    public static final String ID =makeID(QuickRun.class.getSimpleName());
 
 
-    public Dash(){
-        super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = this.damage = 8;
-        this.baseBlock = this.block = 8;
-        this.tags.add(CustomTags.WISE);
-
-
+    public QuickRun(){
+        super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
+        this.baseMagicNumber = this.magicNumber = 2;
+        this.baseSecondMagic = this.secondMagic = 2;
+        tags.add(CustomTags.WISE);
     }
+
     @Override
     public void upp() {
-        upgradeDamage(4);
-        upgradeBlock(4);
+        upgradeMagicNumber(2);
+        upgradeSecondMagic(-1);
         super.upgrade();
     }
 
     @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        dmg(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
-        addToBot(new DashAction(p,this.block));
+    public void use(AbstractPlayer p, AbstractMonster monster) {
+        addToBot(new QuickRunAction(p,this.magicNumber, this.secondMagic));
     }
 
     @Override
@@ -53,6 +51,4 @@ public class Dash extends AbstractEasyCard {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
-
-
 }
