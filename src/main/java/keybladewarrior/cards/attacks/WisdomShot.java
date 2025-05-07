@@ -20,13 +20,13 @@ public class WisdomShot extends AbstractEasyCard {
 
     public WisdomShot(){
         super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = 6;
+        this.baseDamage = 7;
         this.tags.add(CustomTags.WISE);
     }
 
     @Override
     public void upp() {
-        this.upgradeDamage(4);
+        this.upgradeDamage(3);
         super.upgrade();
     }
 

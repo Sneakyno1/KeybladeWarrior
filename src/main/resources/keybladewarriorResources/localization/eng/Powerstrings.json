@@ -16,7 +16,7 @@
   "${ModID}:ValorPower": {
     "NAME": "Valor Form",
     "DESCRIPTIONS": [
-      "While in this #yDrive #yForm every attack played draws 1 card."
+      "Whenever you ply an attack, draw #b1 card."
     ]
   },
   "${ModID}:FauxMasteryPower": {
@@ -51,6 +51,18 @@
     "DESCRIPTIONS": [
       "At the start of your turn, #yScry ",
       " ."
+    ]
+  },
+  "${ModID}:MasterPower": {
+    "NAME": "Master Form",
+    "DESCRIPTIONS": [
+      "Whenever you play a card, gain #b2 #yBlock. If the card played is an attack, draw #b1 card."
+    ]
+  },
+  "${ModID}:DriveGeneratorPower": {
+    "NAME": "Drive Generator",
+    "DESCRIPTIONS": [
+      "At the start of your turn gain #b"," #yDrive #yPoints."
     ]
   }
 }

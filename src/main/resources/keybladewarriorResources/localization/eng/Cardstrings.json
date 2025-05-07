@@ -136,5 +136,14 @@
   "${ModID}:MPHaste": {
     "NAME": "MP Haste",
     "DESCRIPTION": "{@@}Unplayable. NL ${ModID}:Spell: Draw !M! card{!M!|>1=s}."
+  },
+  "${ModID}:Mastery": {
+    "NAME": "Mastery",
+    "DESCRIPTION": "Enter ${ModID}:Master_Form. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Retain. NL Enter ${ModID}:Master_Form. NL Exhaust."
+  },
+  "${ModID}:DriveGenerator": {
+    "NAME": "Drive Generator",
+    "DESCRIPTION": "At the start of your turn gain !M! ${ModID}:Drive_Points."
   }
 }

@@ -1,6 +1,5 @@
 package keybladewarrior.driveForms;
 
-import basemod.helpers.CardTags;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -12,23 +11,24 @@ import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
-import keybladewarrior.powers.ValorPower;
-import keybladewarrior.powers.WisdomPower;
+import keybladewarrior.powers.MasterPower;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class WisdomForm extends AbstractDriveForm{
-    public static final String STANCE_ID = makeID(WisdomForm.class.getSimpleName());
+public class MasterForm extends AbstractDriveForm{
+    public static final String STANCE_ID = makeID(MasterForm.class.getSimpleName());
     private static final StanceStrings stanceString = CardCrawlGame.languagePack.getStanceString(STANCE_ID);
     private static final String NAME = stanceString.NAME;
     public static final String[] DESCRIPTIONS = stanceString.DESCRIPTION;
     private static long sfxId = -1L;
-    public static final ArrayList<AbstractCard.CardTags> DriveTags = new ArrayList<AbstractCard.CardTags>(Collections.singletonList(CustomTags.WISE));
+    public static final ArrayList<AbstractCard.CardTags> DriveTags = new ArrayList<AbstractCard.CardTags>() {{
+        add(CustomTags.WISE);
+        add(CustomTags.STRONG);
+    }};
 
     public static final Color COLOR_MIN = CardHelper.getColor(92, 92, 92);
     public static final Color COLOR_MAX = CardHelper.getColor(128, 128, 128);
@@ -39,13 +39,13 @@ public class WisdomForm extends AbstractDriveForm{
     private static final String LOOP_SOUND = "STANCE_LOOP_DIVINITY";
     private static float TIMER = 0.1F;
 
-    public WisdomForm() {
+    public MasterForm() {
         this.ID = STANCE_ID;
         this.name = NAME;
 
-        this.BaseCostToEnterForm = 4;
+        this.BaseCostToEnterForm = 8;
         this.CurrentFormCost = this.BaseCostToEnterForm;
-        this.BaseFormCostPerTurn = 2;
+        this.BaseFormCostPerTurn = 4;
         this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
         this.FormCostModifier = 0;
         this.FormCostMultiplier = 1;
@@ -54,7 +54,7 @@ public class WisdomForm extends AbstractDriveForm{
         this.updateDescription();
     }
 
-    public WisdomForm(boolean IgnoreCostToEnterForm) {
+    public MasterForm(boolean IgnoreCostToEnterForm) {
         this();
         this. IgnoreCostToEnterForm = IgnoreCostToEnterForm;
         this.updateDescription();
@@ -73,13 +73,13 @@ public class WisdomForm extends AbstractDriveForm{
     @Override
     public void onEnterStance() {
         super.onEnterStance();
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player, new WisdomPower(AbstractDungeon.player),2));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player, new MasterPower(AbstractDungeon.player),2));
 
         if (sfxId != -1L)
             stopIdleSfx();
-        CardCrawlGame.sound.play("STANCE_ENTER_CALM");
-        sfxId = CardCrawlGame.sound.playAndLoop("STANCE_LOOP_CALM");
-        AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.ROYAL, true));
+        CardCrawlGame.sound.play("STANCE_ENTER_DIVINITY");
+        sfxId = CardCrawlGame.sound.playAndLoop("STANCE_LOOP_DIVINITY");
+        AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.GOLD, true));
         AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, "Calm"));
 
     }
@@ -87,14 +87,14 @@ public class WisdomForm extends AbstractDriveForm{
     @Override
     public void onExitStance() {
 
-        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player, WisdomPower.ID));
+        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player,MasterPower.ID));
         stopIdleSfx();
     }
 
     @Override
     public void stopIdleSfx() {
         if (sfxId != -1L) {
-            CardCrawlGame.sound.stop("STANCE_LOOP_WRATH", sfxId);
+            CardCrawlGame.sound.stop("STANCE_LOOP_CALM", sfxId);
             sfxId = -1L;
         }
     }

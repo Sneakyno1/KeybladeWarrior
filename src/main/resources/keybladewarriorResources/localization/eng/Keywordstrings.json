@@ -57,6 +57,16 @@
   },
 
   {
+    "PROPER_NAME": "Master Form",
+    "NAMES": [
+      "master form",
+      "Master_Form",
+      "master_form"
+    ],
+    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. NL You cannot gain #yDrive #yPoints while in a #yDrive #yForm. NL Whenever you play a card, gain #b2 Block. If the card played is an attack, draw #b1 card. NL Costs #b8 #yDrive #yPoints to enter. NL Costs #b4 #yDrive #yPoints per turn."
+  },
+
+  {
     "PROPER_NAME": "Combo",
     "NAMES": [
       "combo",

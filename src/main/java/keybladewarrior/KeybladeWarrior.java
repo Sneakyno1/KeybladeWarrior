@@ -24,7 +24,9 @@ import keybladewarrior.cards.attacks.Strike;
 import keybladewarrior.cards.skills.Wisdom;
 import keybladewarrior.relics.TodoItem;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static keybladewarrior.KeybladeWarrior.Enums.CARD_COLOR;
 import static keybladewarrior.ModFile.*;
@@ -131,8 +133,11 @@ public class KeybladeWarrior extends CustomPlayer {
 
     @Override
     public AbstractCard getStartCardForEvent() {
-        System.out.println("YOU NEED TO SET getStartCardForEvent() in your " + getClass().getSimpleName() + " file!");
-        return null;
+        Random random = new Random(System.currentTimeMillis());
+        if (random.nextInt() % 2 == 0){
+            return new Wisdom();
+        }
+        return new Courage();
     }
 
     @Override

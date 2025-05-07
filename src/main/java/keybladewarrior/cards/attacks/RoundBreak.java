@@ -20,9 +20,10 @@ public class RoundBreak extends AbstractEasyCard {
 
     public RoundBreak(){
         super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ALL_ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = 6;
+        this.baseDamage = this.damage = 6;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
+        this.isMultiDamage = true;
     }
 
 

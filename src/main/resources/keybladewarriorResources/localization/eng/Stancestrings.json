@@ -2,13 +2,19 @@
   "${ModID}:ValorForm": {
     "NAME": "Valor",
     "DESCRIPTION": [
-      "While in this #yDrive #yForm, every attack played draws 1 card. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
+      "While in this #yDrive #yForm, every attack played draws #b1 card. NL Costs #b4 #yDrive #yPoints to enter. NL Costs #b2 #yDrive #yPoints per turn."
     ]
   },
   "${ModID}:WisdomForm": {
     "NAME": "Wisdom",
     "DESCRIPTION": [
-      "While in this #yDrive #yForm, whenever you play a card gain 2 #yBlock. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
+      "While in this #yDrive #yForm, whenever you play a card gain 2 #yBlock. NL Costs #b4 #yDrive #yPoints to enter. NL Costs #b2 #yDrive #yPoints per turn."
+    ]
+  },
+  "${ModID}:MasterForm": {
+    "NAME": "Wisdom",
+    "DESCRIPTION": [
+      "While in this #yDrive #yForm, whenever you play a card, gain #b2 #yBlock. If the card played is an attack, draw #b1 card. NL Costs #b8 #yDrive #yPoints to enter. NL Costs #b4 #yDrive #yPoints per turn."
     ]
   }
 }
