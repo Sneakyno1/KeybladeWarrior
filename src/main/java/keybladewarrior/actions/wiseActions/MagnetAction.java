@@ -2,7 +2,6 @@ package keybladewarrior.actions.wiseActions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.BetterDiscardPileToHandAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import keybladewarrior.driveForms.AbstractDriveForm;
 import keybladewarrior.util.CustomTags;

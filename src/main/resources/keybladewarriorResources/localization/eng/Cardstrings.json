@@ -114,8 +114,8 @@
   },
   "${ModID}:APBoost": {
     "NAME": "AP Boost",
-    "DESCRIPTION": "Unplayable. NL ${ModID}:Spell: Gain [E] .",
-    "UPGRADE_DESCRIPTION": "Unplayable. NL ${ModID}:Spell: Gain [E] [E] ."
+    "DESCRIPTION": "Unplayable. NL If this card is discarded from your hand, gain !M! Strength and Dexterity. NL ${ModID}:Spell: Gain [E] [E] .",
+    "UPGRADE_DESCRIPTION": "Unplayable. NL If this card is discarded from your hand, gain !M! Strength and Dexterity. NL ${ModID}:Spell: Gain [E] [E] [E] ."
   },
   "${ModID}:RoundBreak": {
     "NAME": "Round Break",
@@ -127,7 +127,7 @@
   },
   "${ModID}:QuickRun": {
     "NAME": "Quick Run",
-    "DESCRIPTION": "{@@}Draw !M! cards. NL Discard !${ModID}:m2! card{!${ModID}:m2!|>1=s}. NL ${ModID}:Wise: Discard 1 fewer cards."
+    "DESCRIPTION": "{@@}Draw !M! cards. NL Discard !${ModID}:m2! card{!${ModID}:m2!|>1=s}. NL ${ModID}:Wise: Draw 2 extra cards."
   },
   "${ModID}:MagicLockOn": {
     "NAME": "Magic Lock-On",
@@ -135,7 +135,7 @@
   },
   "${ModID}:MPHaste": {
     "NAME": "MP Haste",
-    "DESCRIPTION": "{@@}Unplayable. NL ${ModID}:Spell: Draw !M! card{!M!|>1=s}."
+    "DESCRIPTION": "{@@}Unplayable. NL If this card is discarded from your hand, NL gain !B! Block. NL ${ModID}:Spell: Draw !M! card{!M!|>1=s}."
   },
   "${ModID}:Mastery": {
     "NAME": "Mastery",
@@ -145,5 +145,21 @@
   "${ModID}:DriveGenerator": {
     "NAME": "Drive Generator",
     "DESCRIPTION": "At the start of your turn gain !M! ${ModID}:Drive_Points."
+  },
+  "${ModID}:ClearMind": {
+    "NAME": "Clear Mind",
+    "DESCRIPTION": "Gain !B! Block. NL Scry !M!, gain !${ModID}:m2! Block per card discarded this way."
+  },
+  "${ModID}:FlareForce": {
+    "NAME": "Flare Force",
+    "DESCRIPTION": "Deal !D! damage to a random enemy !M! times."
+  },
+  "${ModID}:GoofyBash": {
+    "NAME": "Goofy Bash",
+    "DESCRIPTION": "Deal !D! damage."
+  },
+  "${ModID}:MobileAction": {
+    "NAME": "Mobile Action",
+    "DESCRIPTION": "Deal !D! damage. NL Discard a random card from your hand. NL ${ModID}:Wise: Choose a card to discard instead."
   }
 }

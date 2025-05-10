@@ -1,7 +1,6 @@
 package keybladewarrior.actions.comboActions;
 
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 
 public class QuickThinkingAction extends AbstractComboAction{

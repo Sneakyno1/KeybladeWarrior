@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import keybladewarrior.driveForms.ValorForm;
-import keybladewarrior.powers.DrivePoints;
 
 public class AffinityForValorAction extends AbstractGameAction {
     AbstractPlayer p;

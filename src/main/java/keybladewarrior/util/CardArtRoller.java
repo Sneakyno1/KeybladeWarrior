@@ -1,7 +1,6 @@
 package keybladewarrior.util;
 
 import basemod.patches.whatmod.WhatMod;
-import keybladewarrior.ModFile;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,6 +21,7 @@ import com.megacrit.cardcrawl.cards.red.Defend_Red;
 import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.random.Random;
+import keybladewarrior.ModFile;
 import keybladewarrior.cards.AbstractEasyCard;
 
 import java.util.ArrayList;

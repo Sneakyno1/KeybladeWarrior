@@ -1,17 +1,12 @@
 package keybladewarrior.actions.miscellaneousActions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
-import keybladewarrior.driveForms.AbstractDriveForm;
 import keybladewarrior.driveForms.ValorForm;
-import keybladewarrior.util.CustomTags;
 
 public class AutoValorAction extends AbstractGameAction {
     AbstractPlayer p;

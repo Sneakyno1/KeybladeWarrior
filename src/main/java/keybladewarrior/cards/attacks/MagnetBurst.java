@@ -1,21 +1,13 @@
 package keybladewarrior.cards.attacks;
 
-import com.evacipated.cardcrawl.mod.stslib.actions.common.DamageCallbackAction;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.actions.comboActions.MagnetBurstAction;
 import keybladewarrior.cards.AbstractEasyCard;
-import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
-
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 
 import static keybladewarrior.ModFile.makeID;
 

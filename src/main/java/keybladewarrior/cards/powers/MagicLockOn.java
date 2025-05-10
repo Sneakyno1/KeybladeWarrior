@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.powers.MagicLockOnPower;
-import keybladewarrior.powers.WellRoundedPower;
 
 import static keybladewarrior.ModFile.makeID;
 

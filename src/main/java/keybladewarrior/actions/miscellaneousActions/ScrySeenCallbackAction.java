@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class ScrySeenCallbackAction
-    extends ScryAction
+        extends ScryAction
 {
     public Consumer<ArrayList<AbstractCard>> callback;
     public ScrySeenCallbackAction(int numCards, Consumer<ArrayList<AbstractCard>> callback) {

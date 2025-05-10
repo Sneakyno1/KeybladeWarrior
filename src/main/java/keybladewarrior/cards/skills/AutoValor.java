@@ -1,18 +1,12 @@
 package keybladewarrior.cards.skills;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.actions.miscellaneousActions.AutoValorAction;
 import keybladewarrior.cards.AbstractEasyCard;
-import keybladewarrior.driveForms.ValorForm;
-import keybladewarrior.powers.DrivePoints;
 
 import static keybladewarrior.ModFile.makeID;
 

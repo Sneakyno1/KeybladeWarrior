@@ -1,8 +1,5 @@
 package keybladewarrior.powers;
 
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
-import com.megacrit.cardcrawl.actions.watcher.NotStanceCheckAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,7 +8,6 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 import com.megacrit.cardcrawl.stances.NeutralStance;
-import com.megacrit.cardcrawl.vfx.combat.EmptyStanceEffect;
 
 import java.util.Objects;
 
@@ -33,6 +29,15 @@ public class DrivePoints extends AbstractEasyPower{
 
     public DrivePoints(AbstractCreature owner, int amount){
         super(ID, getPowerStrings(ID).NAME, AbstractPower.PowerType.BUFF,true,owner,amount);
+        reducePower(amount);
+        if (!Objects.equals(((AbstractPlayer) owner).stance.ID, NeutralStance.STANCE_ID) && !IgnoreNoDriveGain && !GainFromBank){
+            //Player shouldn't gain any drive points
+            return;
+        }else{
+            super.stackPower(amount);
+            GainFromBank = false;
+        }
+        updateDescription();
         this.canGoNegative = false;
     }
 

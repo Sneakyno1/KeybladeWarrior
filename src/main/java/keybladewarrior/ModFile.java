@@ -16,14 +16,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.CharacterStrings;
-import com.megacrit.cardcrawl.localization.OrbStrings;
-import com.megacrit.cardcrawl.localization.PotionStrings;
-import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.localization.StanceStrings;
-import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.cards.cardvars.AbstractEasyDynamicVariable;
@@ -31,8 +24,8 @@ import keybladewarrior.potions.AbstractEasyPotion;
 import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.relics.AbstractEasyRelic;
 import keybladewarrior.util.ProAudio;
+
 import java.nio.charset.StandardCharsets;
-import basemod.interfaces.OnCardUseSubscriber;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @SpireInitializer
@@ -201,7 +194,7 @@ public class ModFile implements
         if (AbstractDungeon.player instanceof KeybladeWarrior)
 
             if (card.type == AbstractCard.CardType.ATTACK){
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p), 1));
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p,1), 1));
             }
     }
 }

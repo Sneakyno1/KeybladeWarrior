@@ -18,13 +18,12 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import keybladewarrior.cards.attacks.Strike;
 import keybladewarrior.cards.skills.Courage;
 import keybladewarrior.cards.skills.Defend;
-import keybladewarrior.cards.attacks.Strike;
 import keybladewarrior.cards.skills.Wisdom;
 import keybladewarrior.relics.TodoItem;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
 

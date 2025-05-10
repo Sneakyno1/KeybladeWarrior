@@ -4,12 +4,14 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.DexterityPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.interfaces.OnBeingScriedInterface;
-import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
 
 import static keybladewarrior.ModFile.makeID;
@@ -39,13 +41,13 @@ public class APBoost extends AbstractEasyCard implements OnBeingScriedInterface 
 
     @Override
     public void triggerOnManualDiscard() {
-        addToBot(new GainEnergyAction(this.magicNumber));
+        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, this.magicNumber), this.magicNumber));
+        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new DexterityPower(AbstractDungeon.player, this.magicNumber), this.magicNumber));
     }
 
     @Override
     public void onBeingScried() {
-        addToTop(new GainEnergyAction(this.magicNumber));
-        addToTop(new GainEnergyAction(this.magicNumber));
+        addToTop(new GainEnergyAction(this.magicNumber+1));
     }
 
     @Override

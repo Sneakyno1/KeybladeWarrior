@@ -1,7 +1,6 @@
 package keybladewarrior.cards.skills;
 
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -22,14 +21,16 @@ public class MPHaste extends AbstractEasyCard implements OnBeingScriedInterface 
 
     public MPHaste(){
         super(ID, -2, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.NONE, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseMagicNumber = 1;
+        this.baseBlock = this.block = 9;
+        this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
         tags.add(CustomTags.SPELL);
     }
 
     @Override
     public void upp() {
-        upgradeMagicNumber(1);
+        upgradeMagicNumber(2);
+        upgradeBlock(3);
         super.upgrade();
     }
 
@@ -40,13 +41,12 @@ public class MPHaste extends AbstractEasyCard implements OnBeingScriedInterface 
     @Override
     public void triggerOnManualDiscard() {
         AbstractPlayer p = AbstractDungeon.player;
-        addToBot(new DrawCardAction(p,this.magicNumber));
+        blck();
     }
 
     @Override
     public void onBeingScried() {
         AbstractPlayer p = AbstractDungeon.player;
-        addToTop(new DrawCardAction(p,this.magicNumber));
         addToTop(new DrawCardAction(p,this.magicNumber));
     }
 

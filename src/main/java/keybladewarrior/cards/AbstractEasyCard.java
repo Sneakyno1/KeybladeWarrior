@@ -15,9 +15,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import java.util.function.Consumer;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.util.CardArtRoller;
+
+import java.util.function.Consumer;
 
 import static keybladewarrior.ModFile.makeImagePath;
 import static keybladewarrior.ModFile.modID;

@@ -1,47 +1,45 @@
 package keybladewarrior.cards.attacks;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
-import keybladewarrior.actions.strongActions.SynchBladeAction;
+import keybladewarrior.actions.wiseActions.MobileActionAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.driveForms.AbstractDriveForm;
 import keybladewarrior.util.CustomTags;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class SynchBlade extends AbstractEasyCard {
-    public static final String ID =makeID(SynchBlade.class.getSimpleName());
+public class MobileAction extends AbstractEasyCard {
+    public static final String ID =makeID(MobileAction.class.getSimpleName());
 
 
-    public SynchBlade(){
+    public MobileAction(){
         super(ID, 1, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = 3;
-        this.baseMagicNumber = 1;
-        this.magicNumber = this.baseMagicNumber;
-        this.tags.add(CustomTags.STRONG);
+        this.baseDamage = 10;
+        this.tags.add(CustomTags.WISE);
     }
 
     @Override
     public void upp() {
-        upgradeMagicNumber(1);
-        upgradeDamage(3);
+        this.upgradeDamage(5);
         super.upgrade();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new SynchBladeAction(p,m,this.magicNumber,new DamageInfo(p, damage, damageTypeForTurn)));
+        dmg(m, AbstractGameAction.AttackEffect.SLASH_VERTICAL);
+        addToBot(new MobileActionAction(p));
     }
 
     @Override
     public void triggerOnGlowCheck() {
         AbstractPlayer p = AbstractDungeon.player;
         if (p.stance instanceof AbstractDriveForm){
-            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.STRONG)) {
+            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.WISE)) {
                 this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
             }
         } else {

@@ -2,15 +2,11 @@ package keybladewarrior.cards.attacks;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
-import keybladewarrior.actions.comboActions.MagnetBurstAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.powers.DrivePoints;
-import keybladewarrior.util.CustomTags;
 
 import static keybladewarrior.ModFile.makeID;
 
@@ -31,7 +27,7 @@ public class RoundBreak extends AbstractEasyCard {
     @Override
     public void upp() {
         upgradeMagicNumber(1);
-        upgradeDamage(3);
+        upgradeDamage(4);
         super.upgrade();
     }
 

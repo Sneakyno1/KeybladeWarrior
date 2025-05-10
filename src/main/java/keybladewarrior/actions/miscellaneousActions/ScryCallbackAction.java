@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class ScryCallbackAction
+
     extends ScryAction
 {
     public Consumer<ArrayList<AbstractCard>> callback;
-
-    public ScryCallbackAction(int numCards, Consumer<ArrayList<AbstractCard>> callback)
-    {
-        super(numCards);
-        this.callback = callback;
-    }
+    public ScryCallbackAction(int numCards, Consumer<ArrayList<AbstractCard>> callback) {
+    super(numCards);
+    this.callback = callback;
+}
 }

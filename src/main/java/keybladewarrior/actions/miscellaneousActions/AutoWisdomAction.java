@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.ThoughtBubble;
-import keybladewarrior.driveForms.ValorForm;
 import keybladewarrior.driveForms.WisdomForm;
 
 public class AutoWisdomAction extends AbstractGameAction {

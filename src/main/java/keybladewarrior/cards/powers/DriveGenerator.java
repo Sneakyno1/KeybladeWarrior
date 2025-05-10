@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.powers.DriveGeneratorPower;
-import keybladewarrior.powers.WellRoundedPower;
 
 import static keybladewarrior.ModFile.makeID;
 
@@ -21,7 +20,7 @@ public class DriveGenerator extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeMagicNumber(1);
+        upgradeMagicNumber(2);
         super.upgrade();
     }
 

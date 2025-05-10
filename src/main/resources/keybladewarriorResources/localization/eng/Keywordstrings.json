@@ -108,6 +108,6 @@
       "spell",
       "Spell"
     ],
-    "DESCRIPTION": "Trigger this card's #ySpell effect once if discarding from your hand, trigger it twice if discarded from #yScrying."
+    "DESCRIPTION": "Trigger this card's #ySpell effect if discarded from #yScrying."
   }
 ]

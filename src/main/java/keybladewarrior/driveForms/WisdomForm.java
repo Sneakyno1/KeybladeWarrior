@@ -1,6 +1,5 @@
 package keybladewarrior.driveForms;
 
-import basemod.helpers.CardTags;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -12,12 +11,10 @@ import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
-import keybladewarrior.powers.ValorPower;
 import keybladewarrior.powers.WisdomPower;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import static keybladewarrior.ModFile.makeID;

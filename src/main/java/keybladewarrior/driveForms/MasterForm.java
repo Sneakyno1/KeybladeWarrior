@@ -15,7 +15,6 @@ import keybladewarrior.powers.MasterPower;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static keybladewarrior.ModFile.makeID;
 

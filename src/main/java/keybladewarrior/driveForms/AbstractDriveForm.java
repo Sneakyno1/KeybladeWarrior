@@ -1,6 +1,5 @@
 package keybladewarrior.driveForms;
 
-import basemod.helpers.CardTags;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;

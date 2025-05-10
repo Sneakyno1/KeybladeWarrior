@@ -1,14 +1,10 @@
 package keybladewarrior.cards.skills;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.DexterityPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.actions.miscellaneousActions.DefenseBoostAction;
 import keybladewarrior.cards.AbstractEasyCard;
-import keybladewarrior.powers.DrivePoints;
 
 import static keybladewarrior.ModFile.makeID;
 
@@ -18,7 +14,7 @@ public class DefenseBoost extends AbstractEasyCard {
 
     public DefenseBoost(){
         super(ID, 2, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseBlock = 9;
+        this.baseBlock = 12;
         this.baseMagicNumber = 4;
         this.magicNumber = this.baseMagicNumber;
     }

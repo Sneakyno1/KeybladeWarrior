@@ -6,11 +6,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
-import keybladewarrior.actions.miscellaneousActions.AutoValorAction;
 import keybladewarrior.actions.miscellaneousActions.AutoWisdomAction;
-import keybladewarrior.actions.wiseActions.DashAction;
 import keybladewarrior.cards.AbstractEasyCard;
-import keybladewarrior.util.CustomTags;
 
 import static keybladewarrior.ModFile.makeID;
 

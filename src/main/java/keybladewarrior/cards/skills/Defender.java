@@ -1,6 +1,5 @@
 package keybladewarrior.cards.skills;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -8,7 +7,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.actions.comboActions.DefenderAction;
 import keybladewarrior.cards.AbstractEasyCard;
-import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
 
 import static keybladewarrior.ModFile.makeID;
@@ -19,7 +17,7 @@ public class Defender extends AbstractEasyCard {
 
     public Defender(){
         super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseBlock = 6;
+        this.baseBlock = 8;
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
         tags.add(CustomTags.COMBO);
@@ -27,7 +25,7 @@ public class Defender extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        upgradeBlock(3);
+        upgradeBlock(4);
         super.upgrade();
     }
 
