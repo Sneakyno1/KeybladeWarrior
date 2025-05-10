@@ -95,6 +95,24 @@ public class DriveBankPower extends AbstractEasyPower{
                     this.DriveBankedThisTurn += AmountToBank;
                     this.amount2 += AmountToBank;
                 }
+            }else {
+                if (((DrivePoints) power).IgnoreNoDriveGain) {
+                    //do nothing, don't need to bank since you can gain drive
+                    return;
+                }
+
+                if (!Objects.equals(p.stance.ID, NeutralStance.STANCE_ID)) {
+
+                    AmountToBank = Math.min(power.amount, this.amount - DriveBankedThisTurn);
+                    this.DriveBankedThisTurn += AmountToBank;
+                    this.amount2 += AmountToBank;
+
+                    //If player doesn't have drive points, and has drive bank
+                    //and is in any drive form, it means they entered for free prior to
+                    //getting here, so we should reduce the power amount by the stack to prevent
+                    //adding drive when it shouldn't be gained
+                    power.reducePower(power.amount);
+                }
             }
         }
 

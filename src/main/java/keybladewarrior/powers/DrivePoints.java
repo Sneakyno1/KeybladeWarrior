@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 import com.megacrit.cardcrawl.stances.NeutralStance;
+import keybladewarrior.actions.miscellaneousActions.GainedDriveInDriveFormWithNoActiveDrivePointsAction;
 
 import java.util.Objects;
 
@@ -29,13 +30,14 @@ public class DrivePoints extends AbstractEasyPower{
 
     public DrivePoints(AbstractCreature owner, int amount){
         super(ID, getPowerStrings(ID).NAME, AbstractPower.PowerType.BUFF,true,owner,amount);
-        reducePower(amount);
-        if (!Objects.equals(((AbstractPlayer) owner).stance.ID, NeutralStance.STANCE_ID) && !IgnoreNoDriveGain && !GainFromBank){
+
+        if (!(owner.hasPower(ID))
+                && !Objects.equals(((AbstractPlayer) owner).stance.ID, NeutralStance.STANCE_ID)
+                && !IgnoreNoDriveGain
+                && !GainFromBank){
             //Player shouldn't gain any drive points
+            addToBot(new GainedDriveInDriveFormWithNoActiveDrivePointsAction((AbstractPlayer) owner,this, amount));
             return;
-        }else{
-            super.stackPower(amount);
-            GainFromBank = false;
         }
         updateDescription();
         this.canGoNegative = false;
