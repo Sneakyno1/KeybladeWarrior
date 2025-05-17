@@ -18,7 +18,7 @@ public class ComboMaster extends AbstractEasyCard {
 
     public ComboMaster(){
         super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseMagicNumber = 1;
+        this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;
         this.exhaust = true;
         tags.add(CustomTags.COMBO);

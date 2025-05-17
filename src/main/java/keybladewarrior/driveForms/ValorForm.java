@@ -1,17 +1,20 @@
 package keybladewarrior.driveForms;
 
+import basemod.BaseMod;
+import basemod.interfaces.OnCardUseSubscriber;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
+import com.megacrit.cardcrawl.stances.AbstractStance;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
-import keybladewarrior.powers.ValorPower;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
@@ -19,7 +22,8 @@ import java.util.Collections;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class ValorForm extends AbstractDriveForm{
+@SpireInitializer
+public class ValorForm  extends AbstractDriveForm  {
     public static final String STANCE_ID = makeID(ValorForm.class.getSimpleName());
     private static final StanceStrings stanceString = CardCrawlGame.languagePack.getStanceString(STANCE_ID);
     private static final String NAME = stanceString.NAME;
@@ -66,11 +70,11 @@ public class ValorForm extends AbstractDriveForm{
         this.description = DESCRIPTIONS[0];
     }
 
+
+
     @Override
     public void onEnterStance() {
         super.onEnterStance();
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player, new ValorPower(AbstractDungeon.player),1));
-
         if (sfxId != -1L)
             stopIdleSfx();
         CardCrawlGame.sound.play(ENTER_SOUND);
@@ -82,8 +86,6 @@ public class ValorForm extends AbstractDriveForm{
 
     @Override
     public void onExitStance() {
-
-        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player, ValorPower.ID));
         stopIdleSfx();
     }
 
@@ -113,6 +115,17 @@ public class ValorForm extends AbstractDriveForm{
 
         return color;
     }
+
+
+
+    @Override
+    public void onUseCard(AbstractCard card, UseCardAction action) {
+        if (card.type == AbstractCard.CardType.ATTACK) {
+            AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
+        }
+    }
+
+
 }
 
 

@@ -15,3 +15,4 @@ This mod will also be available on the Steam workshop once more content is added
 This mod is based on the template provided by DarkVexon at: https://github.com/DarkVexon/ProTemplate.
 I also referenced conversations in the modding sections of the Slay The Spire discord: https://discord.gg/ATzTPmyRSS.
 Took scry discard mechanics from: https://github.com/Jedi515/sts-jedi
+Used this mod as an example for modifying stances: https://github.com/torrentails/StS-Marked-Mod/tree/master

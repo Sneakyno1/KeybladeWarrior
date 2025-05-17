@@ -12,7 +12,7 @@ public class QuickThinkingAction extends AbstractComboAction{
 
     public void update() {
         if (this.PreviousCardWasAComboCard()){
-            addToBot(new DrawCardAction(p,1));
+            addToTop(new DrawCardAction(p,1));
         }
 
         this.isDone = true;

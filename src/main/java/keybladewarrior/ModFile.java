@@ -20,6 +20,8 @@ import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.cards.cardvars.AbstractEasyDynamicVariable;
+import keybladewarrior.driveForms.AbstractDriveForm;
+import keybladewarrior.driveForms.ValorForm;
 import keybladewarrior.potions.AbstractEasyPotion;
 import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.relics.AbstractEasyRelic;
@@ -191,10 +193,11 @@ public class ModFile implements
     public void receiveCardUsed(AbstractCard card) {
         AbstractPlayer p = AbstractDungeon.player;
 
-        if (AbstractDungeon.player instanceof KeybladeWarrior)
+        if (p instanceof KeybladeWarrior) {
 
-            if (card.type == AbstractCard.CardType.ATTACK){
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p,1), 1));
+            if (card.type == AbstractCard.CardType.ATTACK) {
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p, 1), 1));
             }
+        }
     }
 }

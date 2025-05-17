@@ -70,7 +70,7 @@
   },
   "${ModID}:MagnetBurst": {
     "NAME": "Magnet Burst",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL ${ModID}:Combo: Gain !M! ${ModID}:Drive_Points per unblocked damage dealt."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL ${ModID}:Combo: Gain !M! ${ModID}:Drive_Points per enemy dealt unblocked damage."
   },
   "${ModID}:AutoValor": {
     "NAME": "Auto Valor",
@@ -161,5 +161,19 @@
   "${ModID}:MobileAction": {
     "NAME": "Mobile Action",
     "DESCRIPTION": "Deal !D! damage. NL Discard a random card from your hand. NL ${ModID}:Wise: Choose a card to discard instead."
+  },
+  "${ModID}:Reflect": {
+    "NAME": "Reflect",
+    "DESCRIPTION": "Gain !B! Block. NL Reflect 50% of attack damage back at enemies this turn.",
+    "EXTENDED_DESCRIPTION": [
+          "Reflera",
+          "Gain !B! Block. NL Reflect 75% of attack damage back at enemies this turn.",
+          "Reflega",
+          "Retain. NL Gain !B! Block. NL Reflect attack damage back at enemies this turn."
+    ]
+  },
+  "${ModID}:Finisher": {
+    "NAME": "Finisher",
+    "DESCRIPTION": "After playing 3 ${ModID}:Combo cards in a row, your next played card is played twice."
   }
 }

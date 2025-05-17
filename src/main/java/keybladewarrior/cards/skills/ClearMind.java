@@ -18,7 +18,7 @@ public class ClearMind extends AbstractEasyCard {
 
 
     public ClearMind(){
-        super(ID, 1, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
+        super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
         this.baseBlock = 7;
         this.baseMagicNumber = 2;
         this.magicNumber = this.baseMagicNumber;

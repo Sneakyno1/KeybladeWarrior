@@ -14,17 +14,16 @@ public class FlareForce extends AbstractEasyCard {
 
     public FlareForce(){
         super(ID, 2, CardType.ATTACK, CardRarity.RARE, CardTarget.ALL_ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = 2;
-        this.baseMagicNumber = 8;
+        this.baseDamage = 3;
+        this.baseMagicNumber = 7;
         this.magicNumber = this.baseMagicNumber;
         this.isMultiDamage = true;
-
-
     }
+
     @Override
     public void upp() {
-        this.upgradeDamage(2);
-        this.upgradeMagicNumber(4);
+        this.upgradeDamage(1);
+        this.upgradeMagicNumber(2);
         super.upgrade();
     }
 

@@ -2,9 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <version>0.1.5</version>
+    <version>0.1.7</version>
     <name>Keyblade Warrior</name>
-    <description>Sora from Kingdom hearts 2 tries to slay the spire!</description>
+    <description>Sora from Kingdom hearts 2 tries to slay the spire! This mod is based on the template provided by DarkVexon at: https://github.com/DarkVexon/ProTemplate.
+        I also referenced conversations in the modding sections of the Slay The Spire discord: https://discord.gg/ATzTPmyRSS.
+        Took scry discard mechanics from: https://github.com/Jedi515/sts-jedi
+        Used this mod as an example for modifying stances: https://github.com/torrentails/StS-Marked-Mod/tree/master</description>
     <!-- Change the above for mod information. -->
 
     <properties>

@@ -5,5 +5,12 @@
     "DESCRIPTIONS": [
       "The first entry into #yWisdom #yForm or #yValor #yForm each combat is free."
     ]
+  },
+  "${ModID}:SynthesisRecipe": {
+    "NAME": "Synthesis Recipe",
+    "FLAVOR": "You're lucky the Moogles and the Merchant are such good friends.",
+    "DESCRIPTIONS": [
+      "Cards on sale can be bought for free #b3 times."
+    ]
   }
 }

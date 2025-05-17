@@ -1,9 +1,10 @@
 package keybladewarrior.driveForms;
 
+import basemod.interfaces.OnCardUseSubscriber;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -11,13 +12,13 @@ import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
-import keybladewarrior.powers.MasterPower;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
 
 import static keybladewarrior.ModFile.makeID;
 
+@SpireInitializer
 public class MasterForm extends AbstractDriveForm{
     public static final String STANCE_ID = makeID(MasterForm.class.getSimpleName());
     private static final StanceStrings stanceString = CardCrawlGame.languagePack.getStanceString(STANCE_ID);
@@ -37,6 +38,9 @@ public class MasterForm extends AbstractDriveForm{
     private static final String ENTER_SOUND = "STANCE_ENTER_CALM";
     private static final String LOOP_SOUND = "STANCE_LOOP_DIVINITY";
     private static float TIMER = 0.1F;
+
+    WisdomForm WisdomComponent = new WisdomForm();
+    ValorForm ValorComponent = new ValorForm();
 
     public MasterForm() {
         this.ID = STANCE_ID;
@@ -69,10 +73,10 @@ public class MasterForm extends AbstractDriveForm{
         this.description = DESCRIPTIONS[0];
     }
 
+
     @Override
     public void onEnterStance() {
         super.onEnterStance();
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player, new MasterPower(AbstractDungeon.player),2));
 
         if (sfxId != -1L)
             stopIdleSfx();
@@ -85,8 +89,6 @@ public class MasterForm extends AbstractDriveForm{
 
     @Override
     public void onExitStance() {
-
-        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player,MasterPower.ID));
         stopIdleSfx();
     }
 
@@ -116,6 +118,13 @@ public class MasterForm extends AbstractDriveForm{
 
         return color;
     }
+
+    @Override
+    public void onUseCard(AbstractCard card, UseCardAction action){
+        WisdomComponent.onUseCard(card, action);
+         ValorComponent.onUseCard(card, action);
+    }
+
 }
 
 

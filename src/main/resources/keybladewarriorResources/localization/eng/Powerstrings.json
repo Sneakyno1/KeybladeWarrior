@@ -64,5 +64,29 @@
     "DESCRIPTIONS": [
       "At the start of your turn gain #b"," #yDrive #yPoints."
     ]
+  },
+  "${ModID}:ReflectPower": {
+    "NAME": "Reflect",
+    "DESCRIPTIONS": [
+      "Reflect 50% of attack damage back at enemies this turn.",
+      "Reflect 75% of attack damage back at enemies this turn.",
+      "Reflect attack damage back at enemies this turn."
+    ]
+  },
+  "${ModID}:FinisherPower": {
+    "NAME": "FinisherPower",
+    "DESCRIPTIONS": [
+      "Play #b",
+      " more #yCombo card this turn to play the next card twice.",
+      " more #yCombo cards this turn to play the next card twice."
+    ]
+  },
+  "${ModID}:FinisherDuplicationPower": {
+    "NAME": "Duplication",
+    "DESCRIPTIONS": [
+      "Your next card is played twice this turn.",
+      "Your next #b",
+      " cards are played twice this turn."
+    ]
   }
 }

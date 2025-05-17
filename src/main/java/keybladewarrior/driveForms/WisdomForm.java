@@ -1,17 +1,20 @@
 package keybladewarrior.driveForms;
 
+import basemod.interfaces.OnCardUseSubscriber;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
-import keybladewarrior.powers.WisdomPower;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
@@ -70,8 +73,6 @@ public class WisdomForm extends AbstractDriveForm{
     @Override
     public void onEnterStance() {
         super.onEnterStance();
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player, new WisdomPower(AbstractDungeon.player),2));
-
         if (sfxId != -1L)
             stopIdleSfx();
         CardCrawlGame.sound.play("STANCE_ENTER_CALM");
@@ -83,8 +84,6 @@ public class WisdomForm extends AbstractDriveForm{
 
     @Override
     public void onExitStance() {
-
-        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player,AbstractDungeon.player, WisdomPower.ID));
         stopIdleSfx();
     }
 
@@ -114,6 +113,17 @@ public class WisdomForm extends AbstractDriveForm{
 
         return color;
     }
+
+    @Override
+    public void onUseCard(AbstractCard card, UseCardAction action){
+        AbstractPlayer p = AbstractDungeon.player;
+        if (Settings.FAST_MODE) {
+            AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, 2, true));
+        } else {
+            AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, 2));
+        }
+    }
+
 }
 
 
