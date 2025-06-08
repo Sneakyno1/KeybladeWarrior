@@ -135,7 +135,7 @@ public abstract class AbstractDriveForm extends AbstractStance{
             ExhaustExitDriveIfInWorkingDeck(p);
 
             AbstractDungeon.actionManager.addToBottom(new NotStanceCheckAction("Neutral", new VFXAction(new EmptyStanceEffect(p.hb.cX, p.hb.cY), 0.1F)));
-            AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction("Neutral"));
+            AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction(AntiForm.STANCE_ID));
         }
     }
 

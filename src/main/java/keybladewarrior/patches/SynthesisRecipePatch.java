@@ -6,13 +6,14 @@ package keybladewarrior.patches;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.metrics.MetricData;
 import com.megacrit.cardcrawl.shop.OnSaleTag;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import javassist.CtBehavior;
 import keybladewarrior.relics.uncommon.SynthesisRecipe;
+
+//This patch is for adding the Synthesis recipe logic to the Shop Screen
 
 @SuppressWarnings("unused")
 public class SynthesisRecipePatch {

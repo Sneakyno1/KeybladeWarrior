@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 import com.megacrit.cardcrawl.stances.NeutralStance;
 import keybladewarrior.actions.miscellaneousActions.GainedDriveInDriveFormWithNoActiveDrivePointsAction;
+import keybladewarrior.driveForms.FinalForm;
 
 import java.util.Objects;
 
@@ -31,6 +32,16 @@ public class DrivePoints extends AbstractEasyPower{
     public DrivePoints(AbstractCreature owner, int amount){
         super(ID, getPowerStrings(ID).NAME, AbstractPower.PowerType.BUFF,true,owner,amount);
 
+        for (AbstractPower pw : owner.powers) {
+            if (pw instanceof AbstractKeybladeWarriorPower){
+                this.amount = (int)((AbstractKeybladeWarriorPower)(pw)).onGainDrive(amount);
+            }
+        }
+
+        if (((AbstractPlayer) owner).stance.ID.equals(FinalForm.STANCE_ID)){
+            IgnoreNoDriveGain = true;
+        }
+
         if (!(owner.hasPower(ID))
                 && !Objects.equals(((AbstractPlayer) owner).stance.ID, NeutralStance.STANCE_ID)
                 && !IgnoreNoDriveGain
@@ -39,6 +50,9 @@ public class DrivePoints extends AbstractEasyPower{
             addToBot(new GainedDriveInDriveFormWithNoActiveDrivePointsAction((AbstractPlayer) owner,this, amount));
             return;
         }
+
+
+
         updateDescription();
         this.canGoNegative = false;
     }
@@ -61,8 +75,19 @@ public class DrivePoints extends AbstractEasyPower{
             //Player shouldn't gain any drive points
             return;
         }else{
-        super.stackPower(AmountToStack);
-        GainFromBank = false;
+
+            for (AbstractPower pw : owner.powers) {
+                if (pw instanceof AbstractKeybladeWarriorPower){
+                    AmountToStack = (int)((AbstractKeybladeWarriorPower)(pw)).onGainDrive(AmountToStack);
+                }
+            }
+
+            if (((AbstractPlayer) owner).stance.ID.equals(FinalForm.STANCE_ID)){
+                AmountToStack /= 2;
+            }
+
+            super.stackPower(AmountToStack);
+            GainFromBank = false;
         }
         updateDescription();
     }

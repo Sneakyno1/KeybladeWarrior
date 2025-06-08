@@ -8,6 +8,8 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import keybladewarrior.driveForms.AbstractDriveForm;
 
+//This patch is to add stances to the useCardAction Game action
+
 @SuppressWarnings("unused")
 public class UseCardActionPatchAddDriveForms {
 

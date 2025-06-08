@@ -1,6 +1,7 @@
 package keybladewarrior.driveForms;
 
 import basemod.interfaces.OnCardUseSubscriber;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -14,7 +15,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
+import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
+import keybladewarrior.driveForms.driveVFX.ValorFormParticleEffect;
+import keybladewarrior.driveForms.driveVFX.WisdomFormParticleEffect;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
@@ -30,8 +34,8 @@ public class WisdomForm extends AbstractDriveForm{
     private static long sfxId = -1L;
     public static final ArrayList<AbstractCard.CardTags> DriveTags = new ArrayList<AbstractCard.CardTags>(Collections.singletonList(CustomTags.WISE));
 
-    public static final Color COLOR_MIN = CardHelper.getColor(92, 92, 92);
-    public static final Color COLOR_MAX = CardHelper.getColor(128, 128, 128);
+    public static final Color COLOR_MIN = CardHelper.getColor(20, 17, 72);
+    public static final Color COLOR_MAX = CardHelper.getColor(40, 35, 144);
 
     private static Color cachedColor = null;
 
@@ -75,10 +79,28 @@ public class WisdomForm extends AbstractDriveForm{
         super.onEnterStance();
         if (sfxId != -1L)
             stopIdleSfx();
-        CardCrawlGame.sound.play("STANCE_ENTER_CALM");
-        sfxId = CardCrawlGame.sound.playAndLoop("STANCE_LOOP_CALM");
-        AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.ROYAL, true));
-        AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, "Calm"));
+        CardCrawlGame.sound.play(ENTER_SOUND);
+        sfxId = CardCrawlGame.sound.playAndLoop(LOOP_SOUND);
+        AbstractDungeon.effectsQueue.add(new BorderFlashEffect(getColor(), true));
+        AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, this.ID));
+
+    }
+
+    @Override
+    public void updateAnimation() {
+        if (!Settings.DISABLE_EFFECTS) {
+            this.particleTimer -= Gdx.graphics.getDeltaTime();
+            if (this.particleTimer < 0.0F) {
+                this.particleTimer = TIMER;
+                AbstractDungeon.effectsQueue.add(new WisdomFormParticleEffect());
+            }
+        }
+
+        this.particleTimer2 -= Gdx.graphics.getDeltaTime();
+        if (this.particleTimer2 < 0.0F) {
+            this.particleTimer2 = MathUtils.random(0.45F, 0.55F);
+            AbstractDungeon.effectsQueue.add(new StanceAuraEffect(STANCE_ID));
+        }
 
     }
 
@@ -90,7 +112,7 @@ public class WisdomForm extends AbstractDriveForm{
     @Override
     public void stopIdleSfx() {
         if (sfxId != -1L) {
-            CardCrawlGame.sound.stop("STANCE_LOOP_WRATH", sfxId);
+            CardCrawlGame.sound.stop(LOOP_SOUND, sfxId);
             sfxId = -1L;
         }
     }

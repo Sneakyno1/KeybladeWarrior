@@ -8,21 +8,25 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import com.megacrit.cardcrawl.stances.NeutralStance;
 import keybladewarrior.cards.attacks.Strike;
 import keybladewarrior.cards.skills.Courage;
 import keybladewarrior.cards.skills.Defend;
 import keybladewarrior.cards.skills.Wisdom;
+import keybladewarrior.driveForms.AntiForm;
 import keybladewarrior.relics.TodoItem;
 
 import java.util.ArrayList;
@@ -181,6 +185,14 @@ public class KeybladeWarrior extends CustomPlayer {
     @Override
     public void useCard(AbstractCard c, AbstractMonster monster, int energyOnUse) {
         super.useCard(c, monster, energyOnUse);
+    }
+
+    @Override
+    public void onVictory() {
+        if (stance.ID.equals(AntiForm.STANCE_ID)){
+            stance.onExitStance();
+        }
+        super.onVictory();
     }
 
     public static class Enums {

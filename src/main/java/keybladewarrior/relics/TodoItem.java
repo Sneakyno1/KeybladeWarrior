@@ -29,6 +29,7 @@ public class TodoItem extends AbstractEasyRelic {
                 ((AbstractDriveForm) newStance).IgnoreCostToEnterForm = true;
                 FirstValorOrWisdomEntry = false;
                 this.stopPulse();
+                this.usedUp();
             }
         }
 

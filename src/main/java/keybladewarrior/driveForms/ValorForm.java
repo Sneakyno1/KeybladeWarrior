@@ -2,6 +2,7 @@ package keybladewarrior.driveForms;
 
 import basemod.BaseMod;
 import basemod.interfaces.OnCardUseSubscriber;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -9,12 +10,14 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
-import com.megacrit.cardcrawl.stances.AbstractStance;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
+import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
+import keybladewarrior.driveForms.driveVFX.ValorFormParticleEffect;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
@@ -22,7 +25,6 @@ import java.util.Collections;
 
 import static keybladewarrior.ModFile.makeID;
 
-@SpireInitializer
 public class ValorForm  extends AbstractDriveForm  {
     public static final String STANCE_ID = makeID(ValorForm.class.getSimpleName());
     private static final StanceStrings stanceString = CardCrawlGame.languagePack.getStanceString(STANCE_ID);
@@ -31,12 +33,12 @@ public class ValorForm  extends AbstractDriveForm  {
     private static long sfxId = -1L;
     public static final ArrayList<AbstractCard.CardTags> DriveTags = new ArrayList<AbstractCard.CardTags>(Collections.singletonList(CustomTags.STRONG));
 
-    public static final Color COLOR_MIN = CardHelper.getColor(92, 92, 92);
-    public static final Color COLOR_MAX = CardHelper.getColor(128, 128, 128);
+    public static final Color COLOR_MIN = CardHelper.getColor(110, 7, 12);
+    public static final Color COLOR_MAX = CardHelper.getColor(220, 15, 25);
 
     private static Color cachedColor = null;
 
-    private static final String ENTER_SOUND = "STANCE_ENTER_WRATH";
+    private static final String ENTER_SOUND = "ORB_LIGHTNING_EVOKE";
     private static final String LOOP_SOUND = "STANCE_LOOP_WRATH";
     private static float TIMER = 0.1F;
 
@@ -70,17 +72,36 @@ public class ValorForm  extends AbstractDriveForm  {
         this.description = DESCRIPTIONS[0];
     }
 
+    @Override
+    public void updateAnimation() {
+        if (!Settings.DISABLE_EFFECTS) {
+            this.particleTimer -= Gdx.graphics.getDeltaTime();
+            if (this.particleTimer < 0.0F) {
+                this.particleTimer = TIMER;
+                AbstractDungeon.effectsQueue.add(new ValorFormParticleEffect());
+            }
+        }
 
+        this.particleTimer2 -= Gdx.graphics.getDeltaTime();
+        if (this.particleTimer2 < 0.0F) {
+            this.particleTimer2 = MathUtils.random(0.45F, 0.55F);
+            AbstractDungeon.effectsQueue.add(new StanceAuraEffect(STANCE_ID));
+        }
+
+    }
 
     @Override
     public void onEnterStance() {
         super.onEnterStance();
-        if (sfxId != -1L)
+        if (sfxId != -1L){
             stopIdleSfx();
+        }
+
         CardCrawlGame.sound.play(ENTER_SOUND);
         sfxId = CardCrawlGame.sound.playAndLoop(LOOP_SOUND);
-        AbstractDungeon.effectsQueue.add(new BorderFlashEffect(Color.SCARLET, true));
-        AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, "Wrath"));
+
+        AbstractDungeon.effectsQueue.add(new BorderFlashEffect(getColor(), true));
+        AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, this.ID));
 
     }
 
@@ -92,7 +113,7 @@ public class ValorForm  extends AbstractDriveForm  {
     @Override
     public void stopIdleSfx() {
         if (sfxId != -1L) {
-            CardCrawlGame.sound.stop("STANCE_LOOP_WRATH", sfxId);
+            CardCrawlGame.sound.stop(LOOP_SOUND, sfxId);
             sfxId = -1L;
         }
     }

@@ -17,8 +17,8 @@ public class ComboPlus extends AbstractEasyCard {
 
 
     public ComboPlus(){
-        super(ID, 0, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = 6;
+        super(ID, 0, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
+        this.baseDamage = 7;
         tags.add(CustomTags.COMBO);
     }
 

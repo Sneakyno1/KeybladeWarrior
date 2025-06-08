@@ -2,19 +2,31 @@
   "${ModID}:ValorForm": {
     "NAME": "Valor Form",
     "DESCRIPTION": [
-      "While in this #yDrive #yForm, every attack played draws #b1 card. NL Costs #b4 #yDrive #yPoints to enter. NL Costs #b2 #yDrive #yPoints per turn."
+      "Every attack played draws #b1 card. NL Costs #b2 #yDrive #yPoints per turn."
     ]
   },
   "${ModID}:WisdomForm": {
     "NAME": "Wisdom Form",
     "DESCRIPTION": [
-      "While in this #yDrive #yForm, whenever you play a card gain 2 #yBlock. NL Costs #b4 #yDrive #yPoints to enter. NL Costs #b2 #yDrive #yPoints per turn."
+      "Whenever you play a card gain 2 #yBlock. NL Costs #b2 #yDrive #yPoints per turn."
     ]
   },
   "${ModID}:MasterForm": {
     "NAME": "Master Form",
     "DESCRIPTION": [
-      "While in this #yDrive #yForm, whenever you play a card, gain #b2 #yBlock. If the card played is an attack, draw #b1 card. NL Costs #b8 #yDrive #yPoints to enter. NL Costs #b4 #yDrive #yPoints per turn."
+      "Whenever you play a card, gain #b2 #yBlock. If the card played is an attack, draw #b1 card. NL Costs #b4 #yDrive #yPoints per turn."
+    ]
+  },
+  "${ModID}:FinalForm": {
+    "NAME": "Final Form",
+    "DESCRIPTION": [
+      "Gain #b6 #yThorns, gain half #yDrive #yPoints instead of none. NL Choose any number of cards to #yRetain. NL Whenever you play a card, gain #b2 #yBlock. If the card played is an attack, draw #b1 card NL Costs #b6 #yDrive #yPoints per turn."
+    ]
+  },
+  "${ModID}:AntiForm": {
+    "NAME": "Anti Form",
+    "DESCRIPTION": [
+      "Gain 6 #yStrength. NL At the beginning of each turn gain #yHades #yCurse and #b1 #yIntangible. NL You are stuck in this form until the end of combat."
     ]
   }
 }

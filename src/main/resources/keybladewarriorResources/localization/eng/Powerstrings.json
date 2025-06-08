@@ -88,5 +88,19 @@
       "Your next #b",
       " cards are played twice this turn."
     ]
+  },
+  "${ModID}:DriveBoostPower": {
+    "NAME": "Drive Boost",
+    "DESCRIPTIONS": [
+      "Gain #b"," extra #yDrive #yPoints",
+      " extra #yDrive #yPoint",
+      " whenever you gain #yDrive #yPoints."
+    ]
+  },
+  "${ModID}:HadesCursePower": {
+    "NAME": "Hades Curse",
+    "DESCRIPTIONS": [
+      "You cannot play #ySkills this turn."
+    ]
   }
 }

@@ -102,7 +102,7 @@
   },
   "${ModID}:Magnet": {
     "NAME": "Magnet",
-    "DESCRIPTION": "Gain !B! Block. NL ${ModID}:Wise: Put a card from your discard pile into your hand."
+    "DESCRIPTION": "{@@}Gain !B! Block. NL ${ModID}:Wise: Put !M! card{!M!|>1=s} from your discard pile into your hand."
   },
   "${ModID}:Defender": {
     "NAME": "Defender",
@@ -175,5 +175,19 @@
   "${ModID}:Finisher": {
     "NAME": "Finisher",
     "DESCRIPTION": "After playing 3 ${ModID}:Combo cards in a row, your next played card is played twice."
+  },
+  "${ModID}:UpperSlash": {
+    "NAME": "Upper Slash",
+    "DESCRIPTION": "Deal !D! damage. NL Gain !M! ${ModID}:Drive_Points."
+  },
+  "${ModID}:DriveBoost": {
+    "NAME": "Drive Boost",
+    "DESCRIPTION": "Ethereal. NL Gain !M! extra ${ModID}:Drive_Point whenever you gain ${ModID}:Drive_Points.",
+    "UPGRADE_DESCRIPTION": "Retain. NL Gain !M! extra ${ModID}:Drive_Point whenever you gain ${ModID}:Drive_Points."
+  },
+  "${ModID}:Finality": {
+    "NAME": "Finality",
+    "DESCRIPTION": "Gain !M! ${ModID}:Drive_Points. NL Enter ${ModID}:Final_Form. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Retain. NL Gain !M! ${ModID}:Drive_Points. NL Enter ${ModID}:Final_Form. NL Exhaust."
   }
 }

@@ -43,7 +43,7 @@
       "Valor_Form",
       "valor_form"
     ],
-    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. NL You cannot gain #yDrive #yPoints while in a #yDrive #yForm. NL Every attack played draws 1 card. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
+    "DESCRIPTION": "Every attack played draws 1 card. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
   },
 
   {
@@ -53,7 +53,7 @@
       "Wisdom_Form",
       "wisdom_form"
     ],
-    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. NL You cannot gain #yDrive #yPoints while in a #yDrive #yForm. NL Whenever you play a card, gain #b2 Block. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
+    "DESCRIPTION": "Whenever you play a card, gain #b2 Block. NL Costs 4 #yDrive #yPoints to enter. NL Costs 2 #yDrive #yPoints per turn."
   },
 
   {
@@ -63,7 +63,26 @@
       "Master_Form",
       "master_form"
     ],
-    "DESCRIPTION": "You can only be in one #yDrive #yForm at a time. NL You cannot gain #yDrive #yPoints while in a #yDrive #yForm. NL Whenever you play a card, gain #b2 Block. If the card played is an attack, draw #b1 card. NL Costs #b8 #yDrive #yPoints to enter. NL Costs #b4 #yDrive #yPoints per turn."
+    "DESCRIPTION": "Whenever you play a card, gain #b2 Block. If the card played is an attack, draw #b1 card. NL Costs #b8 #yDrive #yPoints to enter. NL Costs #b4 #yDrive #yPoints per turn."
+  },
+
+  {
+    "PROPER_NAME": "Final Form",
+    "NAMES": [
+      "final form",
+      "Final_Form",
+      "final_form"
+    ],
+    "DESCRIPTION": "While in this #yDrive #yForm gain #b6 #yThorns, gain half #yDrive #yPoints instead of none. NL Choose any number of cards to #yRetain. NL Whenever you play a card, gain #b2 Block. If the card played is an attack, draw #b1 card. NL Costs #b12 #yDrive #yPoints to enter. NL Costs #b6 #yDrive #yPoints per turn."
+  },
+  {
+    "PROPER_NAME": "Anti Form",
+    "NAMES": [
+      "anti form",
+      "Anti_Form",
+      "anti_form"
+    ],
+    "DESCRIPTION": "While in this #yDrive #yForm gain 6 #yStrength. NL At the beginning of each turn gain #yHades #yCurse and #b1 #yIntangible. NL You are stuck in this form until the end of combat."
   },
 
   {

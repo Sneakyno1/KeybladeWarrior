@@ -1,9 +1,9 @@
 {
   "${ModID}:TodoItem": {
     "NAME": "test Starting Relic",
-    "FLAVOR": "It'll do for now i guess",
+    "FLAVOR": "It'll do for now I guess",
     "DESCRIPTIONS": [
-      "The first entry into #yWisdom #yForm or #yValor #yForm each combat is free."
+      "The first entry into #yWisdom #yForm or #yValor #yForm is free each combat."
     ]
   },
   "${ModID}:SynthesisRecipe": {
@@ -11,6 +11,13 @@
     "FLAVOR": "You're lucky the Moogles and the Merchant are such good friends.",
     "DESCRIPTIONS": [
       "Cards on sale can be bought for free #b3 times."
+    ]
+  },
+  "${ModID}:ProofOfConnection": {
+    "NAME": "Proof Of Connection",
+    "FLAVOR": "Proof of winning the battle in the portal at Disney Castle. Perhaps it has changed Sora.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, choose #b1 of #b3 random upgraded cards of any color and add the chosen card into your hand. NL It costs 0 the rest of this combat."
     ]
   }
 }

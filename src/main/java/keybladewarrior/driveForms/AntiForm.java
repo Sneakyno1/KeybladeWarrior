@@ -1,23 +1,29 @@
 package keybladewarrior.driveForms;
 
-import basemod.interfaces.OnCardUseSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.actions.unique.EstablishmentPowerAction;
+import com.megacrit.cardcrawl.actions.unique.RetainCardsAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
-import com.megacrit.cardcrawl.audio.SoundMaster;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
+import com.megacrit.cardcrawl.powers.*;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
+import keybladewarrior.driveForms.driveVFX.AntiFormParticleEffect;
 import keybladewarrior.driveForms.driveVFX.MasterFormParticleEffect;
-import keybladewarrior.driveForms.driveVFX.ValorFormParticleEffect;
+import keybladewarrior.powers.HadesCursePower;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
@@ -25,45 +31,43 @@ import java.util.ArrayList;
 import static keybladewarrior.ModFile.makeID;
 
 @SpireInitializer
-public class MasterForm extends AbstractDriveForm{
-    public static final String STANCE_ID = makeID(MasterForm.class.getSimpleName());
+public class AntiForm extends AbstractDriveForm{
+    public static final String STANCE_ID = makeID(AntiForm.class.getSimpleName());
     private static final StanceStrings stanceString = CardCrawlGame.languagePack.getStanceString(STANCE_ID);
     private static final String NAME = stanceString.NAME;
     public static final String[] DESCRIPTIONS = stanceString.DESCRIPTION;
     private static long sfxId = -1L;
-    public static final ArrayList<AbstractCard.CardTags> DriveTags = new ArrayList<AbstractCard.CardTags>() {{
-        add(CustomTags.WISE);
-        add(CustomTags.STRONG);
-    }};
+    public static final ArrayList<AbstractCard.CardTags> DriveTags = new ArrayList<AbstractCard.CardTags>() {};
 
-    public static final Color COLOR_MIN = CardHelper.getColor(110, 95, 10);
-    public static final Color COLOR_MAX = CardHelper.getColor(220, 190, 20);
+    public static final Color COLOR_MIN = new Color(-0);//CardHelper.getColor(42, 2, 55);
+    public static final Color COLOR_MAX = CardHelper.getColor(84, 4, 110);
 
     private static Color cachedColor = null;
 
     private static final String ENTER_SOUND = "MONSTER_CHAMP_CHARGE";
-    private static final String LOOP_SOUND = "STANCE_LOOP_CALM";
+    private static final String LOOP_SOUND = "STANCE_LOOP_WRATH";
     private static float TIMER = 0.1F;
 
-    WisdomForm WisdomComponent = new WisdomForm();
     ValorForm ValorComponent = new ValorForm();
 
-    public MasterForm() {
+    private int RealPlayerHealth = 1;
+    public int AntiFormPLayerHealth = 5;
+
+    public AntiForm() {
         this.ID = STANCE_ID;
         this.name = NAME;
 
-        this.BaseCostToEnterForm = 8;
+        this.BaseCostToEnterForm = 0;
         this.CurrentFormCost = this.BaseCostToEnterForm;
-        this.BaseFormCostPerTurn = 4;
+        this.BaseFormCostPerTurn = 0;
         this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
         this.FormCostModifier = 0;
         this.FormCostMultiplier = 1;
 
-
         this.updateDescription();
     }
 
-    public MasterForm(boolean IgnoreCostToEnterForm) {
+    public AntiForm(boolean IgnoreCostToEnterForm) {
         this();
         this. IgnoreCostToEnterForm = IgnoreCostToEnterForm;
         this.updateDescription();
@@ -82,7 +86,29 @@ public class MasterForm extends AbstractDriveForm{
 
     @Override
     public void onEnterStance() {
-        super.onEnterStance();
+        AbstractPlayer p = AbstractDungeon.player;
+
+        //remember players health and set it to 5
+        this.RealPlayerHealth = p.currentHealth;
+        if (p.currentHealth <= 5){
+            p.heal(5 - p.currentHealth);
+        }else {
+            p.heal(-(p.currentHealth - 5));
+        }
+        p.healthBarUpdatedEvent();
+
+
+        //apply intangible, strength, and "entangle" but for skills
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new IntangiblePlayerPower(p,1), 1));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new StrengthPower(p,6), 6));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new HadesCursePower(p)));
+
+
+//        for(AbstractCard c : AbstractDungeon.player.hand.group) {
+//            if (c.type != AbstractCard.CardType.ATTACK) {
+//                AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(c, AbstractDungeon.player.hand, true));
+//            }
+//        }
 
         if (sfxId != -1L)
             stopIdleSfx();
@@ -95,8 +121,40 @@ public class MasterForm extends AbstractDriveForm{
 
     @Override
     public void onExitStance() {
+        AbstractPlayer p = AbstractDungeon.player;
+        int overHeal = Math.max(0, p.currentHealth - 5);
+
+        if (p.currentHealth > 0){
+            p.heal(this.RealPlayerHealth - p.currentHealth + overHeal);
+        }
+
+
         stopIdleSfx();
         super.onExitStance();
+    }
+
+
+    @Override
+    public void atStartOfTurn() {
+        AbstractPlayer p = AbstractDungeon.player;
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,new IntangiblePlayerPower(AbstractDungeon.player,1), 1));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new HadesCursePower(p)));
+    }
+
+    @Override
+    public void onEndOfTurn() {
+
+//        for (AbstractCard c : AbstractDungeon.player.hand.group) {
+//            if (c.type != AbstractCard.CardType.ATTACK) {
+//                AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(c, AbstractDungeon.player.hand, true));
+//            }
+//        }
+
+    }
+
+    @Override
+    public void onUseCard(AbstractCard card, UseCardAction action){
+        ValorComponent.onUseCard(card, action);
     }
 
     @Override
@@ -113,7 +171,7 @@ public class MasterForm extends AbstractDriveForm{
             this.particleTimer -= Gdx.graphics.getDeltaTime();
             if (this.particleTimer < 0.0F) {
                 this.particleTimer = TIMER;
-                //AbstractDungeon.effectsQueue.add(new MasterFormParticleEffect());
+                AbstractDungeon.effectsQueue.add(new AntiFormParticleEffect());
             }
         }
 
@@ -144,11 +202,7 @@ public class MasterForm extends AbstractDriveForm{
         return color;
     }
 
-    @Override
-    public void onUseCard(AbstractCard card, UseCardAction action){
-        WisdomComponent.onUseCard(card, action);
-         ValorComponent.onUseCard(card, action);
-    }
+
 
 }
 

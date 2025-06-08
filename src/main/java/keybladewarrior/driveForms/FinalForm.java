@@ -1,32 +1,38 @@
 package keybladewarrior.driveForms;
 
-import basemod.interfaces.OnCardUseSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.unique.EstablishmentPowerAction;
+import com.megacrit.cardcrawl.actions.unique.RetainCardsAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
-import com.megacrit.cardcrawl.audio.SoundMaster;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ThornsPower;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
+import keybladewarrior.driveForms.driveVFX.FinalFormParticleEffect;
 import keybladewarrior.driveForms.driveVFX.MasterFormParticleEffect;
-import keybladewarrior.driveForms.driveVFX.ValorFormParticleEffect;
+import keybladewarrior.powers.AbstractKeybladeWarriorPower;
+import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
 
 import static keybladewarrior.ModFile.makeID;
 
-@SpireInitializer
-public class MasterForm extends AbstractDriveForm{
-    public static final String STANCE_ID = makeID(MasterForm.class.getSimpleName());
+public class FinalForm extends AbstractDriveForm{
+    public static final String STANCE_ID = makeID(FinalForm.class.getSimpleName());
     private static final StanceStrings stanceString = CardCrawlGame.languagePack.getStanceString(STANCE_ID);
     private static final String NAME = stanceString.NAME;
     public static final String[] DESCRIPTIONS = stanceString.DESCRIPTION;
@@ -36,25 +42,26 @@ public class MasterForm extends AbstractDriveForm{
         add(CustomTags.STRONG);
     }};
 
-    public static final Color COLOR_MIN = CardHelper.getColor(110, 95, 10);
-    public static final Color COLOR_MAX = CardHelper.getColor(220, 190, 20);
+    public final int ThornsAmount = 4;
+
+    public static final Color COLOR_MIN = CardHelper.getColor(210, 210, 210);
+    public static final Color COLOR_MAX = CardHelper.getColor(210, 210, 210);
 
     private static Color cachedColor = null;
 
-    private static final String ENTER_SOUND = "MONSTER_CHAMP_CHARGE";
+    private static final String ENTER_SOUND = "POWER_MANTRA";
     private static final String LOOP_SOUND = "STANCE_LOOP_CALM";
     private static float TIMER = 0.1F;
 
-    WisdomForm WisdomComponent = new WisdomForm();
-    ValorForm ValorComponent = new ValorForm();
+    MasterForm MasterFormComponent = new MasterForm();
 
-    public MasterForm() {
+    public FinalForm() {
         this.ID = STANCE_ID;
         this.name = NAME;
 
-        this.BaseCostToEnterForm = 8;
+        this.BaseCostToEnterForm = 12;
         this.CurrentFormCost = this.BaseCostToEnterForm;
-        this.BaseFormCostPerTurn = 4;
+        this.BaseFormCostPerTurn = 6;
         this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
         this.FormCostModifier = 0;
         this.FormCostMultiplier = 1;
@@ -63,7 +70,7 @@ public class MasterForm extends AbstractDriveForm{
         this.updateDescription();
     }
 
-    public MasterForm(boolean IgnoreCostToEnterForm) {
+    public FinalForm(boolean IgnoreCostToEnterForm) {
         this();
         this. IgnoreCostToEnterForm = IgnoreCostToEnterForm;
         this.updateDescription();
@@ -83,19 +90,43 @@ public class MasterForm extends AbstractDriveForm{
     @Override
     public void onEnterStance() {
         super.onEnterStance();
+        AbstractPlayer p = AbstractDungeon.player;
+
+        if (p.hasPower(DrivePoints.ID)){
+            ((DrivePoints) (p.getPower(DrivePoints.ID))).IgnoreNoDriveGain = true;
+        }
+
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new ThornsPower(p,ThornsAmount), ThornsAmount));
 
         if (sfxId != -1L)
             stopIdleSfx();
         CardCrawlGame.sound.play(ENTER_SOUND);
         sfxId = CardCrawlGame.sound.playAndLoop(LOOP_SOUND);
         AbstractDungeon.effectsQueue.add(new BorderFlashEffect(getColor(), true));
-        AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, this.ID));
+        AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(p.hb.cX, p.hb.cY, this.ID));
 
     }
 
     @Override
     public void onExitStance() {
         stopIdleSfx();
+
+        AbstractPlayer p = AbstractDungeon.player;
+
+        if (p.hasPower(DrivePoints.ID)){
+            ((DrivePoints) (p.getPower(DrivePoints.ID))).IgnoreNoDriveGain = false;
+        }
+
+        if (p.hasPower(ThornsPower.POWER_ID)){
+            p.getPower(ThornsPower.POWER_ID).reducePower(ThornsAmount);
+            p.getPower(ThornsPower.POWER_ID).updateDescription();
+
+            if (p.getPower(ThornsPower.POWER_ID).amount <= 0) {
+                AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(p,p,ThornsPower.POWER_ID));
+
+            }
+        }
+
         super.onExitStance();
     }
 
@@ -113,7 +144,7 @@ public class MasterForm extends AbstractDriveForm{
             this.particleTimer -= Gdx.graphics.getDeltaTime();
             if (this.particleTimer < 0.0F) {
                 this.particleTimer = TIMER;
-                //AbstractDungeon.effectsQueue.add(new MasterFormParticleEffect());
+                AbstractDungeon.effectsQueue.add(new FinalFormParticleEffect());
             }
         }
 
@@ -144,12 +175,41 @@ public class MasterForm extends AbstractDriveForm{
         return color;
     }
 
-    @Override
-    public void onUseCard(AbstractCard card, UseCardAction action){
-        WisdomComponent.onUseCard(card, action);
-         ValorComponent.onUseCard(card, action);
+    public static Color getAuraColor(float a) {
+        Color color = CardHelper.getColor(50, 50, 50);
+
+        if (a > 1.0f) {
+            a = a / 255.0f;
+        }
+        color.a = a;
+
+        return color;
     }
 
+    @Override
+    public void onUseCard(AbstractCard card, UseCardAction action){
+        MasterFormComponent.onUseCard(card, action);
+    }
+
+    @Override
+    public void onEndOfTurn() {
+        if (!AbstractDungeon.player.hand.isEmpty() && !AbstractDungeon.player.hasRelic("Runic Pyramid") &&
+                !AbstractDungeon.player.hasPower("Equilibrium")){
+            AbstractDungeon.actionManager.addToBottom(new RetainCardsAction(AbstractDungeon.player, AbstractDungeon.player.hand.size()));
+        }
+
+        //AbstractDungeon.actionManager.addToBottom(new EstablishmentPowerAction(1));
+
+        super.onEndOfTurn();
+    }
+
+
+//    @Override
+//    public void atStartOfTurn() {
+//        for (AbstractCard c : AbstractDungeon.player.hand.group) {
+//            c.setCostForTurn(c.cost - 1);
+//        }
+//    }
 }
 
 
