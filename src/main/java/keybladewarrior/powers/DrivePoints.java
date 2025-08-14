@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.stances.AbstractStance;
 import com.megacrit.cardcrawl.stances.NeutralStance;
 import keybladewarrior.actions.miscellaneousActions.GainedDriveInDriveFormWithNoActiveDrivePointsAction;
+import keybladewarrior.driveForms.AntiForm;
 import keybladewarrior.driveForms.FinalForm;
 
 import java.util.Objects;
@@ -42,14 +43,14 @@ public class DrivePoints extends AbstractEasyPower{
             IgnoreNoDriveGain = true;
         }
 
-        if (!(owner.hasPower(ID))
-                && !Objects.equals(((AbstractPlayer) owner).stance.ID, NeutralStance.STANCE_ID)
-                && !IgnoreNoDriveGain
-                && !GainFromBank){
-            //Player shouldn't gain any drive points
-            addToBot(new GainedDriveInDriveFormWithNoActiveDrivePointsAction((AbstractPlayer) owner,this, amount));
-            return;
-        }
+//        if (!(owner.hasPower(ID))
+//                && !Objects.equals(((AbstractPlayer) owner).stance.ID, NeutralStance.STANCE_ID)
+//                && !IgnoreNoDriveGain
+//                && !GainFromBank){
+//            //Player shouldn't gain any drive points
+//            addToBot(new GainedDriveInDriveFormWithNoActiveDrivePointsAction((AbstractPlayer) owner,this, amount));
+//            return;
+//        }
 
 
 
@@ -71,7 +72,7 @@ public class DrivePoints extends AbstractEasyPower{
     @Override
     public void stackPower(int AmountToStack){
         AbstractPlayer p = AbstractDungeon.player;
-        if (!Objects.equals(p.stance.ID, NeutralStance.STANCE_ID) && !IgnoreNoDriveGain && !GainFromBank){
+        if (Objects.equals(p.stance.ID, AntiForm.STANCE_ID) && !IgnoreNoDriveGain && !GainFromBank){
             //Player shouldn't gain any drive points
             return;
         }else{

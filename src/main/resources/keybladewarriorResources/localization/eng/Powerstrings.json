@@ -102,5 +102,11 @@
     "DESCRIPTIONS": [
       "You cannot play #ySkills this turn."
     ]
-  }
+  },
+  "${ModID}:ParryPower": {
+    "NAME": "Parry",
+    "DESCRIPTIONS": [
+      "Whenever you play a card, gain #b1 #yBlock per card played this turn."
+    ]
+ }
 }

@@ -61,7 +61,7 @@ public class FinalForm extends AbstractDriveForm{
 
         this.BaseCostToEnterForm = 12;
         this.CurrentFormCost = this.BaseCostToEnterForm;
-        this.BaseFormCostPerTurn = 6;
+        this.BaseFormCostPerTurn = 10;
         this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
         this.FormCostModifier = 0;
         this.FormCostMultiplier = 1;
@@ -89,7 +89,7 @@ public class FinalForm extends AbstractDriveForm{
 
     @Override
     public void onEnterStance() {
-        super.onEnterStance();
+
         AbstractPlayer p = AbstractDungeon.player;
 
         if (p.hasPower(DrivePoints.ID)){
@@ -104,6 +104,8 @@ public class FinalForm extends AbstractDriveForm{
         sfxId = CardCrawlGame.sound.playAndLoop(LOOP_SOUND);
         AbstractDungeon.effectsQueue.add(new BorderFlashEffect(getColor(), true));
         AbstractDungeon.effectsQueue.add(new StanceChangeParticleGenerator(p.hb.cX, p.hb.cY, this.ID));
+
+        super.onEnterStance();
 
     }
 

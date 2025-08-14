@@ -6,33 +6,51 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.actions.comboActions.DefenderAction;
+import keybladewarrior.actions.comboActions.DodgeRollAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.util.CustomTags;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class Defender extends AbstractEasyCard {
-    public static final String ID =makeID(Defender.class.getSimpleName());
+public class DodgeRoll extends AbstractEasyCard {
+    public static final String ID =makeID(DodgeRoll.class.getSimpleName());
 
 
-    public Defender(){
-        super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseBlock = 8;
-        this.baseMagicNumber = 1;
-        this.magicNumber = this.baseMagicNumber;
+    public DodgeRoll(){
+        super(ID, 1, CardType.SKILL, CardRarity.COMMON, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
+        this.baseBlock = 5;
+        this.baseMagicNumber = this.magicNumber = 8;
         tags.add(CustomTags.COMBO);
     }
 
     @Override
     public void upp() {
-        upgradeBlock(2);
+        upgradeBlock(3);
+        upgradeMagicNumber(3);
         super.upgrade();
+    }
+
+    @Override
+    public void applyPowers() {
+        magicNumber = baseMagicNumber;
+
+        int tmp = baseBlock;
+        baseBlock = magicNumber;
+
+        super.applyPowers();
+
+        magicNumber = block;
+        baseBlock = tmp;
+
+        super.applyPowers();
+
+        isMagicNumberModified = (magicNumber != baseMagicNumber);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster monster) {
         blck();
-        addToBot(new DefenderAction(p, this.magicNumber));
+        addToBot(new DodgeRollAction(p, this.magicNumber));
     }
 
     @Override

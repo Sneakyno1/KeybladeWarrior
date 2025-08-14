@@ -15,14 +15,14 @@ public class DefenseBoost extends AbstractEasyCard {
     public DefenseBoost(){
         super(ID, 2, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF, KeybladeWarrior.Enums.CARD_COLOR);
         this.baseBlock = 12;
-        this.baseMagicNumber = 4;
+        this.baseMagicNumber = 5;
         this.magicNumber = this.baseMagicNumber;
     }
 
     @Override
     public void upp() {
         upgradeBlock(3);
-        upgradeMagicNumber(-1);
+        upgradeMagicNumber(-2);
         super.upgrade();
     }
 

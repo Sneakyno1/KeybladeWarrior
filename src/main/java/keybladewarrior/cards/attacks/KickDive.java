@@ -1,40 +1,38 @@
 package keybladewarrior.cards.attacks;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
-import keybladewarrior.actions.comboActions.MagnetBurstAction;
+import keybladewarrior.actions.comboActions.KickDiveAction;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.util.CustomTags;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class MagnetBurst extends AbstractEasyCard {
-    public static final String ID =makeID(MagnetBurst.class.getSimpleName());
+public class KickDive extends AbstractEasyCard {
+    public static final String ID =makeID(KickDive.class.getSimpleName());
 
 
-    public MagnetBurst(){
-        super(ID, 2, CardType.ATTACK, CardRarity.RARE, CardTarget.ALL_ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = 16;
-        this.baseMagicNumber = 2;
-        this.magicNumber = this.baseMagicNumber;
+    public KickDive(){
+        super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
+        this.baseDamage = 8;
         tags.add(CustomTags.COMBO);
     }
 
 
-
     @Override
     public void upp() {
-        upgradeMagicNumber(1);
-        upgradeDamage(4);
+        upgradeDamage(2);
         super.upgrade();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new MagnetBurstAction(p,this.magicNumber,this.damage,this.damageTypeForTurn));
+        dmg(m, AbstractGameAction.AttackEffect.BLUNT_LIGHT);
+        addToBot(new KickDiveAction());
     }
 
     @Override

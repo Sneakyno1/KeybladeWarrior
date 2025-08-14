@@ -28,7 +28,7 @@ public class SynchBlade extends AbstractEasyCard {
     @Override
     public void upp() {
         upgradeMagicNumber(1);
-        upgradeDamage(3);
+        upgradeDamage(1);
         super.upgrade();
     }
 

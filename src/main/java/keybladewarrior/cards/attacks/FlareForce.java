@@ -22,8 +22,7 @@ public class FlareForce extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        this.upgradeDamage(1);
-        this.upgradeMagicNumber(2);
+        this.upgradeMagicNumber(3);
         super.upgrade();
     }
 

@@ -2,6 +2,7 @@ package keybladewarrior.cards.attacks;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -20,6 +21,7 @@ public class WisdomShot extends AbstractEasyCard {
     public WisdomShot(){
         super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
         this.baseDamage = 7;
+        this.cardsToPreview = (AbstractCard)new Shiv();
         this.tags.add(CustomTags.WISE);
     }
 

@@ -5,9 +5,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.common.ReduceCostForTurnAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -17,8 +21,10 @@ import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
+import keybladewarrior.cards.skills.Deflect;
 import keybladewarrior.driveForms.driveVFX.ValorFormParticleEffect;
 import keybladewarrior.driveForms.driveVFX.WisdomFormParticleEffect;
+import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
@@ -47,9 +53,9 @@ public class WisdomForm extends AbstractDriveForm{
         this.ID = STANCE_ID;
         this.name = NAME;
 
-        this.BaseCostToEnterForm = 4;
+        this.BaseCostToEnterForm = 0;
         this.CurrentFormCost = this.BaseCostToEnterForm;
-        this.BaseFormCostPerTurn = 2;
+        this.BaseFormCostPerTurn = 0;
         this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
         this.FormCostModifier = 0;
         this.FormCostMultiplier = 1;
@@ -139,12 +145,11 @@ public class WisdomForm extends AbstractDriveForm{
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action){
         AbstractPlayer p = AbstractDungeon.player;
-        if (Settings.FAST_MODE) {
-            AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, 2, true));
-        } else {
-            AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, 2));
+        if (card.type == AbstractCard.CardType.ATTACK) {
+                AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new Deflect()));
         }
     }
+
 
 }
 

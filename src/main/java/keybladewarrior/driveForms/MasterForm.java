@@ -52,9 +52,9 @@ public class MasterForm extends AbstractDriveForm{
         this.ID = STANCE_ID;
         this.name = NAME;
 
-        this.BaseCostToEnterForm = 8;
+        this.BaseCostToEnterForm = 10;
         this.CurrentFormCost = this.BaseCostToEnterForm;
-        this.BaseFormCostPerTurn = 4;
+        this.BaseFormCostPerTurn = 6;
         this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
         this.FormCostModifier = 0;
         this.FormCostMultiplier = 1;

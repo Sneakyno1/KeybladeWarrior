@@ -92,17 +92,20 @@ public abstract class AbstractDriveForm extends AbstractStance{
         AbstractPlayer p = AbstractDungeon.player;
         DrivePoints Drive = (DrivePoints) p.getPower(DrivePoints.ID);
 
-        //check if player has enough drive points to enter
-        if (IgnoreCostToEnterForm){
-            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new ExitDrive(), 1, false));
-        } else if (Drive != null && Drive.amount >= CurrentFormCost){
+        if (    p.stance.ID.equals(ValorForm.STANCE_ID) ||
+                p.stance.ID.equals(WisdomForm.STANCE_ID) ||
+                p.stance.ID.equals(AntiForm.STANCE_ID) ||
+                IgnoreCostToEnterForm) {
+            return;
+        }
+        else if (Drive != null && Drive.amount >= CurrentFormCost){
             Drive.reducePower(CurrentFormCost);
 
-            if (!ExitDriveInWorkingDeck(p)){
-                AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new ExitDrive(), 1, false));
-            }
+//            if (!ExitDriveInWorkingDeck(p)){
+//                AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new ExitDrive(), 1, false));
+//            }
         }
-        //if player doesn't have enough drive points to change we'll force them back into their current form
+        //if player doesn't have enough drive points to change we'll force them back into Neutral form
         else {
 
             AbstractDungeon.actionManager.addToBottom(new NotStanceCheckAction(NeutralStance.STANCE_ID, new VFXAction(new EmptyStanceEffect(p.hb.cX, p.hb.cY), 0.1F)));
@@ -121,21 +124,28 @@ public abstract class AbstractDriveForm extends AbstractStance{
         AbstractPlayer p = AbstractDungeon.player;
         DrivePoints Drive = (DrivePoints) p.getPower(DrivePoints.ID);
 
+
         //check if the player has any drive points and keep in the form if so while updating the drive points
-        if (IgnoreFormCostPerTurn) {
+        if (    p.stance.ID.equals(ValorForm.STANCE_ID) ||
+                p.stance.ID.equals(WisdomForm.STANCE_ID) ||
+                p.stance.ID.equals(AntiForm.STANCE_ID) ||
+                IgnoreFormCostPerTurn) {
             return;
         }
-        else if (Drive != null && Drive.amount > 0) {
+        else if (Drive != null && Drive.amount >= CurrentFormCostPerTurn) {
             Drive.reducePower(CurrentFormCostPerTurn);
         }
         else {
-            //right now player is just force back into neutral
-            //also removes exit drive card from players working deck if they were forced out of a drive form
-            //TODO: force player into antiform when its made
-            ExhaustExitDriveIfInWorkingDeck(p);
+            //ExhaustExitDriveIfInWorkingDeck(p);
 
             AbstractDungeon.actionManager.addToBottom(new NotStanceCheckAction("Neutral", new VFXAction(new EmptyStanceEffect(p.hb.cX, p.hb.cY), 0.1F)));
-            AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction(AntiForm.STANCE_ID));
+
+            if (p.stance.ID.equals(MasterForm.STANCE_ID)) {
+                AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction("Neutral"));
+            } else {
+                AbstractDungeon.actionManager.addToBottom(new ChangeStanceAction(AntiForm.STANCE_ID));
+            }
+
         }
     }
 

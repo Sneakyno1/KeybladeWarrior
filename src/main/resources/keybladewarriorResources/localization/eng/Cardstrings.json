@@ -123,7 +123,7 @@
   },
   "${ModID}:WisdomShot": {
     "NAME": "Wisdom Shot",
-    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Wise: Discard 1 card."
+    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Wise: Add 1 Shiv to your hand."
   },
   "${ModID}:QuickRun": {
     "NAME": "Quick Run",
@@ -189,5 +189,26 @@
     "NAME": "Finality",
     "DESCRIPTION": "Gain !M! ${ModID}:Drive_Points. NL Enter ${ModID}:Final_Form. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Retain. NL Gain !M! ${ModID}:Drive_Points. NL Enter ${ModID}:Final_Form. NL Exhaust."
+  },
+  "${ModID}:KickDive": {
+    "NAME": "Kick Dive",
+    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Combo: Gain [E]."
+  },
+  "${ModID}:DodgeRoll": {
+    "NAME": "Dodge Roll",
+    "DESCRIPTION": "Gain !B! Block. NL ${ModID}:Combo: Next turn, gain !M! Block."
+  },
+  "${ModID}:Parry": {
+    "NAME": "Parry",
+    "DESCRIPTION": "Ethereal. NL When you play a card, gain 1 Block per card played this turn.",
+    "UPGRADE_DESCRIPTION": "When you play a card, gain 1 Block per card played this turn."
+  },
+  "${ModID}:Deflect": {
+    "NAME": "Deflect",
+    "DESCRIPTION": "Ethereal. NL Gain !B! Block. NL Exhaust."
+  },
+  "${ModID}:BraveBeat": {
+    "NAME": "Brave Beat",
+    "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Strong: Draw 1 card per enemy dealt unblocked damage."
   }
 }

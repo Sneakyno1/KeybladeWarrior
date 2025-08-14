@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.unique.EstablishmentPowerAction;
 import com.megacrit.cardcrawl.actions.unique.RetainCardsAction;
@@ -89,17 +90,17 @@ public class AntiForm extends AbstractDriveForm{
         AbstractPlayer p = AbstractDungeon.player;
 
         //remember players health and set it to 5
-        this.RealPlayerHealth = p.currentHealth;
-        if (p.currentHealth <= 5){
-            p.heal(5 - p.currentHealth);
-        }else {
-            p.heal(-(p.currentHealth - 5));
-        }
-        p.healthBarUpdatedEvent();
+//        this.RealPlayerHealth = p.currentHealth;
+//        if (p.currentHealth <= 5){
+//            p.heal(5 - p.currentHealth);
+//        }else {
+//            p.heal(-(p.currentHealth - 5));
+//        }
+//        p.healthBarUpdatedEvent();
 
 
         //apply intangible, strength, and "entangle" but for skills
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new IntangiblePlayerPower(p,1), 1));
+        //AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new IntangiblePlayerPower(p,1), 1));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new StrengthPower(p,6), 6));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new HadesCursePower(p)));
 
@@ -122,11 +123,11 @@ public class AntiForm extends AbstractDriveForm{
     @Override
     public void onExitStance() {
         AbstractPlayer p = AbstractDungeon.player;
-        int overHeal = Math.max(0, p.currentHealth - 5);
-
-        if (p.currentHealth > 0){
-            p.heal(this.RealPlayerHealth - p.currentHealth + overHeal);
-        }
+//        int overHeal = Math.max(0, p.currentHealth - 5);
+//
+//        if (p.currentHealth > 0){
+//            p.heal(this.RealPlayerHealth - p.currentHealth + overHeal);
+//        }
 
 
         stopIdleSfx();
@@ -137,7 +138,7 @@ public class AntiForm extends AbstractDriveForm{
     @Override
     public void atStartOfTurn() {
         AbstractPlayer p = AbstractDungeon.player;
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,new IntangiblePlayerPower(AbstractDungeon.player,1), 1));
+        //AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player,AbstractDungeon.player,new IntangiblePlayerPower(AbstractDungeon.player,1), 1));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p,p,new HadesCursePower(p)));
     }
 
@@ -154,7 +155,9 @@ public class AntiForm extends AbstractDriveForm{
 
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action){
-        ValorComponent.onUseCard(card, action);
+        if (card.type == AbstractCard.CardType.ATTACK) {
+           AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
+       }
     }
 
     @Override

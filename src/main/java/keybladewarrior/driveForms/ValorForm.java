@@ -6,14 +6,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.StanceStrings;
+import com.megacrit.cardcrawl.powers.LoseStrengthPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceAuraEffect;
 import com.megacrit.cardcrawl.vfx.stance.StanceChangeParticleGenerator;
@@ -42,16 +47,20 @@ public class ValorForm  extends AbstractDriveForm  {
     private static final String LOOP_SOUND = "STANCE_LOOP_WRATH";
     private static float TIMER = 0.1F;
 
+    private static int StrengthPerCardPlayed = 1;
     public ValorForm() {
         this.ID = STANCE_ID;
         this.name = NAME;
 
-        this.BaseCostToEnterForm = 4;
+        this.BaseCostToEnterForm = 0;
         this.CurrentFormCost = this.BaseCostToEnterForm;
-        this.BaseFormCostPerTurn = 2;
+
+        this.BaseFormCostPerTurn = 0;
         this.CurrentFormCostPerTurn = this.BaseFormCostPerTurn;
+
         this.FormCostModifier = 0;
         this.FormCostMultiplier = 1;
+
 
         this.updateDescription();
     }
@@ -141,9 +150,12 @@ public class ValorForm  extends AbstractDriveForm  {
 
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
-        if (card.type == AbstractCard.CardType.ATTACK) {
-            AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
-        }
+//        if (card.type == AbstractCard.CardType.ATTACK) {
+//            AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
+//        }
+        AbstractPlayer p = AbstractDungeon.player;
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new StrengthPower(p, StrengthPerCardPlayed), StrengthPerCardPlayed));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new LoseStrengthPower(p, StrengthPerCardPlayed), StrengthPerCardPlayed));
     }
 
 

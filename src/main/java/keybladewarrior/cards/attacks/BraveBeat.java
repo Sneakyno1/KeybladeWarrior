@@ -6,43 +6,45 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import keybladewarrior.KeybladeWarrior;
 import keybladewarrior.actions.comboActions.MagnetBurstAction;
+import keybladewarrior.actions.strongActions.BraveBeatAction;
 import keybladewarrior.cards.AbstractEasyCard;
+import keybladewarrior.driveForms.AbstractDriveForm;
 import keybladewarrior.util.CustomTags;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class MagnetBurst extends AbstractEasyCard {
-    public static final String ID =makeID(MagnetBurst.class.getSimpleName());
+public class BraveBeat extends AbstractEasyCard {
+    public static final String ID =makeID(BraveBeat.class.getSimpleName());
 
 
-    public MagnetBurst(){
-        super(ID, 2, CardType.ATTACK, CardRarity.RARE, CardTarget.ALL_ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
-        this.baseDamage = 16;
-        this.baseMagicNumber = 2;
+    public BraveBeat(){
+        super(ID, 1, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ALL_ENEMY, KeybladeWarrior.Enums.CARD_COLOR);
+        this.baseDamage = 6;
+        this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
-        tags.add(CustomTags.COMBO);
+        tags.add(CustomTags.STRONG);
     }
 
 
 
     @Override
     public void upp() {
-        upgradeMagicNumber(1);
         upgradeDamage(4);
         super.upgrade();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new MagnetBurstAction(p,this.magicNumber,this.damage,this.damageTypeForTurn));
+        addToBot(new BraveBeatAction(p,this.magicNumber,this.damage,this.damageTypeForTurn));
     }
 
     @Override
     public void triggerOnGlowCheck() {
-        if (!AbstractDungeon.actionManager.cardsPlayedThisCombat.isEmpty() && (AbstractDungeon.actionManager.cardsPlayedThisCombat
-                .get(AbstractDungeon.actionManager.cardsPlayedThisCombat
-                        .size() - 1)).hasTag(CustomTags.COMBO)){
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        AbstractPlayer p = AbstractDungeon.player;
+        if (p.stance instanceof AbstractDriveForm){
+            if (((AbstractDriveForm) p.stance).hasTag(CustomTags.STRONG)) {
+                this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+            }
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }

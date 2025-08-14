@@ -3,7 +3,7 @@
     "NAME": "test Starting Relic",
     "FLAVOR": "It'll do for now I guess",
     "DESCRIPTIONS": [
-      "The first entry into #yWisdom #yForm or #yValor #yForm is free each combat."
+      "Gain #b3 #yBlock when entering #yWisdom #yForm or #yValor #yForm."
     ]
   },
   "${ModID}:SynthesisRecipe": {
@@ -18,6 +18,13 @@
     "FLAVOR": "Proof of winning the battle in the portal at Disney Castle. Perhaps it has changed Sora.",
     "DESCRIPTIONS": [
       "At the start of each combat, choose #b1 of #b3 random upgraded cards of any color and add the chosen card into your hand. NL It costs 0 the rest of this combat."
+    ]
+  },
+  "${ModID}:PiggyBank": {
+    "NAME": "Piggy Bank",
+    "FLAVOR": "A fine investment in your future.",
+    "DESCRIPTIONS": [
+      "If you have #yDrive #yPoints at the end of combat, bank up to #b6. Gain stored #yDrive #yPoints at the beginning of the next combat."
     ]
   }
 }
