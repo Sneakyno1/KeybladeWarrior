@@ -7,7 +7,7 @@ There are over 40 custom cards along with a few custom relics for Sora.
 More cards and relics are in the works, along with new custom potions and potentially even new special events!
 
 To use this mod you'll need the most recent versions of BaseMod, ModTheSpire, and STSLib. All are available on the
-Steam workshop for download.
+Steam workshop for download. To install the mod, simply add the KeybladeWarrior.jar into the "Mods" folder where you have the game installed
 
 This mod will also be available on the Steam workshop once more content is added.
 
