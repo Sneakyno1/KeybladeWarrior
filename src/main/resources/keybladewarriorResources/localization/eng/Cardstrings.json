@@ -210,5 +210,21 @@
   "${ModID}:BraveBeat": {
     "NAME": "Brave Beat",
     "DESCRIPTION": "Deal !D! damage. NL ${ModID}:Strong: Draw 1 card per enemy dealt unblocked damage."
+  },
+  "${ModID}:BlazingShard": {
+    "NAME": "Blazing Shard",
+    "DESCRIPTION": "${ModID}:Synthesis_Material. NL Deal !D! damage."
+  },
+  "${ModID}:DenseShard": {
+    "NAME": "Dense Shard",
+    "DESCRIPTION": "${ModID}:Synthesis_Material. NL Gain !B! Block."
+  },
+  "${ModID}:SerenityShard": {
+    "NAME": "Serenity Shard",
+    "DESCRIPTION": "${ModID}:Synthesis_Material. NL Apply !M! Plated Armor."
+  },
+  "${ModID}:MidSynthesis": {
+    "NAME": "Synthesis Stone",
+    "DESCRIPTION": "{@@}${ModID}:Synthesis_Material.{!D!|>1= NL Deal !D! damage.}{!B!|>1= NL Gain !B! Block.}"
   }
 }

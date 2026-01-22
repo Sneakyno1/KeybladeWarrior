@@ -191,13 +191,13 @@ public class ModFile implements
 
     @Override
     public void receiveCardUsed(AbstractCard card) {
-        AbstractPlayer p = AbstractDungeon.player;
-
-        if (p instanceof KeybladeWarrior) {
-
-            if (card.type == AbstractCard.CardType.ATTACK) {
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p, 1), 1));
-            }
-        }
+//        AbstractPlayer p = AbstractDungeon.player;
+//
+//        if (p instanceof KeybladeWarrior) {
+//
+//            if (card.type == AbstractCard.CardType.ATTACK) {
+//                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p, 1), 1));
+//            }
+//        }
     }
 }

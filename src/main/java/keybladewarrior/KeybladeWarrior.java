@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -27,6 +28,7 @@ import keybladewarrior.cards.skills.Courage;
 import keybladewarrior.cards.skills.Defend;
 import keybladewarrior.cards.skills.Wisdom;
 import keybladewarrior.driveForms.AntiForm;
+import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.relics.TodoItem;
 
 import java.util.ArrayList;
@@ -185,6 +187,10 @@ public class KeybladeWarrior extends CustomPlayer {
     @Override
     public void useCard(AbstractCard c, AbstractMonster monster, int energyOnUse) {
         super.useCard(c, monster, energyOnUse);
+
+        if (c.type == AbstractCard.CardType.ATTACK) {
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new DrivePoints(this, 1), 1));
+        }
     }
 
     @Override

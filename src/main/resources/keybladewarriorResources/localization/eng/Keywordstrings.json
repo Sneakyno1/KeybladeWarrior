@@ -128,5 +128,14 @@
       "Spell"
     ],
     "DESCRIPTION": "Trigger this card's #ySpell effect if discarded from #yScrying."
+  },
+  {
+    "PROPER_NAME": "Synthesis Material",
+    "NAMES": [
+      "synthesis material",
+      "Synthesis_Material",
+      "synthesis_material"
+    ],
+    "DESCRIPTION": "If you already have a #ySynthesis #yMaterial card in your deck, combine their effects instead of ."
   }
 ]
