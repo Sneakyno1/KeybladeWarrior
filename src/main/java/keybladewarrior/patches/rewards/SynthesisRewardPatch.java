@@ -3,27 +3,28 @@ package keybladewarrior.patches.rewards;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.SoulGroup;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
-import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EventRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
+import com.megacrit.cardcrawl.screens.CardRewardScreen;
+import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import com.megacrit.cardcrawl.vfx.FastCardObtainEffect;
 import javassist.CtBehavior;
 import keybladewarrior.cards.AbstractSynthesisCard;
+import keybladewarrior.cards.skills.MidSynthesis;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
 import java.util.Map;
-
-import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRng;
+import java.util.Objects;
 
 
 @SuppressWarnings("unused")
@@ -76,21 +77,44 @@ public class SynthesisRewardPatch{
         }
     }
 
-    @SpirePatch(clz = FastCardObtainEffect.class,
-            method = "update")
-    public static class updateFastCardObtainEffect {
-        @SpireInsertPatch(locator = SynthesisRewardPatch.updateFastCardObtainEffect.Locator.class,
-                          localvars = {"card"} )
-        public static SpireReturn<Void> Insert(FastCardObtainEffect _instance, AbstractCard card) {
+    @SpirePatch(clz = CombatRewardScreen.class,
+            method = "updateEffects")
+    public static class updateEffects {
+        @SpirePostfixPatch
+        public static SpireReturn<Void> Postfix(CombatRewardScreen _instance) {
 
-            if (card.hasTag(CustomTags.SYNTHESIS_MATERIAL)){
+            CardGroup synthesisGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-                for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                    if (c instanceof AbstractSynthesisCard && c.hasTag(CustomTags.SYNTHESIS_MATERIAL)) {
-                        ((AbstractSynthesisCard) c).CombineSynthesisCards((AbstractSynthesisCard) card);
-                    }
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                if (c instanceof AbstractSynthesisCard && c.hasTag(CustomTags.SYNTHESIS_MATERIAL)) {
+                    synthesisGroup.addToTop(c);
                 }
             }
+
+            if (synthesisGroup.size()>1){
+                if  (synthesisGroup.findCardById(MidSynthesis.ID)!=null){
+                    AbstractSynthesisCard existingSynthesis = (AbstractSynthesisCard) synthesisGroup.findCardById(MidSynthesis.ID);
+                    for (AbstractCard c: synthesisGroup.group){
+                        if (!Objects.equals(c.cardID, MidSynthesis.ID)) {
+                            ((AbstractSynthesisCard) c).AddSynthesisEffect(existingSynthesis);
+                            AbstractDungeon.player.masterDeck.removeCard(c);
+                        }
+                    }
+                }else{
+                    AbstractSynthesisCard MidSynthesis = new MidSynthesis();
+
+                    for (AbstractCard c: synthesisGroup.group){
+                        ((AbstractSynthesisCard) c).AddSynthesisEffect(MidSynthesis);
+                        AbstractDungeon.player.masterDeck.removeCard(c);
+                    }
+
+                    AbstractDungeon.topLevelEffects.add(new FastCardObtainEffect(MidSynthesis, MidSynthesis.current_x, MidSynthesis.current_y));
+                }
+            }
+
+
+
+
 
             return SpireReturn.Continue();
         }
@@ -99,7 +123,7 @@ public class SynthesisRewardPatch{
                 extends SpireInsertLocator {
             @Override
             public int[] Locate(CtBehavior ctBehavior) throws Exception {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(SoulGroup.class, "obtain");
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(CardRewardScreen.class, "acquireCard");
                 return LineFinder.findInOrder(ctBehavior, finalMatcher);
             }
         }
@@ -149,6 +173,7 @@ public class SynthesisRewardPatch{
         }
 
         reward.cards.addAll(retVal2);
+        reward.text = "Choose a Synthesis Material";
         return reward;
     }
 
@@ -159,7 +184,9 @@ public class SynthesisRewardPatch{
 
         for(Map.Entry<String, AbstractCard> c : CardLibrary.cards.entrySet()) {
             if (    (c.getValue()).color == AbstractCard.CardColor.COLORLESS
-                    && (c.getValue()).hasTag(CustomTags.SYNTHESIS_MATERIAL)) {
+                    && (c.getValue()).hasTag(CustomTags.SYNTHESIS_MATERIAL)
+                    && !(Objects.equals((c.getValue()).cardID, MidSynthesis.ID))
+                ) {
 
                 synthesisCards.add(c.getValue());
             }

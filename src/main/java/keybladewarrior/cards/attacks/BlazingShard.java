@@ -26,7 +26,13 @@ public class BlazingShard extends AbstractSynthesisCard {
 
     @Override
     public void AddSynthesisEffect(AbstractSynthesisCard abstractSynthesisCard) {
-        abstractSynthesisCard.baseBlock += this.baseBlock;
+        if (abstractSynthesisCard.target == CardTarget.NONE
+                || abstractSynthesisCard.target == CardTarget.SELF){
+            abstractSynthesisCard.target = CardTarget.ENEMY;
+        }
+
+        abstractSynthesisCard.baseDamage += this.baseDamage;
+        abstractSynthesisCard.initializeDescription();
     }
 
 

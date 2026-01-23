@@ -1,6 +1,7 @@
 package keybladewarrior.cards.skills;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -35,15 +36,21 @@ public class SerenityShard extends AbstractSynthesisCard {
         AbstractPlayer p = AbstractDungeon.player;
         abstractSynthesisCard.SynthesisActions.add(new ApplyPowerAction(p,p,new PlatedArmorPower(p, baseMagicNumber),baseMagicNumber));
 
-        if (abstractSynthesisCard.rawDescription.contains("#yPlated #yArmor")){
+        if (abstractSynthesisCard.target == CardTarget.NONE){
+            abstractSynthesisCard.target = CardTarget.SELF;
+        }
 
-            int index = abstractSynthesisCard.rawDescription.indexOf("#yPlated #yArmor");
+        if (abstractSynthesisCard.rawDescription.contains("Plated Armor")){
+
+            int index = abstractSynthesisCard.rawDescription.indexOf("Plated Armor");
             char num = abstractSynthesisCard.rawDescription.charAt(index-2);
-            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.replaceFirst("NL Apply #b\\d{1,6} #yPlated #yArmor",("NL Apply"+ (char)(((int) num) + baseMagicNumber) +"#yPlated #yArmor."));
+            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.replaceFirst("NL Apply \\d{1,6} Plated Armor",("NL Apply "+ (char)(((int) num) + baseMagicNumber) +" Plated Armor"));
 
         }
         else {
-            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.concat(" NL Apply #b2 #yPlated #yArmor.");
+            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.concat(" NL Apply 2 Plated Armor.");
         }
+
+        abstractSynthesisCard.initializeDescription();
     }
 }

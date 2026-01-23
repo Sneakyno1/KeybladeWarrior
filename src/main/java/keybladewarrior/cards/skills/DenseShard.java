@@ -30,6 +30,11 @@ public class DenseShard extends AbstractSynthesisCard {
 
     @Override
     public void AddSynthesisEffect(AbstractSynthesisCard abstractSynthesisCard) {
-        abstractSynthesisCard.baseDamage += this.baseDamage;
+        if (abstractSynthesisCard.target == CardTarget.NONE){
+            abstractSynthesisCard.target = CardTarget.SELF;
+        }
+
+        abstractSynthesisCard.baseBlock += this.baseBlock;
+        abstractSynthesisCard.initializeDescription();
     }
 }
