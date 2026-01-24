@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 import keybladewarrior.cards.AbstractSynthesisCard;
 import keybladewarrior.powers.ReflectPower;
+import org.apache.commons.lang3.ObjectUtils;
 
 import static keybladewarrior.ModFile.makeID;
 
@@ -33,24 +34,31 @@ public class SerenityShard extends AbstractSynthesisCard {
 
     @Override
     public void AddSynthesisEffect(AbstractSynthesisCard abstractSynthesisCard) {
-        AbstractPlayer p = AbstractDungeon.player;
-        abstractSynthesisCard.SynthesisActions.add(new ApplyPowerAction(p,p,new PlatedArmorPower(p, baseMagicNumber),baseMagicNumber));
+        if (abstractSynthesisCard.SynthesisCards.findCardById(this.cardID) != null){
+            abstractSynthesisCard.SynthesisCards.findCardById(this.cardID).baseMagicNumber += this.baseMagicNumber;
 
-        if (abstractSynthesisCard.target == CardTarget.NONE){
-            abstractSynthesisCard.target = CardTarget.SELF;
+        }else {
+
+            abstractSynthesisCard.SynthesisCards.addToTop(this.makeStatEquivalentCopy());
+
+            if (abstractSynthesisCard.target == CardTarget.NONE){
+                abstractSynthesisCard.target = CardTarget.SELF;
+            }
         }
 
-        if (abstractSynthesisCard.rawDescription.contains("Plated Armor")){
+        abstractSynthesisCard.AddSynthesisEffect(abstractSynthesisCard);
 
-            int index = abstractSynthesisCard.rawDescription.indexOf("Plated Armor");
-            char num = abstractSynthesisCard.rawDescription.charAt(index-2);
-            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.replaceFirst("NL Apply \\d{1,6} Plated Armor",("NL Apply "+ (char)(((int) num) + baseMagicNumber) +" Plated Armor"));
-
-        }
-        else {
-            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.concat(" NL Apply 2 Plated Armor.");
-        }
-
-        abstractSynthesisCard.initializeDescription();
+//        if (abstractSynthesisCard.rawDescription.contains("Plated Armor")){
+//
+//            int index = abstractSynthesisCard.rawDescription.indexOf("Plated Armor");
+//            char num = abstractSynthesisCard.rawDescription.charAt(index-2);
+//            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.replaceFirst("NL Apply \\d{1,6} Plated Armor",("NL Apply "+ (char)(((int) num) + baseMagicNumber) +" Plated Armor"));
+//
+//        }
+//        else {
+//            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.concat(" NL Apply 2 Plated Armor.");
+//        }
+//
+//        abstractSynthesisCard.initializeDescription();
     }
 }

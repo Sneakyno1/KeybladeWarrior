@@ -26,14 +26,23 @@ public class BlazingShard extends AbstractSynthesisCard {
 
     @Override
     public void AddSynthesisEffect(AbstractSynthesisCard abstractSynthesisCard) {
-        if (abstractSynthesisCard.target == CardTarget.NONE
-                || abstractSynthesisCard.target == CardTarget.SELF){
-            abstractSynthesisCard.target = CardTarget.ENEMY;
+
+
+        if (abstractSynthesisCard.SynthesisCards.findCardById(this.cardID) != null){
+            abstractSynthesisCard.SynthesisCards.findCardById(this.cardID).baseDamage += this.baseDamage;
+
+        }else {
+
+            abstractSynthesisCard.SynthesisCards.addToTop(this.makeStatEquivalentCopy());
+            abstractSynthesisCard.type = CardType.ATTACK;
+
+            if (abstractSynthesisCard.target == CardTarget.NONE
+                    || abstractSynthesisCard.target == CardTarget.SELF){
+
+                abstractSynthesisCard.target = CardTarget.ENEMY;
+            }
         }
-
-        abstractSynthesisCard.baseDamage += this.baseDamage;
-        abstractSynthesisCard.initializeDescription();
+        abstractSynthesisCard.AddSynthesisEffect(abstractSynthesisCard);
     }
-
 
 }
