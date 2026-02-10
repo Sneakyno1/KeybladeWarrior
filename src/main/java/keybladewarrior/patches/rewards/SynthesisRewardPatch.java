@@ -20,6 +20,8 @@ import com.megacrit.cardcrawl.vfx.FastCardObtainEffect;
 import javassist.CtBehavior;
 import keybladewarrior.cards.AbstractSynthesisCard;
 import keybladewarrior.cards.skills.MidSynthesis;
+import keybladewarrior.relics.StarterRelicForSora;
+import keybladewarrior.rewards.SynthesisReward;
 import keybladewarrior.util.CustomTags;
 
 import java.util.ArrayList;
@@ -52,11 +54,11 @@ public class SynthesisRewardPatch{
                 }
                 if (_instance.rewards.size() >= 4)
                     chance = 0;
-                if (MathUtils.random(0, 99) < chance || Settings.isDebug || true) {
+                if (MathUtils.random(0, 99) < chance || Settings.isDebug) {
                     //CardCrawlGame.metricData.potions_floor_spawned.add(Integer.valueOf(AbstractDungeon.floorNum));
 
                     //make into synthesis reward instead of potion
-                    _instance.rewards.add(getSynthesisCardReward());
+                    _instance.rewards.add(new SynthesisReward());
                     //blizzardPotionMod -= 10;
                 } else {
 
@@ -99,6 +101,9 @@ public class SynthesisRewardPatch{
                             ((AbstractSynthesisCard) c).AddSynthesisEffect(existingSynthesis);
                             AbstractDungeon.player.masterDeck.removeCard(c);
                         }
+
+                        existingSynthesis.initializeDescription();
+                        existingSynthesis.update();
                     }
                 }else{
                     AbstractSynthesisCard MidSynthesis = new MidSynthesis();
@@ -108,94 +113,59 @@ public class SynthesisRewardPatch{
                         AbstractDungeon.player.masterDeck.removeCard(c);
                     }
 
-                    AbstractDungeon.topLevelEffects.add(new FastCardObtainEffect(MidSynthesis, MidSynthesis.current_x, MidSynthesis.current_y));
+                    MidSynthesis.initializeDescription();
+                    MidSynthesis.update();
+                    AbstractDungeon.topLevelEffects.add(new FastCardObtainEffect(MidSynthesis.makeStatEquivalentCopy(), MidSynthesis.current_x, MidSynthesis.current_y));
                 }
             }
-
-
-
-
 
             return SpireReturn.Continue();
         }
 
-        private static class Locator
-                extends SpireInsertLocator {
-            @Override
-            public int[] Locate(CtBehavior ctBehavior) throws Exception {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher(CardRewardScreen.class, "acquireCard");
-                return LineFinder.findInOrder(ctBehavior, finalMatcher);
-            }
-        }
-    }
-
-    public static RewardItem getSynthesisCardReward() {
-        ArrayList<AbstractCard> retVal = new ArrayList<>();
-        AbstractPlayer player = AbstractDungeon.player;
-        int numCards = 3;
-        RewardItem reward = new RewardItem();
-        reward.cards.clear();
-
-//        for (AbstractRelic r : player.relics)
-//            numCards = r.changeNumberOfCardsInReward(numCards);
-//
-//        if (ModHelper.isModEnabled("Binary"))
-//            numCards--;
-
-        for (int i = 0; i < numCards; i++) {
-            AbstractCard card = null;
-            boolean containsDupe = true;
-
-            while (containsDupe) {
-                containsDupe = false;
-
-                card = getRandomSynthesisCard();
-
-                for (AbstractCard c : retVal) {
-                    if (c.cardID.equals(card.cardID))
-                        containsDupe = true;
-                }
-            }
-            if (card != null)
-                retVal.add(card);
-        }
-
-        ArrayList<AbstractCard> retVal2 = new ArrayList<>();
-        for (AbstractCard c : retVal)
-            retVal2.add(c.makeCopy());
-        for (AbstractCard c : retVal2) {
-//            if (c.rarity != AbstractCard.CardRarity.RARE && cardRng.randomBoolean(cardUpgradedChance) && c.canUpgrade()) {
-//                c.upgrade();
-//                continue;
+//        private static class Locator
+//                extends SpireInsertLocator {
+//            @Override
+//            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+//                Matcher finalMatcher = new Matcher.MethodCallMatcher(CardRewardScreen.class, "acquireCard");
+//                return LineFinder.findInOrder(ctBehavior, finalMatcher);
 //            }
-            for (AbstractRelic r : player.relics)
-                r.onPreviewObtainCard(c);
-        }
-
-        reward.cards.addAll(retVal2);
-        reward.text = "Choose a Synthesis Material";
-        return reward;
+//        }
     }
 
+    @SpirePatch(clz = AbstractDungeon.class,
+            method = "getRewardCards")
+    public static class getRewardCards {
+        @SpirePostfixPatch
+        public static ArrayList<AbstractCard> Postfix(ArrayList<AbstractCard> _result) {
+            ArrayList<AbstractCard> synthesisCards = new ArrayList<AbstractCard>();
 
-    public static AbstractCard getRandomSynthesisCard() {
-        ArrayList<AbstractCard> synthesisCards = new ArrayList();
-        AbstractCard card;
+            if (AbstractDungeon.player.hasRelic(StarterRelicForSora.ID)){
+                for(Map.Entry<String, AbstractCard> c : CardLibrary.cards.entrySet()) {
+                    if (    (c.getValue()).color == AbstractCard.CardColor.COLORLESS
+                            && (c.getValue()).hasTag(CustomTags.SYNTHESIS_MATERIAL)
+                            && !(Objects.equals((c.getValue()).cardID, MidSynthesis.ID))
+                    ) {
 
-        for(Map.Entry<String, AbstractCard> c : CardLibrary.cards.entrySet()) {
-            if (    (c.getValue()).color == AbstractCard.CardColor.COLORLESS
-                    && (c.getValue()).hasTag(CustomTags.SYNTHESIS_MATERIAL)
-                    && !(Objects.equals((c.getValue()).cardID, MidSynthesis.ID))
-                ) {
+                        synthesisCards.add(c.getValue());
+                    }
+                }
 
-                synthesisCards.add(c.getValue());
+                _result.add(synthesisCards.get(AbstractDungeon.cardRng.random(synthesisCards.size() - 1)));
+
             }
+
+            return _result;
         }
 
-
-        card = synthesisCards.get(MathUtils.random(synthesisCards.size() - 1));
-
-        return card;
+//        private static class Locator
+//                extends SpireInsertLocator {
+//            @Override
+//            public int[] Locate(CtBehavior ctBehavior) throws Exception {
+//                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractDungeon.class, "getRewardCards");
+//                return LineFinder.findInOrder(ctBehavior, finalMatcher);
+//            }
+//        }
     }
+
 
 }

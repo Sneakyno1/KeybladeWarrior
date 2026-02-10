@@ -221,10 +221,16 @@
   },
   "${ModID}:SerenityShard": {
     "NAME": "Serenity Shard",
-    "DESCRIPTION": "${ModID}:Synthesis_Material. NL Apply !M! Plated Armor."
+    "DESCRIPTION": "${ModID}:Synthesis_Material. NL Apply !M! Plated Armor.",
+    "EXTENDED_DESCRIPTION" : ["${ModID}:Synthesis_Material.", " NL Apply ", " Plated Armor."]
   },
   "${ModID}:MidSynthesis": {
     "NAME": "Synthesis Stone",
     "DESCRIPTION": "{@@}${ModID}:Synthesis_Material.{!D!|>1= NL Deal !D! damage.}{!B!|>1= NL Gain !B! Block.}"
+  },
+  "${ModID}:LucidShard": {
+    "NAME": "Lucid Shard",
+    "DESCRIPTION": "${ModID}:Synthesis_Material. NL Draw !M! cards.",
+    "EXTENDED_DESCRIPTION" : ["${ModID}:Synthesis_Material.", " NL Draw ", " cards.", " card."]
   }
 }

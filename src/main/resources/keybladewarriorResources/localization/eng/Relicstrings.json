@@ -1,9 +1,9 @@
 {
-  "${ModID}:TodoItem": {
+  "${ModID}:StarterRelicForSora": {
     "NAME": "test Starting Relic",
     "FLAVOR": "It'll do for now I guess",
     "DESCRIPTIONS": [
-      "Gain #b3 #yBlock when entering #yWisdom #yForm or #yValor #yForm."
+      "Card Reward screens also have 1 #ySynthesis #yMaterial to choose."
     ]
   },
   "${ModID}:SynthesisRecipe": {

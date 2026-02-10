@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.rewards.RewardSave;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import keybladewarrior.cards.AbstractEasyCard;
 import keybladewarrior.cards.cardvars.AbstractEasyDynamicVariable;
@@ -25,6 +26,8 @@ import keybladewarrior.driveForms.ValorForm;
 import keybladewarrior.potions.AbstractEasyPotion;
 import keybladewarrior.powers.DrivePoints;
 import keybladewarrior.relics.AbstractEasyRelic;
+import keybladewarrior.rewards.SynthesisReward;
+import keybladewarrior.util.CustomTags;
 import keybladewarrior.util.ProAudio;
 
 import java.nio.charset.StandardCharsets;
@@ -38,6 +41,7 @@ public class ModFile implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
+        PostInitializeSubscriber,
         AddAudioSubscriber {
 
     public static final String modID = "keybladewarrior";
@@ -119,7 +123,8 @@ public class ModFile implements
     public void receiveEditCharacters() {
         BaseMod.addCharacter(new KeybladeWarrior(KeybladeWarrior.characterStrings.NAMES[1], KeybladeWarrior.Enums.KeybladeWarrior),
             CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, KeybladeWarrior.Enums.KeybladeWarrior);
-        
+
+
         new AutoAdd(modID)
             .packageFilter(AbstractEasyPotion.class)
             .any(AbstractEasyPotion.class, (info, potion) -> {
@@ -199,5 +204,17 @@ public class ModFile implements
 //                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DrivePoints(p, 1), 1));
 //            }
 //        }
+    }
+
+    @Override
+    public void receivePostInitialize() {
+        BaseMod.registerCustomReward(
+                CustomTags.SYNTHESIS,
+                (rewardSave) -> { // this handles what to do when this quest type is loaded.
+                    return new SynthesisReward(rewardSave.amount);
+                },
+                (customReward) -> { // this handles what to do when this quest type is saved.
+                    return new RewardSave(customReward.type.toString(), null, ((SynthesisReward)customReward).numCards, 0);
+                });
     }
 }
