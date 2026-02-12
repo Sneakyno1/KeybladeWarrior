@@ -232,5 +232,19 @@
     "NAME": "Lucid Shard",
     "DESCRIPTION": "${ModID}:Synthesis_Material. NL Draw !M! cards.",
     "EXTENDED_DESCRIPTION" : ["${ModID}:Synthesis_Material.", " NL Draw ", " cards.", " card."]
+  },
+  "${ModID}:BrightShard": {
+    "NAME": "Bright Shard",
+    "DESCRIPTION": "${ModID}:Synthesis_Material. NL Gain !M! ${ModID}:Drive_Points.",
+    "EXTENDED_DESCRIPTION" : ["${ModID}:Synthesis_Material.", " NL Apply ", " ${ModID}:Drive_Points."]
+  },
+  "${ModID}:PricklyFantasy": {
+    "NAME": "Prickly Fantasy",
+    "DESCRIPTION": "${ModID}:Synthesis_Material. NL Apply !M! Thorns.",
+    "EXTENDED_DESCRIPTION" : ["${ModID}:Synthesis_Material.", " NL Apply ", " Thorns."]
+  },
+  "${ModID}:ComboTech": {
+    "NAME": "Combo Tech",
+    "DESCRIPTION": "${ModID}:Synthesis_Material. NL ${ModID}:Combo."
   }
 }

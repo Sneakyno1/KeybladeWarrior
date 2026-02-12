@@ -40,6 +40,7 @@ public abstract class AbstractSynthesisCard extends AbstractEasyCard implements 
             AbstractSynthesisCard c = (AbstractSynthesisCard) result;
             c.SynthesisCards.group.addAll(this.SynthesisCards.group);
         }
+        result.tags.addAll(this.tags);
         return result;
     }
 
@@ -145,13 +146,31 @@ public abstract class AbstractSynthesisCard extends AbstractEasyCard implements 
 
             for (int i = 0; i < cS.upgrades; i++)
                 retVal.upgrade();
+
             retVal.misc = misc;
             if (cS.misc != 0) {
                 retVal.baseMagicNumber = cS.misc;
             }
+
             retVal.resetAttributes();
+
+            for (CardTags tag: retVal.tags){
+                if (!this.tags.contains(tag)){
+                    this.tags.add(tag);
+                }
+            }
+
+            if (retVal.exhaust){
+                this.exhaust = true;
+            }
+            if (retVal.isEthereal){
+                this.isEthereal = true;
+            }
+
             SynthesisCards.addToTop(retVal);
         }
+
+        this.resetAttributes();
 
     }
 
