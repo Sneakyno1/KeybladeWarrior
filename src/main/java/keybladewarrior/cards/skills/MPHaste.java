@@ -40,7 +40,6 @@ public class MPHaste extends AbstractEasyCard implements OnBeingScriedInterface 
 
     @Override
     public void triggerOnManualDiscard() {
-        AbstractPlayer p = AbstractDungeon.player;
         blck();
     }
 

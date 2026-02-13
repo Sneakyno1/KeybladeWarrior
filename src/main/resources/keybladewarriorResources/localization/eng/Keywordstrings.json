@@ -136,6 +136,6 @@
       "Synthesis_Material",
       "synthesis_material"
     ],
-    "DESCRIPTION": "#ySynthesis #yMaterials combine effects when added to your deck."
+    "DESCRIPTION": "#ySynthesis #yMaterials combine effects when added to your deck. For every #b3 cards combined, increase the cost by #b1."
   }
 ]

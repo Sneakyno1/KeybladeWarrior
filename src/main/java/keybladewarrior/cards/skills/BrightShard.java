@@ -15,7 +15,7 @@ public class BrightShard extends AbstractSynthesisCard {
     public BrightShard(){
         super(ID, 0, CardType.SKILL, CardRarity.SPECIAL, CardTarget.SELF);
         color = CardColor.COLORLESS;
-        this.baseMagicNumber = 1;
+        this.baseMagicNumber = 2;
         this.resetAttributes();
         this.initializeDescription();
     }
@@ -52,28 +52,7 @@ public class BrightShard extends AbstractSynthesisCard {
 
         abstractSynthesisCard.SynthesisCards.findCardById(this.cardID).resetAttributes();
         abstractSynthesisCard.AddSynthesisEffect(abstractSynthesisCard);
-
-//        if (abstractSynthesisCard.rawDescription.contains("Plated Armor")){
-//
-//            int index = abstractSynthesisCard.rawDescription.indexOf("Plated Armor");
-//            char num = abstractSynthesisCard.rawDescription.charAt(index-2);
-//            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.replaceFirst("NL Apply \\d{1,6} Plated Armor",("NL Apply "+ (char)(((int) num) + baseMagicNumber) +" Plated Armor"));
-//
-//        }
-//        else {
-//            abstractSynthesisCard.rawDescription = abstractSynthesisCard.rawDescription.concat(" NL Apply 2 Plated Armor.");
-//        }
-//
-//        abstractSynthesisCard.initializeDescription();
+        abstractSynthesisCard.initializeDescription();
     }
 
-    @Override
-    public void initializeDescription() {
-
-        if (cardStrings != null){
-            this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[0] + cardStrings.EXTENDED_DESCRIPTION[1]
-                                + (this.magicNumber)  + cardStrings.EXTENDED_DESCRIPTION[2];
-        }
-        super.initializeDescription();
-    }
 }

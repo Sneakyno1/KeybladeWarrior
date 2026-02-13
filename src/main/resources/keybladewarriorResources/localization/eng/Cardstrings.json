@@ -246,5 +246,13 @@
   "${ModID}:ComboTech": {
     "NAME": "Combo Tech",
     "DESCRIPTION": "${ModID}:Synthesis_Material. NL ${ModID}:Combo."
-  }
+  },
+  "${ModID}:RemembranceShard": {
+    "NAME": "Remembrance Shard",
+    "DESCRIPTION": "${ModID}:Synthesis_Material. NL Retain."
+  },
+  "${ModID}:ManifestIllusion": {
+  "NAME": "Manifest Illusion",
+  "DESCRIPTION": "${ModID}:Synthesis_Material. NL Innate."
+}
 }

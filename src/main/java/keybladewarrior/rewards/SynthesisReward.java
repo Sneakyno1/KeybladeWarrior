@@ -4,6 +4,7 @@ import basemod.abstracts.CustomReward;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -73,31 +74,39 @@ public class SynthesisReward extends CustomReward {
     public  ArrayList<AbstractCard> getSynthesisCardReward() {
         ArrayList<AbstractCard> retVal = new ArrayList<AbstractCard>();
         AbstractPlayer player = AbstractDungeon.player;
-        int numberOfCards = this.numCards;
 
-        for (AbstractRelic r : player.relics)
-            numCards = r.changeNumberOfCardsInReward(numCards);
+        if (!Settings.isDebug) {
+            int numberOfCards = this.numCards;
 
-        if (ModHelper.isModEnabled("Binary"))
-            numCards--;
+            for (AbstractRelic r : player.relics)
+                numCards = r.changeNumberOfCardsInReward(numCards);
 
-        for (int i = 0; i < numberOfCards; i++) {
-            AbstractCard card = null;
-            boolean containsDupe = true;
+            if (ModHelper.isModEnabled("Binary"))
+                numCards--;
 
-            while (containsDupe) {
-                containsDupe = false;
+            for (int i = 0; i < numberOfCards; i++) {
+                AbstractCard card = null;
+                boolean containsDupe = true;
 
-                card = getRandomSynthesisCard();
+                while (containsDupe) {
+                    containsDupe = false;
 
-                for (AbstractCard c : retVal) {
-                    if (c.cardID.equals(card.cardID))
-                        containsDupe = true;
+                    card = getRandomSynthesisCard();
+
+                    for (AbstractCard c : retVal) {
+                        if (c.cardID.equals(card.cardID)) {
+                            containsDupe = true;
+                            break;
+                        }
+                    }
                 }
+                if (card != null)
+                    retVal.add(card);
             }
-            if (card != null)
-                retVal.add(card);
+        }else {
+            retVal.addAll(synthesisCards);
         }
+
 
         ArrayList<AbstractCard> retVal2 = new ArrayList<>();
         for (AbstractCard c : retVal)

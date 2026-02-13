@@ -18,10 +18,13 @@ public class MidSynthesis extends AbstractSynthesisCard {
         color = CardColor.COLORLESS;
         this.baseDamage = 0;
         this.baseBlock = 0;
+        this.cost = (this.misc>0) ? Math.floorDiv(this.misc,3) : 0;
     }
 
     @Override
     public void AddSynthesisEffect(AbstractSynthesisCard abstractSynthesisCard) {
+        this.misc++;
+        this.cost = (this.misc>0) ? Math.floorDiv(this.misc,3) : 0;
         this.initializeDescription();
         this.update();
     }
@@ -33,34 +36,44 @@ public class MidSynthesis extends AbstractSynthesisCard {
     @Override
     public void initializeDescription() {
         if (!this.description.isEmpty()){
-            super.initializeDescription();
-//            if (!this.isEthereal){
-//                this.description.remove(0);
-//            }
+            //super.initializeDescription();
 
-//            if (!this.exhaust){
-//                this.description.remove(this.description. size() - 1);
-//                super.initializeDescription();
+            if (this.isInnate){
+                this.rawDescription = this.rawDescription.replace(this.rawDescription, "*Innate. NL "+this.rawDescription);
+            }
+            if (this.isEthereal){
+                this.rawDescription = this.rawDescription.replace(this.rawDescription, "*Ethereal. NL "+this.rawDescription);
+            }
+            if (this.selfRetain){
+                this.rawDescription = this.rawDescription.replace(this.rawDescription, "*Retain. NL "+this.rawDescription);
+            }
 
-                if (SynthesisCards != null){
-                    for (AbstractCard c: SynthesisCards.group){
-                        c.initializeDescription();
-                        this.description.add(c.description.get(1));
+            if (SynthesisCards != null){
+                for (AbstractCard c: SynthesisCards.group){
+
+                    if (((AbstractSynthesisCard) c).ignoreForDescription){
+                        continue;
                     }
+
+                    c.initializeDescription();
+
+                    String descriptionInProgress = c.rawDescription.replace("keybladewarrior:Synthesis_Material.","");
+
+                    if (descriptionInProgress.contains("!M!")) {
+                        descriptionInProgress = descriptionInProgress.replace("!M!", ("" + (c.magicNumber)));
+                    }
+
+                    this.rawDescription = this.rawDescription.concat(descriptionInProgress);
                 }
-//            }else{
-//
-//
-//                if (SynthesisCards != null){
-//                    for (AbstractCard c: SynthesisCards.group){
-//                        c.initializeDescription();
-//                        this.description.add(this.description.size() - 2, c.description.get(1));
-//                    }
-//                }
-//            }
-        }else {
-            super.initializeDescription();
+            }
+
+            if (this.exhaust){
+                this.rawDescription = this.rawDescription.concat(" NL *Exhaust.");
+            }
         }
+
+        super.initializeDescription();
+
     }
 
     @Override
@@ -95,5 +108,10 @@ public class MidSynthesis extends AbstractSynthesisCard {
                 this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
             }
         }
+    }
+
+    @Override
+    public boolean canUpgrade() {
+        return false;
     }
 }

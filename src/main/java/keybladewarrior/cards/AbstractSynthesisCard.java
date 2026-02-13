@@ -21,15 +21,12 @@ import static keybladewarrior.ModFile.makeID;
 
 public abstract class AbstractSynthesisCard extends AbstractEasyCard implements CustomSavable<ArrayList<CardSave>> {
     public static final String ID =makeID(AbstractSynthesisCard.class.getSimpleName());
-    //public static final int MaxNumberOfEffects = 7;
     public CardGroup SynthesisCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-
-    //public int NumberOfEffects = 1;
+    public boolean ignoreForDescription = false;
 
     public AbstractSynthesisCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
         super(cardID, cost, type, rarity, target, KeybladeWarrior.Enums.CARD_COLOR);
         this.tags.add((CustomTags.SYNTHESIS_MATERIAL));
-        //BaseMod.addSaveField(this.cardID,  ArrayList.class);
     }
 
     public abstract void AddSynthesisEffect(AbstractSynthesisCard abstractSynthesisCard);
@@ -41,26 +38,10 @@ public abstract class AbstractSynthesisCard extends AbstractEasyCard implements 
             c.SynthesisCards.group.addAll(this.SynthesisCards.group);
         }
         result.tags.addAll(this.tags);
+        this.cost = (this.misc>0) ? Math.floorDiv(this.misc,3) : 0;
         return result;
     }
 
-//    public void CombineSynthesisCards(AbstractSynthesisCard NewCard){
-//        if (ID != MidSynthesis.ID && NumberOfEffects == 1){
-//            ReplaceWithMidSynthesis(this, NewCard);
-//        }
-//        else{
-//
-//            NewCard.AddSynthesisEffect(this);
-//            this.initializeDescription();
-//            this.initializeTitle();
-//            AbstractDungeon.player.masterDeck.removeCard(NewCard);
-//
-//            NumberOfEffects++;
-//            if (NumberOfEffects >= MaxNumberOfEffects) {
-//                this.tags.remove(CustomTags.SYNTHESIS_MATERIAL);
-//            }
-//        }
-//    }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -82,10 +63,6 @@ public abstract class AbstractSynthesisCard extends AbstractEasyCard implements 
 //        }
     }
 
-
-//    public void ReplaceWithMidSynthesis(AbstractSynthesisCard inMasterDeck, AbstractSynthesisCard addingToDeck){
-//       addToTop(new CreateMidSynthesisAction(inMasterDeck, addingToDeck ));
-//    }
 
 
     @Override
@@ -121,12 +98,11 @@ public abstract class AbstractSynthesisCard extends AbstractEasyCard implements 
 
         this.target = CardTarget.SELF;
 
-        //TODO: Add checks for the cards that will give Exhaust and Ethereal
         for (CardSave cS: CardsSaved){
             AbstractCard source = getCard(cS.id);
             AbstractCard retVal = null;
             if (source == null) {
-                retVal = getCard("Madness").makeCopy();
+                continue;
             } else if (Objects.equals(source.cardID, BlazingShard.ID)) {
                 this.type = CardType.ATTACK;
                 if (this.target == CardTarget.NONE || this.target == CardTarget.SELF){
@@ -165,6 +141,12 @@ public abstract class AbstractSynthesisCard extends AbstractEasyCard implements 
             }
             if (retVal.isEthereal){
                 this.isEthereal = true;
+            }
+            if (retVal.selfRetain){
+                this.selfRetain = true;
+            }
+            if (retVal.isInnate){
+                this.isInnate = true;
             }
 
             SynthesisCards.addToTop(retVal);

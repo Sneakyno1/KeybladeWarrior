@@ -1,22 +1,20 @@
 package keybladewarrior.cards.skills;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.ThornsPower;
 import keybladewarrior.cards.AbstractSynthesisCard;
 import keybladewarrior.util.CustomTags;
 
 import static keybladewarrior.ModFile.makeID;
 
-public class ComboTech extends AbstractSynthesisCard {
-    public static final String ID =makeID(ComboTech.class.getSimpleName());
+public class RemembranceShard extends AbstractSynthesisCard {
+    public static final String ID =makeID(RemembranceShard.class.getSimpleName());
 
-    public ComboTech(){
+    public RemembranceShard(){
         super(ID, 0, CardType.SKILL, CardRarity.SPECIAL, CardTarget.NONE);
         color = CardColor.COLORLESS;
-        this.tags.add(CustomTags.COMBO);
+        this.selfRetain = true;
+        this.ignoreForDescription = true;
         this.resetAttributes();
         this.initializeDescription();
     }
@@ -34,7 +32,7 @@ public class ComboTech extends AbstractSynthesisCard {
     @Override
     public void AddSynthesisEffect(AbstractSynthesisCard abstractSynthesisCard) {
         if (abstractSynthesisCard.SynthesisCards.findCardById(this.cardID) == null){
-            abstractSynthesisCard.tags.add(CustomTags.COMBO);
+            abstractSynthesisCard.selfRetain = this.selfRetain;
             abstractSynthesisCard.SynthesisCards.addToTop(this.makeStatEquivalentCopy());
             abstractSynthesisCard.resetAttributes();
 

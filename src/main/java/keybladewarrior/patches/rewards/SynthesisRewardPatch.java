@@ -41,7 +41,7 @@ public class SynthesisRewardPatch{
 
                 int chance = 0;
                 if (_instance instanceof MonsterRoomElite) {
-                    chance = 60;
+                    chance = 80;
                     //chance += blizzardPotionMod;
                 } else if (_instance instanceof MonsterRoom) {
                     if (!AbstractDungeon.getMonsters().haveMonstersEscaped()) {
@@ -49,15 +49,12 @@ public class SynthesisRewardPatch{
                        // chance += blizzardPotionMod;
                     }
                 } else if (_instance instanceof EventRoom) {
-                    chance = 40;
+                    chance = 50;
                     //chance += blizzardPotionMod;
                 }
-                if (_instance.rewards.size() >= 4)
-                    chance = 0;
                 if (MathUtils.random(0, 99) < chance || Settings.isDebug) {
                     //CardCrawlGame.metricData.potions_floor_spawned.add(Integer.valueOf(AbstractDungeon.floorNum));
 
-                    //make into synthesis reward instead of potion
                     _instance.rewards.add(new SynthesisReward());
                     //blizzardPotionMod -= 10;
                 } else {
@@ -122,14 +119,6 @@ public class SynthesisRewardPatch{
             return SpireReturn.Continue();
         }
 
-//        private static class Locator
-//                extends SpireInsertLocator {
-//            @Override
-//            public int[] Locate(CtBehavior ctBehavior) throws Exception {
-//                Matcher finalMatcher = new Matcher.MethodCallMatcher(CardRewardScreen.class, "acquireCard");
-//                return LineFinder.findInOrder(ctBehavior, finalMatcher);
-//            }
-//        }
     }
 
     @SpirePatch(clz = AbstractDungeon.class,
@@ -156,15 +145,6 @@ public class SynthesisRewardPatch{
 
             return _result;
         }
-
-//        private static class Locator
-//                extends SpireInsertLocator {
-//            @Override
-//            public int[] Locate(CtBehavior ctBehavior) throws Exception {
-//                Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractDungeon.class, "getRewardCards");
-//                return LineFinder.findInOrder(ctBehavior, finalMatcher);
-//            }
-//        }
     }
 
 
